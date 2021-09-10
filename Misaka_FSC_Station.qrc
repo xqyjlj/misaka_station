@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/UI">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>Battery-Management-System/Battery-Management-System-Minimum/BmsMinForm.qml</file>
+        <file>Control/CanvasWave.qml</file>
+        <file>Tool/ToolForm.qml</file>
+        <file>Tool/ToolBootForm.qml</file>
+        <file>Tool/ToolPackForm.qml</file>
+        <file>Battery-Management-System/BmsForm.qml</file>
+        <file>Data-Collection-System/DscForm.qml</file>
+        <file>Data-Collection-System/DscLVForm.qml</file>
+        <file>Data-Collection-System/DscMotorAMKForm.qml</file>
+        <file>Data-Collection-System/DscMotorUnitekForm.qml</file>
+    </qresource>
+    <qresource prefix="/Fonts">
+        <file>Share/Fonts/Consolas YaHei hybrid.ttf</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>
