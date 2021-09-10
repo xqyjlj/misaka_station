@@ -169,6 +169,8 @@ private slots:
     void on_mqtt_port_name_changed(QStringList list);
 
     void on_mqtt_connect_changed(bool connect);
+
+    void on_mqtt_data_arrived(QByteArray data, QString topic);
 public slots:
 
     /**
@@ -187,6 +189,8 @@ public slots:
     * @param  type_id @c CoreCanStatId_EXT     拓展帧
     */
     void send_can_data(int id, QString path, int type_send, int type_id);
+
+    void send_mqtt_data(QByteArray message, QString topic);
 
 signals:
 
@@ -244,6 +248,9 @@ signals:
 
     void mqtt_connect_changed(bool connect);
 
+    void mqtt_data_arrived(QByteArray data, QString topic);
+
+    void dsc_lv_data_arrived(QByteArray data, int task_number);
 
 };
 

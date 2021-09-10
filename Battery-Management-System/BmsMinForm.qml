@@ -21,7 +21,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 
-import "../../Control"
+import "../Control"
 import QtRemoteObjects 5.15
 import QtCharts 2.2
 

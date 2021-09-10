@@ -30,6 +30,8 @@
 #include "ToolCanBoot.h"
 #include "ToolPack.h"
 
+#include "DscLv.h"
+
 #define LOG_NAME "main"
 
 int main(int argc, char* argv[])
@@ -53,10 +55,15 @@ int main(int argc, char* argv[])
     BmsMin* bms_min = new BmsMin();
     ToolCanBoot* tool_can_boot = new ToolCanBoot();
     ToolPack* tool_pack = new ToolPack();
+    DscLv* dsc_lv = new DscLv();
+
 
     QObject::connect(core_drive, &CoreDrive::bms_min_data_arrived, bms_min, &BmsMin::data_arrived, Qt::UniqueConnection);
     QObject::connect(tool_can_boot, &ToolCanBoot::data_send, core_drive, &CoreDrive::send_can_data, Qt::UniqueConnection);
     QObject::connect(core_drive, &CoreDrive::data_bytes_send, tool_can_boot, &ToolCanBoot::on_data_bytes_send, Qt::UniqueConnection);
+    QObject::connect(core_drive, &CoreDrive::can_data_arrived, dsc_lv, &DscLv::on_can_data_arrived, Qt::UniqueConnection);
+    QObject::connect(core_drive, &CoreDrive::dsc_lv_data_arrived, dsc_lv, &DscLv::on_dsc_lv_data_arrived, Qt::UniqueConnection);
+    QObject::connect(core_drive, &CoreDrive::mqtt_data_arrived, dsc_lv, &DscLv::on_mqtt_data_arrived, Qt::UniqueConnection);
 
     engine.rootContext()->setContextProperty("core_drive", core_drive);
     engine.rootContext()->setContextProperty("core_debug", core_debug);
@@ -65,6 +72,7 @@ int main(int argc, char* argv[])
     engine.rootContext()->setContextProperty("bms_min_cell_voltage_models", QVariant::fromValue(bms_min->cell_voltage_models));
     engine.rootContext()->setContextProperty("tool_can_boot", tool_can_boot);
     engine.rootContext()->setContextProperty("tool_pack", tool_pack);
+    engine.rootContext()->setContextProperty("dsc_lv", dsc_lv);
 
     QQuickStyle::setStyle("Material");
     const QUrl url(QStringLiteral("qrc:/UI/main.qml"));

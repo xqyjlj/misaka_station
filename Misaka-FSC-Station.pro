@@ -30,15 +30,16 @@ CONFIG += resources_big
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Battery-Management-System/Battery-Management-System-Minimum/BmsMinCellVoltageModel.cpp \
-    Battery-Management-System/Battery-Management-System-Minimum/BmsMinTemperatureModel.cpp \
-    Battery-Management-System/Battery-Management-System-Minimum/BmsMin.cpp \
+    Battery-Management-System/BmsMinCellVoltageModel.cpp \
+    Battery-Management-System/BmsMinTemperatureModel.cpp \
+    Battery-Management-System/BmsMin.cpp \
     Core/CoreCan.cpp \
     Core/CoreDebug.cpp \
     Core/CoreExcel.cpp \
     Core/CoreMqtt.cpp \
     Core/CoreSerialData.cpp \
     Core/CoreUtil.cpp \
+    Data-Collection-System/DscLv.cpp \
     Drive/Kvaser/DriveKvaser.cpp \
     Drive/Kvaser/DriveKvaserDataRead.cpp \
     Drive/Kvaser/DriveKvaserDataWrite.cpp \
@@ -52,16 +53,16 @@ SOURCES += \
 
 INCLUDEPATH +=\
     Core\
-    Battery-Management-System/Battery-Management-System-Minimum\
     Battery-Management-System\
     Tool/ToolBoot\
     Tool/ToolPack\
+    Data-Collection-System\
 
 RESOURCES += \
     Misaka_FSC_Station.qrc
 
 OTHER_FILES += \
-    Battery-Management-System/Battery-Management-System-Minimum\BmsMinForm.qml\
+    Battery-Management-System/BmsMinForm.qml\
     main.qml\
     Control/CanvasWave.qml\
     Tool/ToolBootForm.qml \
@@ -71,9 +72,9 @@ OTHER_FILES += \
     Battery-Management-System/BmsForm.qml \
 
 HEADERS += \
-    Battery-Management-System/Battery-Management-System-Minimum/BmsMinCellVoltageModel.h \
-    Battery-Management-System/Battery-Management-System-Minimum/BmsMinTemperatureModel.h \
-    Battery-Management-System/Battery-Management-System-Minimum/BmsMin.h \
+    Battery-Management-System/BmsMinCellVoltageModel.h \
+    Battery-Management-System/BmsMinTemperatureModel.h \
+    Battery-Management-System/BmsMin.h \
     Core/CoreCan.h \
     Core/CoreCanStat.h \
     Core/CoreDebug.h \
@@ -83,6 +84,7 @@ HEADERS += \
     Core/CoreSerial.h \
     Core/CoreSerialData.h \
     Core/CoreUtil.h \
+    Data-Collection-System/DscLv.h \
     Drive/Kvaser/DriveKvaser.h \
     Drive/Kvaser/DriveKvaserDataRead.h \
     Drive/Kvaser/DriveKvaserDataWrite.h \

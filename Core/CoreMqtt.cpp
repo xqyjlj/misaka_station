@@ -70,7 +70,7 @@ void CoreMqtt::on_state_changed(QMqttClient::ClientState state)
 
 void CoreMqtt::on_message_received(const QByteArray& message, const QMqttTopicName& topic)
 {
-    LOG_D << message << topic;
+    emit data_arrived(message, topic.name());
 }
 
 const QStringList& CoreMqtt::port_names() const
@@ -142,3 +142,9 @@ void CoreMqtt::close()
 {
     m_client->disconnectFromHost();//连接阿里云
 }
+
+void CoreMqtt::data_send(QByteArray message, QString topic)
+{
+
+}
+

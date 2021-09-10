@@ -2,7 +2,7 @@
     <qresource prefix="/UI">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>Battery-Management-System/Battery-Management-System-Minimum/BmsMinForm.qml</file>
+        <file>Battery-Management-System/BmsMinForm.qml</file>
         <file>Control/CanvasWave.qml</file>
         <file>Tool/ToolForm.qml</file>
         <file>Tool/ToolBootForm.qml</file>

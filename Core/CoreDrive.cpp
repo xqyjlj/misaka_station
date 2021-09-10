@@ -36,6 +36,7 @@ CoreDrive::CoreDrive(QObject* parent) : QObject(parent)
 
     QObject::connect(m_mqtt, &CoreMqtt::port_name_changed, this, &CoreDrive::on_mqtt_port_name_changed, Qt::UniqueConnection);
     QObject::connect(m_mqtt, &CoreMqtt::connect_changed, this, &CoreDrive::on_mqtt_connect_changed, Qt::UniqueConnection);
+    QObject::connect(m_mqtt, &CoreMqtt::data_arrived, this, &CoreDrive::on_mqtt_data_arrived, Qt::UniqueConnection);
 
     QObject::connect(this, &CoreDrive::can_data_send, m_can, &CoreCan::data_send, Qt::UniqueConnection);
 
@@ -153,6 +154,14 @@ void CoreDrive::on_serial_data_arrived(QByteArray data, int task_number)
     {
         emit bms_min_data_arrived(data, task_number);
     }
+    else if (task_number == 101 ||
+             task_number == 102 ||
+             task_number == 103 ||
+             task_number == 104 ||
+             task_number == 105)
+    {
+        emit dsc_lv_data_arrived(data, task_number);
+    }
     emit serial_data_arrived(data, task_number);
 }
 
@@ -241,4 +250,14 @@ bool CoreDrive::mqtt_connect() const
 void CoreDrive::on_mqtt_connect_changed(bool connect)
 {
     emit mqtt_connect_changed(connect);
+}
+
+void CoreDrive::on_mqtt_data_arrived(QByteArray data, QString topic)
+{
+    emit mqtt_data_arrived(data, topic);
+}
+
+void CoreDrive::send_mqtt_data(QByteArray message, QString topic)
+{
+    m_mqtt->data_send(message, topic);
 }

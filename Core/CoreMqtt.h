@@ -37,9 +37,13 @@ public:
 
     void close();
 
+public slots:
+
+    void data_send(QByteArray message, QString topic);
+
 private:
+
     QStringList m_port_names;
-private:
 
     QMqttClient* m_client = new QMqttClient(); //连接阿里云
     QString m_product_key = "0"; //需要跟阿里云Iot平台一致;
@@ -66,6 +70,8 @@ signals:
     void port_name_changed(QStringList port_names);
 
     void connect_changed(bool);
+
+    void data_arrived(QByteArray data, QString topic);
 
 };
 
