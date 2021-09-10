@@ -1,4 +1,3 @@
-# Misaka-FSC-Station
-> [御坂网络 ](https://github.com/xqyjlj/Misaka-Network)，御坂00020
+# Misaka-Station
 
-FSC调试站软件
+

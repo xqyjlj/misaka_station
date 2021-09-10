@@ -1,4 +1,4 @@
-# @file Misaka-FSC-Station.pro
+# @file Misaka-Station.pro
 # @brief
 # @author xqyjlj (xqyjlj@126.com)
 # @version 0.0
@@ -59,7 +59,7 @@ INCLUDEPATH +=\
     Data-Collection-System\
 
 RESOURCES += \
-    Misaka_FSC_Station.qrc
+    Misaka-Station.qrc
 
 OTHER_FILES += \
     Battery-Management-System/BmsMinForm.qml\
@@ -99,13 +99,13 @@ HEADERS += \
     Tool/ToolPack/ToolPack.h \
     Tool/ToolPack/ToolPackMQTT.h
 
-RC_FILE = Misaka-FSC-Station.rc
+RC_FILE = Misaka-Station.rc
 DISTFILES += \
     Data-Collection-System/DscForm.qml \
     Data-Collection-System/DscLVForm.qml \
     Data-Collection-System/DscMotorAMKForm.qml \
     Data-Collection-System/DscMotorUnitekForm.qml \
-    Misaka-FSC-Station.rc \
+    Misaka-Station.rc \
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

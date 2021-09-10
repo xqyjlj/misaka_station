@@ -21,10 +21,10 @@ BEGIN
 VALUE "CompanyName", "xqyjlj\0"
 VALUE "FileDescription", "Copyright@ <xqyjlj@126.com>\0"                 //文件说明，显示在任务管理器应用处的名字
 VALUE "FileVersion", "0.0.0.1\0"                  //文件版本
-VALUE "LegalCopyright", "https://github.com/xqyjlj/Misaka-FSC-Station\0"                      //版权
-VALUE "ProductName", "Misaka-FSC-Station\0"                     //产品名称
+VALUE "LegalCopyright", "https://github.com/xqyjlj/Misaka-Station\0"                      //版权
+VALUE "ProductName", "Misaka-Station\0"                     //产品名称
 VALUE "ProductVersion", "0.0.0.1\0"               //产品版本
-VALUE "OriginalFileName", "Misaka-FSC-Station.exe\0"            //原始文件名
+VALUE "OriginalFileName", "Misaka-Station.exe\0"            //原始文件名
 END
 END
 BLOCK "VarFileInfo"

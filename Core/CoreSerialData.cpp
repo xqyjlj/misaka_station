@@ -50,7 +50,7 @@ void CoreSerialData::data_receive()
     read_buffer = m_serial->readAll();
     for (int i = 0; i < read_buffer.size(); i++)
     {
-        Misaka_FSC_Station_Data_Prase(read_buffer.at(i));
+        Misaka_Station_Data_Prase(read_buffer.at(i));
     }
 }
 
@@ -58,16 +58,16 @@ void CoreSerialData::data_receive()
  * @brief 数据解析
  * @param  data             数据
  */
-void CoreSerialData::Misaka_FSC_Station_Data_Prase(uint8_t data)
+void CoreSerialData::Misaka_Station_Data_Prase(uint8_t data)
 {
     static uint8_t _data_len = 0, _data_cnt = 0;
     static uint8_t state = 0;
-    if (state == 0 && data == MISAKA_FSC_STATION_HEAD1) //帧头1
+    if (state == 0 && data == MISAKA_STATION_HEAD1) //帧头1
     {
         state = 1;
         rx_buffer[0] = data;
     }
-    else if (state == 1 && data == MISAKA_FSC_STATION_HEAD2) //帧头2
+    else if (state == 1 && data == MISAKA_STATION_HEAD2) //帧头2
     {
         state = 2;
         rx_buffer[1] = data;
@@ -103,12 +103,12 @@ void CoreSerialData::Misaka_FSC_Station_Data_Prase(uint8_t data)
         state = 7;
         rx_buffer[5 + _data_cnt++] = data;
     }
-    else if (state == 7 && data == MISAKA_FSC_STATION_END1) //帧尾0
+    else if (state == 7 && data == MISAKA_STATION_END1) //帧尾0
     {
         state = 8;
         rx_buffer[5 + _data_cnt++] = data;
     }
-    else if (state == 8 && data == MISAKA_FSC_STATION_END2) //帧尾1
+    else if (state == 8 && data == MISAKA_STATION_END2) //帧尾1
     {
         state = 0;
         rx_buffer[5 + _data_cnt] = data;
@@ -136,11 +136,11 @@ void CoreSerialData::data_comb(uint8_t* data_buf, uint8_t length)
     {
         return;
     }
-    if (!(*(data_buf) == MISAKA_FSC_STATION_HEAD1 && *(data_buf + 1) == MISAKA_FSC_STATION_HEAD2)) //帧头校验
+    if (!(*(data_buf) == MISAKA_STATION_HEAD1 && *(data_buf + 1) == MISAKA_STATION_HEAD2)) //帧头校验
     {
         return;
     }
-    if (!(*(data_buf + length - 2) == MISAKA_FSC_STATION_END1 && *(data_buf + length - 1) == MISAKA_FSC_STATION_END2)) //帧尾校验
+    if (!(*(data_buf + length - 2) == MISAKA_STATION_END1 && *(data_buf + length - 1) == MISAKA_STATION_END2)) //帧尾校验
     {
         return;
     }

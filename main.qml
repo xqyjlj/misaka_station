@@ -29,7 +29,7 @@ ApplicationWindow {
     width: Screen.desktopAvailableWidth
     height: Screen.desktopAvailableHeight
     visible: true
-    title: qsTr(">[御坂网络](https://github.com/xqyjlj/Misaka-Network)，御坂00020 FSC调试站软件")
+    title: qsTr(">[御坂网络](https://github.com/xqyjlj/Misaka-Network)，调试站软件")
 
     property var can_rates: ["10K", "20K", "40K", "50K", "80K", "100K", "125K", "200K", "250K", "400K", "500K", "666K", "800K", "1000K", "33.33K", "66.66K", "83.33K"]
     property var serial_rates: ["1200", "2400", "4800", "9600", "14400", "19200", "38400", "43000", "57600", "76800", "115200", "128000", "230400", "256000", "460800", "921600", "1382400", "1500000"]

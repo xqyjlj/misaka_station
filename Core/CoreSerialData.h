@@ -20,11 +20,11 @@
 #include <QObject>
 #include <QSerialPort>
 
-#define MISAKA_FSC_STATION_HEAD1    0xFF
-#define MISAKA_FSC_STATION_HEAD2    0xFE
+#define MISAKA_STATION_HEAD1    0xFF
+#define MISAKA_STATION_HEAD2    0xFE
 
-#define MISAKA_FSC_STATION_END1     0xEF
-#define MISAKA_FSC_STATION_END2     0xEE
+#define MISAKA_STATION_END1     0xEF
+#define MISAKA_STATION_END2     0xEE
 
 /**
  * @brief 串口数据核心
@@ -60,7 +60,7 @@ private:
      * @brief 数据解析
      * @param  data             数据
      */
-    void Misaka_FSC_Station_Data_Prase(uint8_t data);
+    void Misaka_Station_Data_Prase(uint8_t data);
 
     /**
      * @brief 数据组合

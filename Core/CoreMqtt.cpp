@@ -27,10 +27,9 @@
 
 CoreMqtt::CoreMqtt(QObject* parent) : QObject(parent)
 {
-    flush_ports();
-
     QObject::connect(m_client, &QMqttClient::stateChanged, this, &CoreMqtt::on_state_changed, Qt::UniqueConnection);
     QObject::connect(m_client, &QMqttClient::messageReceived, this, &CoreMqtt::on_message_received, Qt::UniqueConnection);
+    flush_ports();
 }
 
 CoreMqtt::~CoreMqtt()
@@ -89,6 +88,7 @@ const QStringList& CoreMqtt::flush_ports()
     {
         m_port_names << QString("MQTT%1(").arg(i) + file_list.at(i) + ")";
     }
+
     emit port_name_changed(m_port_names);
 
     return m_port_names;
