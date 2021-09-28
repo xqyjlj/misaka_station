@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
+using System.Threading;
 
 namespace MstnAPP.Services.Driver
 {
     public class Serial : ISerial
     {
         public event EPortNameChanged PortNamesChanged;
-
         public event EConnectChanged ConnectChanged;
+        public event EDataReceived DataReceived;
 
         private readonly SerialPort _serial = new();
-
         private readonly Dictionary<string, Parity> _parityMap = new();
         private readonly Dictionary<string, Handshake> _handshakeMap = new();
 
@@ -83,12 +83,13 @@ namespace MstnAPP.Services.Driver
         #endregion 初始化字典
 
         public Serial()
-
         {
             InitParityMap();
             InitHandshakeMap();
 
             _serial.ErrorReceived += new SerialErrorReceivedEventHandler(SerialErrorHandler);
+            _serial.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+
             _serial.WriteTimeout = SerialPort.InfiniteTimeout;
             _serial.ReadTimeout = SerialPort.InfiniteTimeout;
         }
@@ -251,7 +252,7 @@ namespace MstnAPP.Services.Driver
 
         #region 回调函数
 
-        private static void SerialErrorHandler(object sender, SerialErrorReceivedEventArgs e)
+        private void SerialErrorHandler(object sender, SerialErrorReceivedEventArgs e)
         {
             SerialPort sp = (SerialPort)sender;
             switch (e.EventType)
@@ -279,6 +280,13 @@ namespace MstnAPP.Services.Driver
                 default:
                     break;
             }
+        }
+
+        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            string indata = sp.ReadExisting();
+            DataReceived(indata);
         }
 
         #endregion 回调函数

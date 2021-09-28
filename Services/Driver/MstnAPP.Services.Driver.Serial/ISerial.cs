@@ -7,11 +7,15 @@ namespace MstnAPP.Services.Driver
 
     public delegate void EConnectChanged(bool isConnect);
 
+    public delegate void EDataReceived(string data);
+
     public interface ISerial
     {
         event EPortNameChanged PortNamesChanged;
 
         event EConnectChanged ConnectChanged;
+
+        event EDataReceived DataReceived;
 
         bool SetPortName(string port);
 
