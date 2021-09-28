@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+	<Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+    <AssemblyName>MstnAPP.Modules.Dialog.QQ</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Views\QQ.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="2.0.3" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\QQ.jpg" />
+  </ItemGroup>
+</Project>

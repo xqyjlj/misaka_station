@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+	<UseWPF>true</UseWPF>
+	<Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataFile\MstnAPP.Services.Sys.LogFlie\MstnAPP.Services.Sys.LogFile.csproj" />
+  </ItemGroup>
+
+</Project>

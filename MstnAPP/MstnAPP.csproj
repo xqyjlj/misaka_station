@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>MstnAPP</AssemblyName>
+    <Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+    <ApplicationIcon>favicon24x24.ico</ApplicationIcon>
+    <PackageId>Misaka-Station</PackageId>
+    <Authors>xqyjlj</Authors>
+    <Company>xqyjlj</Company>
+    <Product>Misaka-Station</Product>
+    <Description>御坂网络服务站</Description>
+    <Copyright>xqyjlj&lt;xqyjlj@126.com&gt;</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/xqyjlj/Misaka-Station</PackageProjectUrl>
+    <PackageIcon>favicon.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/xqyjlj/Misaka-Station</RepositoryUrl>
+  </PropertyGroup>
+  <ItemGroup>
+	  <None Remove="Resources\favicon.png" />
+	  <None Include="..\LICENSE">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
+	  <None Include="Resources\favicon.png">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="2.0.3" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
+	<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Event\MstnApp.Event.Core\MstnApp.Event.Core.csproj" />
+    <ProjectReference Include="..\Modules\Dialog\MstnAPP.Modules.Dialog.Feedback\MstnAPP.Modules.Dialog.Feedback.csproj" />
+    <ProjectReference Include="..\Modules\Dialog\MstnAPP.Modules.Dialog.QQ\MstnAPP.Modules.Dialog.QQ.csproj" />
+    <ProjectReference Include="..\Modules\Dialog\MstnAPP.Modules.Dialog.WeChat\MstnAPP.Modules.Dialog.WeChat.csproj" />
+    <ProjectReference Include="..\Modules\Page\MstnAPP.Modules.Page.Home\MstnAPP.Modules.Page.Home.csproj" />
+    <ProjectReference Include="..\Modules\Page\MstnAPP.Modules.Page.RTThread\MstnAPP.Modules.Page.RTThread.csproj" />
+    <ProjectReference Include="..\MstnAPP.Core\MstnAPP.Core.csproj" />
+    <ProjectReference Include="..\Services\Driver\MstnAPP.Services.Driver.Serial\MstnAPP.Services.Driver.Serial.csproj" />
+    <ProjectReference Include="..\Services\Sys\DataFile\MstnAPP.Services.Sys.IniFile\MstnAPP.Services.Sys.IniFile.csproj" />
+    <ProjectReference Include="..\Services\Sys\MstnAPP.Services.Sys.Debug\MstnAPP.Services.Sys.Debug.csproj" />
+    <ProjectReference Include="..\Services\Sys\MstnAPP.Services.Sys.Process\MstnAPP.Services.Sys.Process.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+	  <Resource Include="Resources\favicon.png" />
+  </ItemGroup>
+</Project>

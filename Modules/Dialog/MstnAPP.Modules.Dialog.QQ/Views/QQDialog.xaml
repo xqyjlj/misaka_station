@@ -1,0 +1,76 @@
+﻿<UserControl
+    x:Class="MstnAPP.Modules.Dialog.QQ.Views.QQDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontFamily="微软雅黑"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            Margin="16"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image
+                Width="100"
+                Height="100"
+                Source="/MstnAPP;component/Resources/favicon.png"
+                Stretch="Uniform" />
+
+            <StackPanel
+                Grid.Column="1"
+                Margin="24,0,0,0"
+                VerticalAlignment="Center">
+                <TextBlock
+                    Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                    Text="欢迎大家加入QQ群向我们联系"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </Grid>
+        <ScrollViewer
+            Grid.Row="1"
+            Margin="0,0,0,32"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Disabled">
+            <Grid>
+                <StackPanel Orientation="Vertical">
+                    <materialDesign:Card
+                        Width="380"
+                        Height="500"
+                        Margin="4,2,8,16">
+                        <Image
+                            VerticalAlignment="Stretch"
+                            Source="/MstnAPP.Modules.Dialog.QQ;component/Views/QQ.jpg"
+                            Stretch="UniformToFill"
+                            StretchDirection="Both" />
+                    </materialDesign:Card>
+                    <TextBox
+                        HorizontalAlignment="Center"
+                        Cursor="IBeam"
+                        IsReadOnly="True"
+                        Text="QQ群号：444093737"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

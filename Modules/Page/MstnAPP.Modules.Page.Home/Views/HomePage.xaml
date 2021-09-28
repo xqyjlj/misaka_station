@@ -1,0 +1,260 @@
+﻿<UserControl
+    x:Class="MstnAPP.Modules.Page.Home.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontFamily="微软雅黑"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            Margin="16"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image
+                Width="100"
+                Height="100"
+                Source="/MstnAPP;component/Resources/favicon.png"
+                Stretch="Uniform" />
+
+            <StackPanel
+                Grid.Column="1"
+                Margin="24,0,0,0"
+                VerticalAlignment="Center">
+                <TextBlock
+                    Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                    Text="欢迎使用Misaka-Station(御坂网络服务站)"
+                    TextWrapping="Wrap" />
+
+                <Button
+                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                    CommandParameter="{x:Static Dock.Left}"
+                    Style="{StaticResource MaterialDesignFlatButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Binoculars" />
+                        <TextBlock
+                            Margin="8,0,0,0"
+                            Text="探索"
+                            ToolTip="探索" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <ScrollViewer
+            Grid.Row="1"
+            Margin="0,0,0,32"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Disabled">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:Card
+                        Width="420"
+                        Height="270"
+                        Margin="4,2,8,16">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image
+                                Grid.RowSpan="5"
+                                VerticalAlignment="Stretch"
+                                Source="/MstnAPP.Modules.Dialog.Feedback;component/Views/Misaka_Mikoto.jpg"
+                                Stretch="UniformToFill"
+                                StretchDirection="Both" />
+
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="16,16,16,2"
+                                Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                Text="联系我们" />
+
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="16,0,16,8"
+                                VerticalAlignment="Center"
+                                Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                Text="你好，使用者，你可以通过以下渠道向我们提出功能请求，或者向我们汇报错误："
+                                TextWrapping="Wrap" />
+
+                            <Border
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="0,8,0,0"
+                                BorderBrush="{DynamicResource MaterialDesignDivider}"
+                                BorderThickness="0,1,0,0">
+                                <Grid Margin="8">
+                                    <Button
+                                        x:Name="GitHubButton"
+                                        HorizontalAlignment="Left"
+                                        Command="{Binding ButtonGithubCommand}"
+                                        Style="{DynamicResource MaterialDesignFlatButton}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Github" />
+                                            <TextBlock
+                                                Margin="8,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="GitHub" />
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button
+                                        x:Name="ButtonWeChat"
+                                        Margin="0,0,28,0"
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding ButtonWeChatCommand}"
+                                        Cursor="Hand"
+                                        Style="{DynamicResource MaterialDesignFlatButton}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Wechat" />
+                                            <TextBlock
+                                                Margin="8,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="微信" />
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </Border>
+
+                            <Border
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                BorderBrush="{DynamicResource MaterialDesignDivider}"
+                                BorderThickness="0,1,0,0">
+                                <Grid Margin="8">
+                                    <Button
+                                        x:Name="ButtonQQ"
+                                        HorizontalAlignment="Left"
+                                        Command="{Binding ButtonQQCommand}"
+                                        Cursor="Hand"
+                                        Style="{DynamicResource MaterialDesignFlatButton}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Qqchat" />
+                                            <TextBlock
+                                                Margin="8,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="QQ" />
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button
+                                        x:Name="ButtonEmail"
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding ButtonEmailCommand}"
+                                        Style="{DynamicResource MaterialDesignFlatButton}"
+                                        ToolTip="xqyjlj@126.com">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Email" />
+                                            <TextBlock
+                                                Margin="8,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="电子邮箱" />
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </materialDesign:Card>
+
+                    <materialDesign:Card
+                        Width="420"
+                        Height="270"
+                        Margin="8,2,4,16">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <materialDesign:PackIcon
+                                Width="160"
+                                Height="160"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Kind="Github" />
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock
+                                    Margin="16,16,16,8"
+                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                    Text="开源项目" />
+
+                                <TextBlock
+                                    Margin="16,0,16,8"
+                                    VerticalAlignment="Top"
+                                    Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                    Text="这个项目是完全开源的。 如果你喜欢它并想说声谢谢，你可以点击 GitHub Star 按钮，或者向你的朋友同事们推荐！"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <Border
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Padding="8"
+                                BorderBrush="{DynamicResource MaterialDesignDivider}"
+                                BorderThickness="0,1,0,0">
+                                <DockPanel>
+                                    <Button
+                                        x:Name="ButtonDonate"
+                                        Command="{Binding ButtonDonateCommand}"
+                                        Cursor="Hand"
+                                        DockPanel.Dock="Right"
+                                        Style="{DynamicResource MaterialDesignFlatButton}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Gift" />
+                                            <TextBlock
+                                                Margin="8,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Text="打赏" />
+                                        </StackPanel>
+                                    </Button>
+
+                                    <TextBlock
+                                        Margin="16"
+                                        VerticalAlignment="Center"
+                                        Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                        Text="你想要对我们进行打赏吗？点击按钮即可对开发者进行打赏"
+                                        TextWrapping="Wrap" />
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                    </materialDesign:Card>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

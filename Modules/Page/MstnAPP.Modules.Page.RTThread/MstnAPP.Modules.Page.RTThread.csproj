@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+	<Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+	<AssemblyName>MstnAPP.Modules.Page.RTThread</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+	<PackageReference Include="MaterialDesignColors" Version="2.0.3" />
+	<PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
+	<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.37" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Event\MstnApp.Event.Core\MstnApp.Event.Core.csproj" />
+    <ProjectReference Include="..\..\..\MstnAPP.Core\MstnAPP.Core.csproj" />
+    <ProjectReference Include="..\..\..\Services\Driver\MstnAPP.Services.Driver.Serial\MstnAPP.Services.Driver.Serial.csproj" />
+    <ProjectReference Include="..\..\..\Services\Sys\DataFile\MstnAPP.Services.Sys.IniFile\MstnAPP.Services.Sys.IniFile.csproj" />
+    <ProjectReference Include="..\..\..\Services\Sys\MstnAPP.Services.Sys.Debug\MstnAPP.Services.Sys.Debug.csproj" />
+    <ProjectReference Include="..\..\..\Services\Sys\MstnAPP.Services.Sys.Process\MstnAPP.Services.Sys.Process.csproj" />
+  </ItemGroup>
+</Project>

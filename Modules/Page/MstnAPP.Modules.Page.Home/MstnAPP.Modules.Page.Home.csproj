@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+	<Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+    <AssemblyName>MstnAPP.Modules.Page.Home</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="2.0.3" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Event\MstnApp.Event.Core\MstnApp.Event.Core.csproj" />
+    <ProjectReference Include="..\..\..\Services\Sys\MstnAPP.Services.Sys.Process\MstnAPP.Services.Sys.Process.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
