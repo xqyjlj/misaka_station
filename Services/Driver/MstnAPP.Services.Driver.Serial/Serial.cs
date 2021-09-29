@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
-using System.Threading;
 
 namespace MstnAPP.Services.Driver
 {
     public class Serial : ISerial
     {
         public event EPortNameChanged PortNamesChanged;
+
         public event EConnectChanged ConnectChanged;
+
         public event EDataReceived DataReceived;
 
         private readonly SerialPort _serial = new();

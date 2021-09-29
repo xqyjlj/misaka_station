@@ -37,7 +37,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="设置" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageSettingContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -51,14 +51,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="任务" />
                     </StackPanel>
                 </TabItem.Header>
-                <TextBlock>
-                    <Run Text="tab 1 content. Default look and behaviors." />
-                    <LineBreak />
-                    <LineBreak />
-                    <Run FontStyle="Italic">
-                        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
-                    </Run>
-                </TextBlock>
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskContentRegion" />
             </TabItem>
 
             <TabItem>

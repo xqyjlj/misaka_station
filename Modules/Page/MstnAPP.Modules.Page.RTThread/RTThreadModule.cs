@@ -10,7 +10,8 @@ namespace MstnAPP.Modules.Page.RTThread
         public void OnInitialized(IContainerProvider containerProvider)
         {
             IRegionManager regionManager = containerProvider.Resolve<IRegionManager>();
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageContentRegion", typeof(RTThreadPageSetting));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageSettingContentRegion", typeof(RTThreadPageSetting));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskContentRegion", typeof(RTThreadPageTask));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

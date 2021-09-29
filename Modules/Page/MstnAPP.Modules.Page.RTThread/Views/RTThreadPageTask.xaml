@@ -1,0 +1,109 @@
+﻿<UserControl
+    x:Class="MstnAPP.Modules.Page.RTThread.Views.RTThreadPageTask"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controler="clr-namespace:MstnAPP.Core.Controler;assembly=MstnAPP.Core"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontFamily="微软雅黑"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto">
+    <Grid>
+        <TabControl
+            materialDesign:ColorZoneAssist.Mode="Standard"
+            materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+            BorderBrush="Transparent"
+            BorderThickness="0"
+            SnapsToDevicePixels="True"
+            Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+            TabStripPlacement="Top">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            Kind="SpiderThread"
+                            ToolTip="线程" />
+                        <TextBlock HorizontalAlignment="Center" Text="线程" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskThreadContentRegion" />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            Kind="WiperWash"
+                            ToolTip="性能" />
+                        <TextBlock HorizontalAlignment="Center" Text="性能" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            Kind="Sync"
+                            ToolTip="同步" />
+                        <TextBlock HorizontalAlignment="Center" Text="同步" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            Kind="HumanGreetingProximity"
+                            ToolTip="通信" />
+                        <TextBlock HorizontalAlignment="Center" Text="通信" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            Kind="Devices"
+                            ToolTip="设备" />
+                        <TextBlock HorizontalAlignment="Center" Text="设备" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            Kind="ClockOutline"
+                            ToolTip="时钟" />
+                        <TextBlock HorizontalAlignment="Center" Text="时钟" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
