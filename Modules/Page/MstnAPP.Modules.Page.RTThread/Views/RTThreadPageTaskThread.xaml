@@ -1,0 +1,25 @@
+﻿<UserControl
+    x:Class="MstnAPP.Modules.Page.RTThread.Views.RTThreadPageTaskThread"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controler="clr-namespace:MstnAPP.Core.Controler;assembly=MstnAPP.Core"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontFamily="微软雅黑"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto">
+    <Grid>
+        <DataGrid
+            CanUserAddRows="False"
+            ItemsSource="{Binding DataGridTaskItems}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" />
+    </Grid>
+</UserControl>
