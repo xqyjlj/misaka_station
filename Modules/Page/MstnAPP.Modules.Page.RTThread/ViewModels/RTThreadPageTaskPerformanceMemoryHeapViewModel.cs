@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace MstnAPP.Modules.Page.RTThread.ViewModels
 {
-    public class RTThreadPageTaskThreadViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
+    internal class RTThreadPageTaskPerformanceMemoryHeapViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
     {
         public bool KeepAlive => false;
 
@@ -22,13 +22,13 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         {
         }
 
-        public RTThreadPageTaskThreadViewModel()
+        public RTThreadPageTaskPerformanceMemoryHeapViewModel()
         {
         }
 
-        private ObservableCollection<ModelThread> _dataGridTaskItems = new();
+        private ObservableCollection<ModelMemoryHeap> _dataGridTaskItems = new();
 
-        public ObservableCollection<ModelThread> DataGridTaskItems
+        public ObservableCollection<ModelMemoryHeap> DataGridTaskItems
         {
             get => _dataGridTaskItems;
             set => _ = SetProperty(ref _dataGridTaskItems, value);

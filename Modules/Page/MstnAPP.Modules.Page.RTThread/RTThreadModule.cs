@@ -13,6 +13,10 @@ namespace MstnAPP.Modules.Page.RTThread
             _ = regionManager.RegisterViewWithRegion("RTThreadPageSettingContentRegion", typeof(RTThreadPageSetting));
             _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskContentRegion", typeof(RTThreadPageTask));
             _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskThreadContentRegion", typeof(RTThreadPageTaskThread));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceContentRegion", typeof(RTThreadPageTaskPerformance));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceMemoryPoolContentRegion", typeof(RTThreadPageTaskPerformanceMemoryPool));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceMemoryHeapContentRegion", typeof(RTThreadPageTaskPerformanceMemoryHeap));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceMemoryFreeContentRegion", typeof(RTThreadPageTaskPerformanceMemoryFree));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
