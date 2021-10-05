@@ -12,6 +12,7 @@ namespace MstnAPP.Modules.Page.RTThread
             IRegionManager regionManager = containerProvider.Resolve<IRegionManager>();
             _ = regionManager.RegisterViewWithRegion("RTThreadPageSettingContentRegion", typeof(RTThreadPageSetting));
             _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskContentRegion", typeof(RTThreadPageTask));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskThreadContentRegion", typeof(RTThreadPageTaskThread));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
