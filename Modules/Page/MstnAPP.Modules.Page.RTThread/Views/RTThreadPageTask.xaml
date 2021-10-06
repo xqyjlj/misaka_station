@@ -1,9 +1,9 @@
 ﻿<UserControl
     x:Class="MstnAPP.Modules.Page.RTThread.Views.RTThreadPageTask"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     prism:ViewModelLocator.AutoWireViewModel="True"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
@@ -63,6 +63,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="同步" />
                     </StackPanel>
                 </TabItem.Header>
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskSyncContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>

@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="MstnAPP.Modules.Page.RTThread.Views.RTThreadPageTaskPerformance"
+    x:Class="MstnAPP.Modules.Page.RTThread.Views.RTThreadPageTaskSync"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:prism="http://prismlibrary.com/"
@@ -30,12 +30,12 @@
                             Width="24"
                             Height="24"
                             HorizontalAlignment="Center"
-                            Kind="SquareRoundedOutline"
-                            ToolTip="内存池" />
-                        <TextBlock HorizontalAlignment="Center" Text="内存池" />
+                            Kind="SignalVariant"
+                            ToolTip="信号量" />
+                        <TextBlock HorizontalAlignment="Center" Text="信号量" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerformanceMemPoolContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskSyncSemContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -44,12 +44,12 @@
                             Width="24"
                             Height="24"
                             HorizontalAlignment="Center"
-                            Kind="ChartBellCurveCumulative"
-                            ToolTip="内存堆" />
-                        <TextBlock HorizontalAlignment="Center" Text="内存堆" />
+                            Kind="MinusCircleMultipleOutline"
+                            ToolTip="互斥集" />
+                        <TextBlock HorizontalAlignment="Center" Text="互斥集" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerformanceMemHeapContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskSyncMutexContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -58,12 +58,12 @@
                             Width="24"
                             Height="24"
                             HorizontalAlignment="Center"
-                            Kind="MicroSd"
-                            ToolTip="动态内存" />
-                        <TextBlock HorizontalAlignment="Center" Text="动态内存" />
+                            Kind="CalendarText"
+                            ToolTip="事件集" />
+                        <TextBlock HorizontalAlignment="Center" Text="事件集" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerformanceFreeContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskSyncEventContentRegion" />
             </TabItem>
         </TabControl>
     </Grid>

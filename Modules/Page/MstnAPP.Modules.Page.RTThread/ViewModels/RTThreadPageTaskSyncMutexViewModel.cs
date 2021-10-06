@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace MstnAPP.Modules.Page.RTThread.ViewModels
 {
-    public class RTThreadPageTaskThreadViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
+    public class RTThreadPageTaskSyncMutexViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
     {
         public bool KeepAlive => false;
 
@@ -22,16 +22,16 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         {
         }
 
-        public RTThreadPageTaskThreadViewModel()
+        public RTThreadPageTaskSyncMutexViewModel()
         {
         }
 
-        private ObservableCollection<ModelThread> _DataGridItems = new();
+        private ObservableCollection<ModelSyncMutex> _dataGridTaskItems = new();
 
-        public ObservableCollection<ModelThread> DataGridItems
+        public ObservableCollection<ModelSyncMutex> DataGridTaskItems
         {
-            get => _DataGridItems;
-            set => _ = SetProperty(ref _DataGridItems, value);
+            get => _dataGridTaskItems;
+            set => _ = SetProperty(ref _dataGridTaskItems, value);
         }
     }
 }

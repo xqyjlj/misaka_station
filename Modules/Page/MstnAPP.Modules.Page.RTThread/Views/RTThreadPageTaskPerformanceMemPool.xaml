@@ -1,9 +1,9 @@
 ﻿<UserControl
-    x:Class="MstnAPP.Modules.Page.RTThread.Views.RTThreadPageTaskThread"
+    x:Class="MstnAPP.Modules.Page.RTThread.Views.RTThreadPageTaskPerformanceMemPool"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     prism:ViewModelLocator.AutoWireViewModel="True"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
@@ -21,45 +21,30 @@
             ItemsSource="{Binding DataGridItems}">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding Thread}"
+                    Binding="{Binding Name}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="线程" />
+                    Header="名称" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding Pri}"
+                    Binding="{Binding Size}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="优先级" />
+                    Header="大小" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding Status}"
+                    Binding="{Binding Total}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="状态" />
+                    Header="总内存块" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding Sp}"
+                    Binding="{Binding Free}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="栈位置" />
+                    Header="空闲内存块" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding StackSize}"
+                    Binding="{Binding SuspendThread}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="栈大小" />
-                <materialDesign:DataGridTextColumn
-                    Binding="{Binding MaxUsed}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="最大使用情况" />
-                <materialDesign:DataGridTextColumn
-                    Binding="{Binding LeftTick}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="运行节拍数" />
-                <materialDesign:DataGridTextColumn
-                    Binding="{Binding Error}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="错误码" />
+                    Header="等待内存池的线程数目" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

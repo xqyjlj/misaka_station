@@ -2,7 +2,7 @@
 
 namespace MstnAPP.Modules.Page.RTThread.Models
 {
-    public class ModelMemoryHeap : BindableBase
+    public class ModelMemHeap : BindableBase
     {
         private string _name;
 

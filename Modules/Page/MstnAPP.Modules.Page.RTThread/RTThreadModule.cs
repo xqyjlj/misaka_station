@@ -14,9 +14,14 @@ namespace MstnAPP.Modules.Page.RTThread
             _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskContentRegion", typeof(RTThreadPageTask));
             _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskThreadContentRegion", typeof(RTThreadPageTaskThread));
             _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceContentRegion", typeof(RTThreadPageTaskPerformance));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceMemoryPoolContentRegion", typeof(RTThreadPageTaskPerformanceMemoryPool));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceMemoryHeapContentRegion", typeof(RTThreadPageTaskPerformanceMemoryHeap));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceMemoryFreeContentRegion", typeof(RTThreadPageTaskPerformanceMemoryFree));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceMemPoolContentRegion", typeof(RTThreadPageTaskPerformanceMemPool));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceMemHeapContentRegion", typeof(RTThreadPageTaskPerformanceMemHeap));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskPerformanceFreeContentRegion", typeof(RTThreadPageTaskPerformanceFree));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskSyncContentRegion", typeof(RTThreadPageTaskSync));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskSyncSemContentRegion", typeof(RTThreadPageTaskSyncSem));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskSyncMutexContentRegion", typeof(RTThreadPageTaskSyncMutex));
+            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskSyncEventContentRegion", typeof(RTThreadPageTaskSyncEvent));
+
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
