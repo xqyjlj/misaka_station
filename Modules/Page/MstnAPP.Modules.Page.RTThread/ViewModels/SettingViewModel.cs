@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using MstnApp.Event.Core;
+using MstnAPP.Modules.Page.RTThread.Services;
 using MstnAPP.Services.Driver;
 using MstnAPP.Services.Sys.DataFlie;
 using Prism.Commands;
@@ -7,14 +8,21 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace MstnAPP.Modules.Page.RTThread.ViewModels
 {
     public class SettingViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
     {
         private readonly ISerial _serial;
+
         private readonly IEventAggregator _eventAggregator;
+
         private readonly IIniFile _iniFile;
+
+        private readonly Thread _thread;
+
+        private readonly ServicesSerialData _serialData = new();
 
         public bool KeepAlive => false;
 
@@ -37,11 +45,17 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         {
             _serial = serial;
             _iniFile = iniFile;
+
+           
             _serial.PortNamesChanged += new EPortNameChanged(SerialPortNameChanged);
             _serial.ConnectChanged += new EConnectChanged(SerialConnectChanged);
+            _serial.DataReceived += new EDataReceived(SerialDataReceived);
+
             ListComboBoxPort = _serial.GetPortNames();
             _eventAggregator = eventAggregator;
-            _ = _eventAggregator.GetEvent<EventDevice>().Subscribe(CloseEventReceived);
+            _ = _eventAggregator.GetEvent<EventClose>().Subscribe(CloseEventReceived);
+
+            _thread = new Thread(_serialData.ParsedData);
             InitListComboBox();
             ReadParameters();
         }
@@ -59,6 +73,12 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         private void SerialPortNameChanged(List<string> portNames)
         {
             ListComboBoxPort = portNames;
+        }
+
+        private void SerialDataReceived(string data)
+        {
+            _serialData.AddBuffer(data);
+            _thread.Start();
         }
 
         private void InitListComboBox()
