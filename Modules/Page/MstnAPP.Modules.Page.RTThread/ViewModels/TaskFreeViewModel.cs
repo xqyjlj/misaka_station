@@ -6,6 +6,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
     public class TaskFreeViewModel : BindableBase, IRegionMemberLifetime
     {
         public bool KeepAlive => false;
+
         public TaskFreeViewModel()
         {
         }

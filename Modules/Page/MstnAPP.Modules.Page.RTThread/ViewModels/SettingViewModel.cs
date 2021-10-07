@@ -41,7 +41,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             _serial.ConnectChanged += new EConnectChanged(SerialConnectChanged);
             ListComboBoxPort = _serial.GetPortNames();
             _eventAggregator = eventAggregator;
-            _ = _eventAggregator.GetEvent<CloseEvent>().Subscribe(CloseEventReceived);
+            _ = _eventAggregator.GetEvent<EventDevice>().Subscribe(CloseEventReceived);
             InitListComboBox();
             ReadParameters();
         }

@@ -1,6 +1,4 @@
-﻿
-
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 
 namespace MstnAPP.Modules.Page.RTThread.Models
 {

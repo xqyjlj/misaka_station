@@ -8,6 +8,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
     internal class TaskMemHeapViewModel : BindableBase, IRegionMemberLifetime
     {
         public bool KeepAlive => false;
+
         public TaskMemHeapViewModel()
         {
         }

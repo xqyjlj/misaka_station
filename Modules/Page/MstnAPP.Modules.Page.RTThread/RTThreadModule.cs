@@ -1,5 +1,4 @@
 ﻿using MstnAPP.Modules.Page.RTThread.Views;
-using MstnAPP.Services.Sys.Debug;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;

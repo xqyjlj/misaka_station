@@ -198,7 +198,7 @@ namespace MstnAPP.ViewModels
                 _iniFile.SetMianWindowFunctionListIndex(0);
             }
 
-            _eventAggregator.GetEvent<CloseEvent>().Publish("MainWindow");
+            _eventAggregator.GetEvent<EventClose>().Publish("MainWindow");
         }
 
         #endregion ClosingCommand

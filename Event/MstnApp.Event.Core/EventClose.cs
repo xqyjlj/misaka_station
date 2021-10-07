@@ -2,7 +2,7 @@
 
 namespace MstnApp.Event.Core
 {
-    public class CloseEvent : PubSubEvent<string>
+    public class EventClose : PubSubEvent<string>
     {
     }
 }

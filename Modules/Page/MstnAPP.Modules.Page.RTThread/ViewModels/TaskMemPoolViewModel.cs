@@ -8,6 +8,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
     public class TaskMemPoolViewModel : BindableBase, IRegionMemberLifetime
     {
         public bool KeepAlive => false;
+
         public TaskMemPoolViewModel()
         {
         }

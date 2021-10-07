@@ -8,6 +8,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
     public class TaskMutexViewModel : BindableBase, IRegionMemberLifetime
     {
         public bool KeepAlive => false;
+
         public TaskMutexViewModel()
         {
         }

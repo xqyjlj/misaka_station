@@ -27,6 +27,5 @@ namespace MstnAPP.Modules.Page.RTThread.Models
             get => _suspend;
             set => _ = SetProperty(ref _suspend, value);
         }
-
     }
 }

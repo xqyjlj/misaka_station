@@ -8,9 +8,9 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
     public class TaskSemViewModel : BindableBase, IRegionMemberLifetime
     {
         public bool KeepAlive => false;
+
         public TaskSemViewModel()
         {
-
         }
 
         private ObservableCollection<ModelSem> _DataGridItems = new();
