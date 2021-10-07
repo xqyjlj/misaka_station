@@ -3,7 +3,7 @@ using Prism.Regions;
 
 namespace MstnAPP.Modules.Page.RTThread.ViewModels
 {
-    public class RTThreadPageTaskPerformanceFreeViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
+    public class RTThreadPageTaskPerfFreeViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
     {
         public bool KeepAlive => false;
 
@@ -20,7 +20,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         {
         }
 
-        public RTThreadPageTaskPerformanceFreeViewModel()
+        public RTThreadPageTaskPerfFreeViewModel()
         {
         }
 

@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="MstnAPP.Modules.Page.RTThread.Views.RTThreadPageTaskPerformance"
+    x:Class="MstnAPP.Modules.Page.RTThread.Views.RTThreadPageTaskPerf"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:prism="http://prismlibrary.com/"
@@ -35,7 +35,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="内存池" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerformanceMemPoolContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerfMemPoolContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -49,7 +49,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="内存堆" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerformanceMemHeapContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerfMemHeapContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -63,7 +63,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="动态内存" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerformanceFreeContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerfFreeContentRegion" />
             </TabItem>
         </TabControl>
     </Grid>

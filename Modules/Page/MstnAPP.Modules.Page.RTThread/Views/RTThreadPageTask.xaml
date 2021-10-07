@@ -49,7 +49,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="性能" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerformanceContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskPerfContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>

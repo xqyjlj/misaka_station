@@ -3,11 +3,11 @@
 namespace MstnAPP.Modules.Page.RTThread.Views
 {
     /// <summary>
-    /// RTThreadPageTaskPerformanceFree.xaml 的交互逻辑
+    /// RTThreadPageTaskPerfMemHeap.xaml 的交互逻辑
     /// </summary>
-    public partial class RTThreadPageTaskPerformanceFree : UserControl
+    public partial class RTThreadPageTaskPerfMemHeap : UserControl
     {
-        public RTThreadPageTaskPerformanceFree()
+        public RTThreadPageTaskPerfMemHeap()
         {
             InitializeComponent();
         }
