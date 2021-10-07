@@ -4,12 +4,12 @@ namespace MstnAPP.Modules.Page.RTThread.Models
 {
     public class ModelThread : BindableBase
     {
-        private string _thread;
+        private string _name;
 
-        public string Thread
+        public string Name
         {
-            get => _thread;
-            set => _ = SetProperty(ref _thread, value);
+            get => _name;
+            set => _ = SetProperty(ref _name, value);
         }
 
         private string _pri;

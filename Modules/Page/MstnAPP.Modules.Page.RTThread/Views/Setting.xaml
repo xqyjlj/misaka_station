@@ -1,0 +1,359 @@
+﻿<UserControl
+    x:Class="MstnAPP.Modules.Page.RTThread.Views.Setting"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controler="clr-namespace:MstnAPP.Core.Controler;assembly=MstnAPP.Core"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontFamily="微软雅黑"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            Margin="16"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image
+                Width="100"
+                Height="100"
+                Source="/MstnAPP;component/Resources/favicon.png"
+                Stretch="Uniform" />
+
+            <StackPanel
+                Grid.Column="1"
+                Margin="24,0,0,0"
+                VerticalAlignment="Center">
+                <TextBlock
+                    Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                    Text="在此配置程序的基本设置"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </Grid>
+        <ScrollViewer
+            Grid.Row="1"
+            Margin="0,0,0,32"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Disabled">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:Card Margin="10,10,10,10">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                HorizontalAlignment="Center"
+                                Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                Text="端口设置"
+                                TextWrapping="Wrap" />
+                            <Grid
+                                Grid.Row="1"
+                                Margin="10"
+                                VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    x:Name="ButtonPort"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding ButtonPortCommand}"
+                                    Content="端口"
+                                    Cursor="Hand"
+                                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                                    ToolTip="点击即可刷新串口列表" />
+                                <ComboBox
+                                    x:Name="ComboBoxPort"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    materialDesign:ComboBoxAssist.ShowSelectedItem="True"
+                                    materialDesign:HintAssist.Hint="端口名"
+                                    ItemsSource="{Binding ListComboBoxPort}"
+                                    SelectedItem="{Binding ListComboBoxPortSelectedItem}"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                            </Grid>
+                            <Grid
+                                Grid.Row="2"
+                                Margin="10"
+                                VerticalAlignment="Stretch">
+                                <Button
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="速率"
+                                    Style="{StaticResource MaterialDesignOutlinedButton}" />
+                                <ComboBox
+                                    x:Name="ComboBoxBaudRate"
+                                    HorizontalAlignment="Right"
+                                    materialDesign:ComboBoxAssist.ShowSelectedItem="True"
+                                    materialDesign:HintAssist.Hint="速率"
+                                    ItemsSource="{Binding ListComboBoxBaudRate}"
+                                    SelectedItem="{Binding ListComboBoxBaudRateSelectedItem}"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                            </Grid>
+                            <Grid
+                                Grid.Row="3"
+                                Margin="10"
+                                VerticalAlignment="Stretch">
+                                <Button
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="校验"
+                                    Style="{StaticResource MaterialDesignOutlinedButton}" />
+                                <ComboBox
+                                    x:Name="ComboBoxParity"
+                                    HorizontalAlignment="Right"
+                                    materialDesign:ComboBoxAssist.ShowSelectedItem="True"
+                                    materialDesign:HintAssist.Hint="校验"
+                                    ItemsSource="{Binding ListComboBoxParity}"
+                                    SelectedItem="{Binding ListComboBoxParitySelectedItem}"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                            </Grid>
+                            <Grid
+                                Grid.Row="4"
+                                Margin="10"
+                                VerticalAlignment="Stretch">
+                                <Button
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="数据位"
+                                    Cursor="Hand"
+                                    Style="{StaticResource MaterialDesignOutlinedButton}" />
+                                <ComboBox
+                                    x:Name="ComboBoxDataBits"
+                                    HorizontalAlignment="Right"
+                                    materialDesign:ComboBoxAssist.ShowSelectedItem="True"
+                                    materialDesign:HintAssist.Hint="数据位"
+                                    ItemsSource="{Binding ListComboBoxDataBits}"
+                                    SelectedItem="{Binding ListComboBoxDataBitsSelectedItem}"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                            </Grid>
+                            <Grid
+                                Grid.Row="5"
+                                Margin="10"
+                                VerticalAlignment="Stretch">
+                                <Button
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="停止位"
+                                    Cursor="Hand"
+                                    Style="{StaticResource MaterialDesignOutlinedButton}" />
+                                <ComboBox
+                                    x:Name="ComboBoxStopBits"
+                                    HorizontalAlignment="Right"
+                                    materialDesign:ComboBoxAssist.ShowSelectedItem="True"
+                                    materialDesign:HintAssist.Hint="停止位"
+                                    ItemsSource="{Binding ListComboBoxStopBits}"
+                                    SelectedItem="{Binding ListComboBoxStopBitsSelectedItem}"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                            </Grid>
+                            <Grid
+                                Grid.Row="6"
+                                Margin="10"
+                                VerticalAlignment="Stretch">
+                                <Button
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="握手协议"
+                                    Cursor="Hand"
+                                    Style="{StaticResource MaterialDesignOutlinedButton}" />
+                                <ComboBox
+                                    x:Name="ComboBoxHandshake"
+                                    HorizontalAlignment="Right"
+                                    materialDesign:ComboBoxAssist.ShowSelectedItem="True"
+                                    materialDesign:HintAssist.Hint="握手协议"
+                                    ItemsSource="{Binding ListComboBoxHandshake}"
+                                    SelectedItem="{Binding ListComboBoxHandshakeSelectedItem}"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                            </Grid>
+                        </Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="10,10,10,10">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                HorizontalAlignment="Center"
+                                Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                Text="应用设置"
+                                TextWrapping="Wrap" />
+                            <Grid Grid.Row="1" VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox
+                                    x:Name="CheckBoxIsSaveData"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    Content="是否保存数据"
+                                    IsChecked="{Binding CheckBoxIsSaveDataIsChecked}"
+                                    IsThreeState="False" />
+                                <StackPanel
+                                    x:Name="StackPanelSaveDataPath"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Margin="0,0,10,0"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                                    <TextBox
+                                        x:Name="TextBoxSaveDataPath"
+                                        MinWidth="100"
+                                        MaxWidth="200"
+                                        Margin="0,10,10,10"
+                                        materialDesign:HintAssist.Hint="请输入保存路径"
+                                        Cursor="IBeam"
+                                        IsEnabled="{Binding IsChecked, ElementName=CheckBoxIsSaveData}"
+                                        Text="{Binding TextBoxSaveDataPathText}" />
+                                    <Button
+                                        x:Name="ButtonSaveDataPathChoose"
+                                        Command="{Binding ButtonSaveDataPathChooseCommand}"
+                                        Content="{materialDesign:PackIcon Kind=FileFindOutline}"
+                                        Cursor="Hand"
+                                        IsEnabled="{Binding IsChecked, ElementName=CheckBoxIsSaveData}"
+                                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                                        ToolTip="点击即可刷新串口列表" />
+                                </StackPanel>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                    Text="定时刷新时间(ms)"
+                                    TextWrapping="Wrap" />
+                                <Slider
+                                    x:Name="SliderFlushTime"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,10,20,10"
+                                    IsSelectionRangeEnabled="True"
+                                    Maximum="10000"
+                                    Minimum="500"
+                                    SelectionEnd="2000"
+                                    SelectionStart="500"
+                                    Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                    TickFrequency="500"
+                                    TickPlacement="TopLeft"
+                                    Value="{Binding SliderFlushTimeValue}" />
+                                <CheckBox
+                                    x:Name="CheckBoxIsExistPassword"
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    Content="是否存在密码"
+                                    IsChecked="{Binding CheckBoxIsExistPasswordIsChecked}"
+                                    IsThreeState="False" />
+                                <PasswordBox
+                                    x:Name="PasswordBoxPassword"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    MinWidth="150"
+                                    MaxWidth="260"
+                                    Margin="0,10,10,10"
+                                    HorizontalAlignment="Stretch"
+                                    controler:PasswordBoxHelper.Password="{Binding Path=PasswordBoxPasswordPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    materialDesign:HintAssist.Hint="请输入密码"
+                                    materialDesign:TextFieldAssist.HasClearButton="True"
+                                    Cursor="IBeam"
+                                    IsEnabled="{Binding IsChecked, ElementName=CheckBoxIsExistPassword}">
+                                    <i:Interaction.Behaviors>
+                                        <controler:PasswordBoxBehavior />
+                                    </i:Interaction.Behaviors>
+                                </PasswordBox>
+                                <TextBlock
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                    Text="串口状态"
+                                    TextWrapping="Wrap" />
+                                <Grid
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    Margin="10"
+                                    HorizontalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock
+                                        Margin="0,0,10,0"
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                        Text="关闭" />
+                                    <ToggleButton
+                                        x:Name="ToggleButtonSerial"
+                                        Grid.Column="1"
+                                        Margin="0,10,0,10"
+                                        IsChecked="{Binding ToggleButtonSerialIsChecked}"
+                                        IsEnabled="{Binding ToggleButtonSerialIsEnabled}"
+                                        Style="{StaticResource MaterialDesignSwitchDarkToggleButton}" />
+                                    <TextBlock
+                                        Grid.Column="2"
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                        Text="打开" />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </materialDesign:Card>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

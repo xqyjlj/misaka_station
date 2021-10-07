@@ -39,7 +39,7 @@ namespace MstnAPP.ViewModels
 
             _listBoxModelItemsView = CollectionViewSource.GetDefaultView(ListBoxModelItems);
             _listBoxModelItemsView.Filter = ModelItemsFilter;
-
+#if DEBUG
             int index = _iniFile.GetMianWindowFunctionListIndex();
             if (index < ListBoxModelItems.Count && index >= 0)
             {
@@ -49,6 +49,7 @@ namespace MstnAPP.ViewModels
             {
                 _ = _regionManager.RegisterViewWithRegion("MainContentRegion", ListBoxModelItems[0].ViewType);
             }
+#endif
         }
 
         private static void ModifyTheme(bool isDarkTheme)

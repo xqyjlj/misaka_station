@@ -5,25 +5,11 @@ using Prism.Services.Dialogs;
 
 namespace MstnAPP.Modules.Page.Home.ViewModels
 {
-    public class HomePageViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
+    public class HomePageViewModel : BindableBase, IRegionMemberLifetime
     {
         private readonly IRegionManager regionManager;
         private readonly IDialogService dialogService;
-
         public bool KeepAlive => false;
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return false;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-        }
 
         public HomePageViewModel(IRegionManager region, IDialogService dialog)
         {
