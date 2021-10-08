@@ -18,5 +18,6 @@
     <ProjectReference Include="..\..\..\Services\Sys\DataFile\MstnAPP.Services.Sys.IniFile\MstnAPP.Services.Sys.IniFile.csproj" />
     <ProjectReference Include="..\..\..\Services\Sys\MstnAPP.Services.Sys.Debug\MstnAPP.Services.Sys.Debug.csproj" />
     <ProjectReference Include="..\..\..\Services\Sys\MstnAPP.Services.Sys.Process\MstnAPP.Services.Sys.Process.csproj" />
+    <ProjectReference Include="..\..\..\Services\Sys\MstnAPP.Services.Sys.Util\MstnAPP.Services.Sys.Util.csproj" />
   </ItemGroup>
 </Project>

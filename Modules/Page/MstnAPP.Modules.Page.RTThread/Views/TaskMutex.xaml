@@ -26,20 +26,20 @@
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="名称" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding owner}"
+                    Binding="{Binding Owner}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="大小" />
+                    Header="当前持有互斥量的线程" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding MaxUsedSize}"
+                    Binding="{Binding Hold}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="最大使用量" />
+                    Header="持有者在这个互斥量上嵌套持有的次数" />
                 <materialDesign:DataGridTextColumn
-                    Binding="{Binding AvailableSize}"
+                    Binding="{Binding Suspend}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="目前剩余大小" />
+                    Header="等待这个互斥量的线程数目" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
