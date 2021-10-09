@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace MstnAPP.Services.Sys.DataFlie
+namespace MstnAPP.Services.Sys.DataFile
 {
     public class LogFile
     {

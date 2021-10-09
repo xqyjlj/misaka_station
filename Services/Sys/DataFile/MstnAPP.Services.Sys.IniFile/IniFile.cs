@@ -4,7 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 
-namespace MstnAPP.Services.Sys.DataFlie
+namespace MstnAPP.Services.Sys.DataFile
 {
     public class IniFile : IIniFile
     {

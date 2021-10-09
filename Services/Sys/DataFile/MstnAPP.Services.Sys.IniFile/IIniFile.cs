@@ -1,4 +1,4 @@
-﻿namespace MstnAPP.Services.Sys.DataFlie
+﻿namespace MstnAPP.Services.Sys.DataFile
 {
     public interface IIniFile
     {

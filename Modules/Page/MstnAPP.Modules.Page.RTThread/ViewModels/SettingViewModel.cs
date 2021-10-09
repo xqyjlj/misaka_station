@@ -3,7 +3,7 @@ using MstnApp.Event.Core;
 using MstnAPP.Modules.Page.RTThread.Event;
 using MstnAPP.Modules.Page.RTThread.Services;
 using MstnAPP.Services.Driver;
-using MstnAPP.Services.Sys.DataFlie;
+using MstnAPP.Services.Sys.DataFile;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -546,7 +546,11 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         public bool CheckBoxIsSaveDataIsChecked
         {
             get => _checkBoxIsSaveDataIsChecked;
-            set => _ = SetProperty(ref _checkBoxIsSaveDataIsChecked, value);
+            set 
+            { 
+                _ = SetProperty(ref _checkBoxIsSaveDataIsChecked, value);
+                _serialData.IsSaveData = _checkBoxIsSaveDataIsChecked;
+            }
         }
 
         #endregion CheckBoxIsSaveDataIsChecked
@@ -570,7 +574,11 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         public string TextBoxSaveDataPathText
         {
             get => _textBoxSaveDataPathText;
-            set => _ = SetProperty(ref _textBoxSaveDataPathText, value);
+            set
+            {
+                _ = SetProperty(ref _textBoxSaveDataPathText, value);
+                _serialData.SaveDataPath = _textBoxSaveDataPathText;
+            }
         }
 
         #endregion TextBoxSaveDataPathText
