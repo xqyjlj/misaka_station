@@ -7,6 +7,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
     public class RTThreadPageViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;//事件聚合器
+
         public RTThreadPageViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
