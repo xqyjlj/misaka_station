@@ -20,6 +20,7 @@
             materialDesign:ShadowAssist.ShadowDepth="Depth0"
             BorderBrush="Transparent"
             BorderThickness="0"
+            SelectedIndex="{Binding TabControlSelectedIndex}"
             SnapsToDevicePixels="True"
             Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
             TabStripPlacement="Left">

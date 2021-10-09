@@ -1,4 +1,4 @@
-﻿using MstnAPP.Modules.Page.RTThread.Events;
+﻿using MstnAPP.Modules.Page.RTThread.Event;
 using MstnAPP.Modules.Page.RTThread.Models;
 using Prism.Events;
 using Prism.Mvvm;

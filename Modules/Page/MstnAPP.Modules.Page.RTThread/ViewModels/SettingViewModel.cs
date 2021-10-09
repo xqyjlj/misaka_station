@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using MstnApp.Event.Core;
+using MstnAPP.Modules.Page.RTThread.Event;
 using MstnAPP.Modules.Page.RTThread.Services;
 using MstnAPP.Services.Driver;
 using MstnAPP.Services.Sys.DataFlie;
@@ -13,42 +14,58 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
 {
     public class SettingViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
     {
-        private readonly ISerial _serial;
+        private readonly ISerial _serial;//串口对象
 
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IEventAggregator _eventAggregator;//事件聚合器
 
-        private readonly IIniFile _iniFile;
+        private readonly IIniFile _iniFile;//INI文件对象
 
-        private readonly ServicesSerialData _serialData;
+        private readonly ServicesSerialData _serialData;//串口数据处理对象
 
-        public bool KeepAlive => false;
+        public bool KeepAlive => false;//是否保存缓存
 
+        /// <summary>
+        /// 导航到此窗口前触发的回调函数
+        /// </summary>
+        /// <param name="navigationContext">导航上下文</param>
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             ReadParameters();
+            PublishEventFlushTime();
         }
 
+        /// <summary>
+        /// 是否创建新示例。
+        /// </summary>
+        /// <param name="navigationContext">导航上下文</param>
+        /// <returns>为true，表示不创建新示例，页面还是之前的；为false，则创建新的页面。</returns>
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return false;
         }
 
+        /// <summary>
+        /// 导航离开此窗口前触发的回调函数
+        /// </summary>
+        /// <param name="navigationContext">导航上下文</param>
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             SaveParameters();
+            PublishEventFlushTime();
         }
 
         public SettingViewModel(ISerial serial, IIniFile iniFile, IEventAggregator eventAggregator)
         {
             _serial = serial;
             _iniFile = iniFile;
+            _eventAggregator = eventAggregator;
 
             _serial.PortNamesChanged += new EPortNameChanged(SerialPortNameChanged);
             _serial.ConnectChanged += new EConnectChanged(SerialConnectChanged);
             _serial.DataReceived += new EDataReceived(SerialDataReceived);
 
             ListComboBoxPort = _serial.GetPortNames();
-            _eventAggregator = eventAggregator;
+
             _ = _eventAggregator.GetEvent<EventClose>().Subscribe(EventCloseReceived);
 
             _serialData = new(_eventAggregator);
@@ -57,27 +74,46 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             ReadParameters();
         }
 
+        /// <summary>
+        /// 窗口关闭事件回调函数
+        /// </summary>
+        /// <param name="message"></param>
         private void EventCloseReceived(string message)
         {
             SaveParameters();
         }
 
+        /// <summary>
+        /// 串口连接状态改变事件回调函数
+        /// </summary>
+        /// <param name="isConnect">串口连接状态</param>
         private void SerialConnectChanged(bool isConnect)
         {
             _ = SetProperty(ref _toggleButtonSerialIsChecked, isConnect);
         }
 
+        /// <summary>
+        /// 串口名改变事件回调函数
+        /// </summary>
+        /// <param name="portNames">串口名</param>
         private void SerialPortNameChanged(List<string> portNames)
         {
             ListComboBoxPort = portNames;
         }
 
+        /// <summary>
+        /// 串口数据接收回调函数
+        /// </summary>
+        /// <param name="data">串口接收到的数据</param>
         private void SerialDataReceived(string data)
         {
             _serialData.AddBuffer(data);
             _serialData.ParsedData();
         }
 
+        /// <summary>
+        /// 初始化下拉框列表
+        /// </summary>
         private void InitListComboBox()
         {
             foreach (string item in GenerateBaudRateItems())
@@ -106,8 +142,11 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             }
         }
 
-        private bool _isHasBeenSetSerial;
+        private bool _isHasBeenSetSerial;//是否已经过设置串口
 
+        /// <summary>
+        /// 打开串口
+        /// </summary>
         private void OpenSerial()
         {
             if (_isHasBeenSetSerial)
@@ -127,11 +166,17 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             _serial.Open();
         }
 
+        /// <summary>
+        /// 关闭串口
+        /// </summary>
         private void CloseSerial()
         {
             _serial.Close();
         }
 
+        /// <summary>
+        /// 刷新串口按钮状态
+        /// </summary>
         private void RefreshToggleButtonSerialIsEnabled()
         {
             ToggleButtonSerialIsEnabled = _listComboBoxPortSelectedItem != null
@@ -142,6 +187,9 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
                 && _listComboBoxHandshakeSelectedItem != null;
         }
 
+        /// <summary>
+        /// 保存参数
+        /// </summary>
         private void SaveParameters()
         {
             if (ListComboBoxPortSelectedItem != null)
@@ -181,6 +229,9 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             _iniFile.SetRTThreadFlushTime(SliderFlushTimeValue);
         }
 
+        /// <summary>
+        /// 读取参数
+        /// </summary>
         private void ReadParameters()
         {
             string port = _iniFile.GetRTThreadPort();
@@ -198,6 +249,14 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             SliderFlushTimeValue = _iniFile.GetRTThreadFlushTime();
             CheckBoxIsExistPasswordIsChecked = _iniFile.GetRTThreadIsExistPassword();
             PasswordBoxPasswordPassword = _iniFile.GetRTThreadPassword();
+        }
+
+        /// <summary>
+        /// 发布刷新时间事件
+        /// </summary>
+        private void PublishEventFlushTime()
+        {
+            _eventAggregator.GetEvent<EventFlushTime>().Publish(SliderFlushTimeValue);
         }
 
         #region 创建Items
@@ -436,7 +495,11 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         public int SliderFlushTimeValue
         {
             get => _sliderFlushTimeValue;
-            set => _ = SetProperty(ref _sliderFlushTimeValue, value);
+            set
+            {
+                _ = SetProperty(ref _sliderFlushTimeValue, value);
+                PublishEventFlushTime();
+            }
         }
 
         #endregion SliderFlushTimeValue

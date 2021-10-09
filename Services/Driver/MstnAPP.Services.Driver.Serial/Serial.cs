@@ -9,15 +9,17 @@ namespace MstnAPP.Services.Driver
 {
     public class Serial : ISerial
     {
-        public event EPortNameChanged PortNamesChanged;
+        public event EPortNameChanged PortNamesChanged;//串口名改变事件
 
-        public event EConnectChanged ConnectChanged;
+        public event EConnectChanged ConnectChanged;//串口连接状态改变事件
 
-        public event EDataReceived DataReceived;
+        public event EDataReceived DataReceived;//串口数据接收事件
 
-        private readonly SerialPort _serial = new();
-        private readonly Dictionary<string, Parity> _parityMap = new();
-        private readonly Dictionary<string, Handshake> _handshakeMap = new();
+        private readonly SerialPort _serial = new();//串口对象
+
+        private readonly Dictionary<string, Parity> _parityMap = new();//校验方式字典
+
+        private readonly Dictionary<string, Handshake> _handshakeMap = new();//握手协议字典
 
         #region 初始化字典
 
@@ -99,6 +101,11 @@ namespace MstnAPP.Services.Driver
 
         #region 设置端口名
 
+        /// <summary>
+        /// 设置串口名
+        /// </summary>
+        /// <param name="port">串口名</param>
+        /// <returns>是否设置成功</returns>
         public bool SetPortName(string port)
         {
             if (GetPortNames().Contains(port))
@@ -114,6 +121,11 @@ namespace MstnAPP.Services.Driver
             }
         }
 
+        /// <summary>
+        /// 设置串口名
+        /// </summary>
+        /// <param name="port">串口名</param>
+        /// <returns>是否设置成功</returns>
         public bool SetPortName(uint port)
         {
             string portName = "COM" + port.ToString(new CultureInfo("zh-CN", false));
@@ -124,11 +136,19 @@ namespace MstnAPP.Services.Driver
 
         #region 设置波特率
 
+        /// <summary>
+        /// 设置波特率
+        /// </summary>
+        /// <param name="baud">波特率</param>
         public void SetBaudRate(int baud)
         {
             _serial.BaudRate = baud;
         }
 
+        /// <summary>
+        /// 设置波特率
+        /// </summary>
+        /// <param name="baud">波特率</param>
         public void SetBaudRate(string baud)
         {
             SetBaudRate(Convert.ToInt32(baud));
@@ -138,11 +158,20 @@ namespace MstnAPP.Services.Driver
 
         #region 设置校验位
 
+        /// <summary>
+        /// 设置校验方式
+        /// </summary>
+        /// <param name="parity">校验方式</param>
         public void SetParity(Parity parity)
         {
             _serial.Parity = parity;
         }
 
+        /// <summary>
+        /// 设置校验方式
+        /// </summary>
+        /// <param name="parity">校验方式</param>
+        /// <returns>是否设置成功</returns>
         public bool SetParity(string parity)
         {
             string strParity = parity.ToLower(new CultureInfo("zh-CN", false));
@@ -163,6 +192,11 @@ namespace MstnAPP.Services.Driver
 
         #region 设置数据位
 
+        /// <summary>
+        /// 设置数据位
+        /// </summary>
+        /// <param name="bits">数据位</param>
+        /// <returns>是否设置成功</returns>
         public bool SetDataBits(int bits)
         {
             if (bits is >= 5 and <= 8)
@@ -178,6 +212,11 @@ namespace MstnAPP.Services.Driver
             }
         }
 
+        /// <summary>
+        /// 设置数据位
+        /// </summary>
+        /// <param name="bits">数据位</param>
+        /// <returns>是否设置成功</returns>
         public bool SetDataBits(string bits)
         {
             return SetDataBits(Convert.ToInt32(bits, new CultureInfo("zh-CN", false)));
@@ -187,11 +226,20 @@ namespace MstnAPP.Services.Driver
 
         #region 设置停止位
 
+        /// <summary>
+        /// 设置停止位
+        /// </summary>
+        /// <param name="bits">停止位</param>
         public void SetStopBits(StopBits bits)
         {
             _serial.StopBits = bits;
         }
 
+        /// <summary>
+        /// 设置停止位
+        /// </summary>
+        /// <param name="bits">停止位</param>
+        /// <returns>是否设置成功</returns>
         public bool SetStopBits(string bits)
         {
             if (bits == "1")
@@ -217,6 +265,11 @@ namespace MstnAPP.Services.Driver
             }
         }
 
+        /// <summary>
+        /// 设置停止位
+        /// </summary>
+        /// <param name="bits">停止位</param>
+        /// <returns>是否设置成功</returns>
         public bool SetStopBits(float bits)
         {
             return SetStopBits(bits.ToString(new CultureInfo("zh-CN", false)));
@@ -226,11 +279,20 @@ namespace MstnAPP.Services.Driver
 
         #region 设置握手协议
 
+        /// <summary>
+        /// 设置握手协议
+        /// </summary>
+        /// <param name="hand">握手协议</param>
         public void SetHandshake(Handshake hand)
         {
             _serial.Handshake = hand;
         }
 
+        /// <summary>
+        /// 设置握手协议
+        /// </summary>
+        /// <param name="hand">握手协议</param>
+        /// <returns>是否设置成功</returns>
         public bool SetHandshake(string hand)
         {
             string strHand = hand.ToLower(new CultureInfo("zh-CN", false)).Replace(" ", "");
@@ -253,6 +315,11 @@ namespace MstnAPP.Services.Driver
 
         #region 回调函数
 
+        /// <summary>
+        /// 串口错误事件回调函数
+        /// </summary>
+        /// <param name="sender">事件源</param>
+        /// <param name="e">事件</param>
         private void SerialErrorHandler(object sender, SerialErrorReceivedEventArgs e)
         {
             SerialPort sp = (SerialPort)sender;
@@ -283,6 +350,11 @@ namespace MstnAPP.Services.Driver
             }
         }
 
+        /// <summary>
+        /// 串口接收事件回调函数
+        /// </summary>
+        /// <param name="sender">事件源</param>
+        /// <param name="e">事件</param>
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
             SerialPort sp = (SerialPort)sender;
@@ -294,6 +366,9 @@ namespace MstnAPP.Services.Driver
 
         #region 操作函数
 
+        /// <summary>
+        /// 打开串口
+        /// </summary>
         public void Open()
         {
             if (!Connected())
@@ -326,6 +401,9 @@ namespace MstnAPP.Services.Driver
             ConnectChanged(Connected());
         }
 
+        /// <summary>
+        /// 关闭串口
+        /// </summary>
         public void Close()
         {
             if (Connected())
@@ -358,21 +436,36 @@ namespace MstnAPP.Services.Driver
             ConnectChanged(Connected());
         }
 
+        /// <summary>
+        /// 串口连接状态
+        /// </summary>
+        /// <returns>串口连接状态</returns>
         public bool Connected()
         {
             return _serial.IsOpen;
         }
 
+        /// <summary>
+        /// 刷新串口
+        /// </summary>
         public void FlushPorts()
         {
             PortNamesChanged(GetPortNames());
         }
 
+        /// <summary>
+        /// 获得串口名列表
+        /// </summary>
+        /// <returns>串口名列表</returns>
         public List<string> GetPortNames()
         {
             return new List<string>(SerialPort.GetPortNames());
         }
 
+        /// <summary>
+        /// 设置DTR引脚电平
+        /// </summary>
+        /// <param name="dtr">DTR引脚电平</param>
         public void SetDtr(bool dtr)
         {
             if (Connected())
@@ -385,6 +478,10 @@ namespace MstnAPP.Services.Driver
             }
         }
 
+        /// <summary>
+        /// 设置RTS引脚电平
+        /// </summary>
+        /// <param name="rts">RTS引脚电平</param>
         public void SetRts(bool rts)
         {
             if (Connected())
@@ -404,6 +501,10 @@ namespace MstnAPP.Services.Driver
             }
         }
 
+        /// <summary>
+        /// 读取CD引脚电平
+        /// </summary>
+        /// <returns>CD引脚电平</returns>
         public bool GetCd()
         {
             if (Connected())
@@ -417,6 +518,10 @@ namespace MstnAPP.Services.Driver
             }
         }
 
+        /// <summary>
+        /// 读取CTS引脚电平
+        /// </summary>
+        /// <returns>CTS引脚电平</returns>
         public bool GetCts()
         {
             if (Connected())
@@ -430,6 +535,10 @@ namespace MstnAPP.Services.Driver
             }
         }
 
+        /// <summary>
+        /// 读取DSR引脚电平
+        /// </summary>
+        /// <returns>DSR引脚电平</returns>
         public bool GetDsr()
         {
             if (Connected())
@@ -440,6 +549,86 @@ namespace MstnAPP.Services.Driver
             {
                 LOG.W("尝试在串口未打开的情况下读取Dsr引脚");
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// 发送串口数据
+        /// </summary>
+        /// <param name="text">数据</param>
+        public void Write(string text)
+        {
+            if (Connected())
+            {
+                _serial.Write(text);
+            }
+        }
+
+        /// <summary>
+        /// 发送串口数据
+        /// </summary>
+        /// <param name="buffer">数据</param>
+        /// <param name="offset">buffer 参数中从零开始的字节偏移量，从此处开始将字节复制到端口</param>
+        /// <param name="count">要写入的字节数</param>
+        public void Write(byte[] buffer, int offset, int count)
+        {
+            if (Connected())
+            {
+                _serial.Write(buffer, offset, count);
+            }
+        }
+
+        /// <summary>
+        /// 发送串口数据
+        /// </summary>
+        /// <param name="buffer">数据</param>
+        /// <param name="offset">buffer 参数中从零开始的字节偏移量，从此处开始将字节复制到端口</param>
+        /// <param name="count">要写入的字节数</param>
+        public void Write(char[] buffer, int offset, int count)
+        {
+            if (Connected())
+            {
+                _serial.Write(buffer, offset, count);
+            }
+        }
+
+        /// <summary>
+        /// 发送串口数据
+        /// </summary>
+        /// <param name="text">数据</param>
+        public void Transmit(string text)
+        {
+            if (Connected())
+            {
+                _serial.Write(text);
+            }
+        }
+
+        /// <summary>
+        /// 发送串口数据
+        /// </summary>
+        /// <param name="buffer">数据</param>
+        /// <param name="offset">buffer 参数中从零开始的字节偏移量，从此处开始将字节复制到端口</param>
+        /// <param name="count">要写入的字节数</param>
+        public void Transmit(byte[] buffer, int offset, int count)
+        {
+            if (Connected())
+            {
+                _serial.Write(buffer, offset, count);
+            }
+        }
+
+        /// <summary>
+        /// 发送串口数据
+        /// </summary>
+        /// <param name="buffer">数据</param>
+        /// <param name="offset">buffer 参数中从零开始的字节偏移量，从此处开始将字节复制到端口</param>
+        /// <param name="count">要写入的字节数</param>
+        public void Transmit(char[] buffer, int offset, int count)
+        {
+            if (Connected())
+            {
+                _serial.Write(buffer, offset, count);
             }
         }
 
