@@ -7,14 +7,12 @@ namespace MstnAPP.Modules.Page.Home.ViewModels
 {
     public class HomePageViewModel : BindableBase, IRegionMemberLifetime
     {
-        private readonly IRegionManager regionManager;
-        private readonly IDialogService dialogService;
+        private readonly IDialogService _dialogService;
         public bool KeepAlive => false;
 
-        public HomePageViewModel(IRegionManager region, IDialogService dialog)
+        public HomePageViewModel(IDialogService dialog)
         {
-            regionManager = region;
-            dialogService = dialog;
+            _dialogService = dialog;
         }
 
         private DelegateCommand _buttonWeChatCommand;
@@ -24,7 +22,7 @@ namespace MstnAPP.Modules.Page.Home.ViewModels
 
         private void ExecuteButtonWeChatCommand()
         {
-            dialogService.ShowDialog("WeChatDialog");
+            _dialogService.ShowDialog("WeChatDialog");
         }
 
         private DelegateCommand _buttonQQCommand;
@@ -34,7 +32,7 @@ namespace MstnAPP.Modules.Page.Home.ViewModels
 
         private void ExecuteButtonQQCommand()
         {
-            dialogService.ShowDialog("QQDialog");
+            _dialogService.ShowDialog("QQDialog");
         }
 
         private DelegateCommand _buttonGithubCommand;
@@ -42,7 +40,7 @@ namespace MstnAPP.Modules.Page.Home.ViewModels
         public DelegateCommand ButtonGithubCommand =>
             _buttonGithubCommand ??= new DelegateCommand(ExecuteButtonGithubCommand);
 
-        private void ExecuteButtonGithubCommand()
+        private static void ExecuteButtonGithubCommand()
         {
             Services.Sys.Process.StartProcess.OpenGithub();
         }
@@ -52,7 +50,7 @@ namespace MstnAPP.Modules.Page.Home.ViewModels
         public DelegateCommand ButtonEmailCommand =>
             _buttonEmailCommand ??= new DelegateCommand(ExecuteButtonEmailCommand);
 
-        private void ExecuteButtonEmailCommand()
+        private static void ExecuteButtonEmailCommand()
         {
             Services.Sys.Process.StartProcess.OpenEmail();
         }
@@ -62,7 +60,7 @@ namespace MstnAPP.Modules.Page.Home.ViewModels
         public DelegateCommand ButtonDonateCommand =>
             _buttonDonateCommand ??= new DelegateCommand(ExecuteButtonDonateCommand);
 
-        private void ExecuteButtonDonateCommand()
+        private static void ExecuteButtonDonateCommand()
         {
             Services.Sys.Process.StartProcess.OpenDonate();
         }

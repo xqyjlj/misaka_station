@@ -1,29 +1,27 @@
 ﻿using Microsoft.Win32;
+using System;
 
 namespace MstnAPP.Services.Sys.Reg
 {
-    public class Reg
+    public class Registry
     {
-        public static string GetMachineGUID()
+        /// <summary>
+        /// 读取Windows的MachineGUID
+        /// </summary>
+        /// <returns>MachineGUID</returns>
+        public static string GetMachineGuid()
         {
-            RegistryKey key = Registry.LocalMachine;
-            RegistryKey reg = key.OpenSubKey("SOFTWARE\\Microsoft\\Cryptography");
+            var key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, Environment.Is64BitOperatingSystem ? RegistryView.Registry64 : RegistryView.Registry32);
+            var reg = key.OpenSubKey("SOFTWARE\\Microsoft\\Cryptography");
             if (reg != null)
             {
-                var obj= reg.GetValue("MachineGuid");
+                var obj = reg.GetValue("MachineGuid");
                 reg.Close();
-                if (obj != null)
-                {
-                    return obj.ToString();
-                }
-                else
-                {
-                    return "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
-                }
+                return obj != null ? obj.ToString() : "12345678-1234-1234-1234-123456789ABC";
             }
             else
             {
-                return "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
+                return "12345678-1234-1234-1234-123456789ABC";
             }
         }
     }

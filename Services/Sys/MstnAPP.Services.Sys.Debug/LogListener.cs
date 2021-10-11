@@ -1,5 +1,4 @@
-﻿using MstnAPP.Services.Sys.DataFile;
-using System;
+﻿using System;
 using System.Diagnostics;
 
 namespace MstnAPP.Services.Sys.Debug
@@ -8,12 +7,12 @@ namespace MstnAPP.Services.Sys.Debug
     {
         public override void Write(string message)
         {
-            LogFile.AppendAllText(message);
+            LogFile.LogFile.AppendAllText(message);
         }
 
         public override void WriteLine(string message)
         {
-            LogFile.AppendAllText(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss    ") + message + Environment.NewLine);
+            LogFile.LogFile.AppendAllText(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss    ") + message + Environment.NewLine);
         }
     }
 }

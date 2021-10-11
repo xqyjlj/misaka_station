@@ -1,4 +1,4 @@
-﻿namespace MstnAPP.Services.Sys.DataFile
+﻿namespace MstnAPP.Services.Sys.IniFile
 {
     public interface IIniFile
     {
@@ -6,13 +6,13 @@
         /// 读取主窗口功能列表的选中节点
         /// </summary>
         /// <returns>主窗口功能列表的选中节点</returns>
-        int GetMianWindowFunctionListIndex();
+        int GetMainWindowFunctionListIndex();
 
         /// <summary>
         /// 设置主窗口功能列表的选中节点
         /// </summary>
         /// <param name="index">主窗口功能列表的选中节点</param>
-        void SetMianWindowFunctionListIndex(int index);
+        void SetMainWindowFunctionListIndex(int index);
 
         /// <summary>
         ///读取RT-Thread界面的端口

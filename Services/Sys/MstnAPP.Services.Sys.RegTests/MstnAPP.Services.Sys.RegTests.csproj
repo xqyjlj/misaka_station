@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFramework>net5.0-windows</TargetFramework>
-	  <Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
-      <IsPackable>false</IsPackable>
+	<TargetFramework>net5.0-windows</TargetFramework>
+	<Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Services\Sys\MstnAPP.Services.Sys.Cryp\MstnAPP.Services.Sys.Cryp.csproj" />
+    <ProjectReference Include="..\MstnAPP.Services.Sys.Reg\MstnAPP.Services.Sys.Reg.csproj" />
   </ItemGroup>
 
 </Project>

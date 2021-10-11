@@ -3,7 +3,7 @@ using MstnApp.Event.Core;
 using MstnAPP.Modules.Page.RTThread.Event;
 using MstnAPP.Modules.Page.RTThread.Services;
 using MstnAPP.Services.Driver;
-using MstnAPP.Services.Sys.DataFile;
+using MstnAPP.Services.Sys.IniFile;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -60,9 +60,9 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             _iniFile = iniFile;
             _eventAggregator = eventAggregator;
 
-            _serial.PortNamesChanged += new EPortNameChanged(SerialPortNameChanged);
-            _serial.ConnectChanged += new EConnectChanged(SerialConnectChanged);
-            _serial.DataReceived += new EDataReceived(SerialDataReceived);
+            _serial.PortNamesChanged += SerialPortNameChanged;
+            _serial.ConnectChanged += SerialConnectChanged;
+            _serial.DataReceived += SerialDataReceived;
 
             ListComboBoxPort = _serial.GetPortNames();
 
@@ -116,27 +116,27 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         /// </summary>
         private void InitListComboBox()
         {
-            foreach (string item in GenerateBaudRateItems())
+            foreach (var item in GenerateBaudRateItems())
             {
                 ListComboBoxBaudRate.Add(item);
             }
 
-            foreach (string item in GenerateParityItems())
+            foreach (var item in GenerateParityItems())
             {
                 ListComboBoxParity.Add(item);
             }
 
-            foreach (string item in GenerateDataBitsItems())
+            foreach (var item in GenerateDataBitsItems())
             {
                 ListComboBoxDataBits.Add(item);
             }
 
-            foreach (string item in GenerateStopBitsItems())
+            foreach (var item in GenerateStopBitsItems())
             {
                 ListComboBoxStopBits.Add(item);
             }
 
-            foreach (string item in GenerateHandshakeItems())
+            foreach (var item in GenerateHandshakeItems())
             {
                 ListComboBoxHandshake.Add(item);
             }
@@ -234,7 +234,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         /// </summary>
         private void ReadParameters()
         {
-            string port = _iniFile.GetRTThreadPort();
+            var port = _iniFile.GetRTThreadPort();
             if (ListComboBoxPort.Contains(port))
             {
                 ListComboBoxPortSelectedItem = port;
@@ -546,8 +546,8 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         public bool CheckBoxIsSaveDataIsChecked
         {
             get => _checkBoxIsSaveDataIsChecked;
-            set 
-            { 
+            set
+            {
                 _ = SetProperty(ref _checkBoxIsSaveDataIsChecked, value);
                 _serialData.IsSaveData = _checkBoxIsSaveDataIsChecked;
             }
@@ -620,7 +620,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
 
         private void ExecuteButtonSaveDataPathChooseCommand()
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            var saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "文本文件|*.txt";
             saveFileDialog.FilterIndex = 2;
             saveFileDialog.RestoreDirectory = true;

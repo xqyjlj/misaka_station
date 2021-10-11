@@ -3,7 +3,7 @@ using MstnApp.Event.Core;
 using MstnAPP.Models;
 using MstnAPP.Modules.Page.Home.Views;
 using MstnAPP.Modules.Page.RTThread.Views;
-using MstnAPP.Services.Sys.DataFile;
+using MstnAPP.Services.Sys.IniFile;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -32,7 +32,7 @@ namespace MstnAPP.ViewModels
             _eventAggregator = eventAggregator;
             _iniFile = iniFile;
 
-            foreach (ModelItem item in GenerateModelItems())
+            foreach (var item in GenerateModelItems())
             {
                 ListBoxModelItems.Add(item);
             }
@@ -40,22 +40,17 @@ namespace MstnAPP.ViewModels
             _listBoxModelItemsView = CollectionViewSource.GetDefaultView(ListBoxModelItems);
             _listBoxModelItemsView.Filter = ModelItemsFilter;
 #if DEBUG
-            int index = _iniFile.GetMianWindowFunctionListIndex();
-            if (index < ListBoxModelItems.Count && index >= 0)
-            {
-                _ = _regionManager.RegisterViewWithRegion("MainContentRegion", ListBoxModelItems[index].ViewType);
-            }
-            else
-            {
-                _ = _regionManager.RegisterViewWithRegion("MainContentRegion", ListBoxModelItems[0].ViewType);
-            }
+            var index = _iniFile.GetMainWindowFunctionListIndex();
+            _ = index < ListBoxModelItems.Count && index >= 0
+                ? _regionManager.RegisterViewWithRegion("MainContentRegion", ListBoxModelItems[index].ViewType)
+                : _regionManager.RegisterViewWithRegion("MainContentRegion", ListBoxModelItems[0].ViewType);
 #endif
         }
 
         private static void ModifyTheme(bool isDarkTheme)
         {
             PaletteHelper paletteHelper = new();
-            ITheme theme = paletteHelper.GetTheme();
+            var theme = paletteHelper.GetTheme();
 
             theme.SetBaseTheme(isDarkTheme ? Theme.Dark : Theme.Light);
             paletteHelper.SetTheme(theme);
@@ -63,8 +58,8 @@ namespace MstnAPP.ViewModels
 
         private static IEnumerable<ModelItem> GenerateModelItems()
         {
-            yield return new("主页", "主页", "HomePage", typeof(HomePage));
-            yield return new("RT-Thread", "RT-Thread", "RTThreadPage", typeof(RTThreadPage));
+            yield return new ModelItem("主页", "主页", "HomePage", typeof(HomePage));
+            yield return new ModelItem("RT-Thread", "RT-Thread", "RTThreadPage", typeof(RTThreadPage));
         }
 
         private readonly ICollectionView _listBoxModelItemsView;
@@ -191,11 +186,11 @@ namespace MstnAPP.ViewModels
         {
             if (ListBoxModelSelectedIndex >= 0 && ListBoxModelSelectedIndex < ListBoxModelItems.Count)
             {
-                _iniFile.SetMianWindowFunctionListIndex(ListBoxModelSelectedIndex);
+                _iniFile.SetMainWindowFunctionListIndex(ListBoxModelSelectedIndex);
             }
             else if (ListBoxModelSelectedIndex != -1)
             {
-                _iniFile.SetMianWindowFunctionListIndex(0);
+                _iniFile.SetMainWindowFunctionListIndex(0);
             }
 
             _eventAggregator.GetEvent<EventClose>().Publish("MainWindow");

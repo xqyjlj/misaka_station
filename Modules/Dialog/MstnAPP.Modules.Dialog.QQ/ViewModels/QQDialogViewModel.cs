@@ -1,16 +1,17 @@
-﻿using Prism.Services.Dialogs;
+﻿using Prism.Mvvm;
+using Prism.Services.Dialogs;
 using System;
 
 namespace MstnAPP.Modules.Dialog.QQ.ViewModels
 {
-    public class QQDialogViewModel : IDialogAware
+    public class QQDialogViewModel : BindableBase, IDialogAware
     {
         private string _title = "QQ";
 
         public string Title
         {
             get => _title;
-            set => _title = Title;
+            set => _ = SetProperty(ref _title, value);
         }
 
         public event Action<IDialogResult> RequestClose;

@@ -13,20 +13,17 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
     {
         public bool KeepAlive => false;
 
-        private readonly IEventAggregator _eventAggregator;
-
         public TaskMailboxViewModel(IEventAggregator eventAggregator)
         {
-            _eventAggregator = eventAggregator;
-            _ = _eventAggregator.GetEvent<EventMailbox>().Subscribe(EventMailboxReceived);
+            _ = eventAggregator.GetEvent<EventMailbox>().Subscribe(EventMailboxReceived);
         }
 
-        private ObservableCollection<ModelMailbox> _DataGridItems = new();
+        private ObservableCollection<ModelMailbox> _dataGridItems = new();
 
         public ObservableCollection<ModelMailbox> DataGridItems
         {
-            get => _DataGridItems;
-            set => _ = SetProperty(ref _DataGridItems, value);
+            get => _dataGridItems;
+            set => _ = SetProperty(ref _dataGridItems, value);
         }
 
         private void EventMailboxReceived(List<string> list)
@@ -36,38 +33,34 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
 
         private void ParseData(List<string> list)
         {
-            string head, msg;
-
-            msg = list[0];
-            head = msg[0..^12];//"list_mailbox".Length
+            var msg = list[0];
+            var head = msg[0..^12];
             msg = list[^1]; //列表中的最后一个字符串
 
-            if (msg == head)  //第一个和最后一个 相同表示报文接收完毕
+            if (msg != head) return;
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
+                DataGridItems.Clear();
+            });
+
+            var count = list.Count - 4;
+            for (var i = 3; i < 3 + count; i++)
+            {
+                msg = list[i];
+
+                var subs = msg.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                if (subs.Length != 4) continue;
+                ModelMailbox model = new()
+                {
+                    Name = subs[0],
+                    Entry = subs[1],
+                    Size = subs[2],
+                    Suspend = subs[3]
+                };
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
-                    DataGridItems.Clear();
+                    DataGridItems.Add(model);
                 });
-
-                int count = list.Count - 4;
-                for (int i = 3; i < 3 + count; i++)
-                {
-                    msg = list[i];
-
-                    string[] subs = msg.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                    if (subs.Length == 4)
-                    {
-                        ModelMailbox model = new();
-                        model.Name = subs[0];
-                        model.Entry = subs[1];
-                        model.Size = subs[2];
-                        model.Suspend = subs[3];
-                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            DataGridItems.Add(model);
-                        });
-                    }
-                }
             }
         }
     }

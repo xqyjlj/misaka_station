@@ -1,20 +1,19 @@
 ﻿using Prism.Commands;
-using Prism.Regions;
+using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
 
 namespace MstnAPP.Modules.Dialog.Feedback.ViewModels
 {
-    public class FeedbackDialogViewModel : IDialogAware
+    public class FeedbackDialogViewModel : BindableBase, IDialogAware
     {
-        private readonly IRegionManager regionManager;
-        private readonly IDialogService dialogService;
+        private readonly IDialogService _dialogService;
         private string _title = "发送反馈";
 
         public string Title
         {
             get => _title;
-            set => _title = Title;
+            set => _ = SetProperty(ref _title, value);
         }
 
         public event Action<IDialogResult> RequestClose;
@@ -29,10 +28,9 @@ namespace MstnAPP.Modules.Dialog.Feedback.ViewModels
         {
         }
 
-        public FeedbackDialogViewModel(IRegionManager region, IDialogService dialog)
+        public FeedbackDialogViewModel(IDialogService dialog)
         {
-            regionManager = region;
-            dialogService = dialog;
+            _dialogService = dialog;
         }
 
         private DelegateCommand _buttonWeChatCommand;
@@ -42,7 +40,7 @@ namespace MstnAPP.Modules.Dialog.Feedback.ViewModels
 
         private void ExecuteButtonWeChatCommand()
         {
-            dialogService.ShowDialog("WeChatDialog");
+            _dialogService.ShowDialog("WeChatDialog");
         }
 
         private DelegateCommand _buttonQQCommand;
@@ -52,7 +50,7 @@ namespace MstnAPP.Modules.Dialog.Feedback.ViewModels
 
         private void ExecuteButtonQQCommand()
         {
-            dialogService.ShowDialog("QQDialog");
+            _dialogService.ShowDialog("QQDialog");
         }
 
         private DelegateCommand _buttonGithubCommand;
@@ -60,7 +58,7 @@ namespace MstnAPP.Modules.Dialog.Feedback.ViewModels
         public DelegateCommand ButtonGithubCommand =>
             _buttonGithubCommand ??= new DelegateCommand(ExecuteButtonGithubCommand);
 
-        private void ExecuteButtonGithubCommand()
+        private static void ExecuteButtonGithubCommand()
         {
             Services.Sys.Process.StartProcess.OpenGithub();
         }
@@ -70,7 +68,7 @@ namespace MstnAPP.Modules.Dialog.Feedback.ViewModels
         public DelegateCommand ButtonEmailCommand =>
             _buttonEmailCommand ??= new DelegateCommand(ExecuteButtonEmailCommand);
 
-        private void ExecuteButtonEmailCommand()
+        private static void ExecuteButtonEmailCommand()
         {
             Services.Sys.Process.StartProcess.OpenEmail();
         }
@@ -80,7 +78,7 @@ namespace MstnAPP.Modules.Dialog.Feedback.ViewModels
         public DelegateCommand ButtonBlogCommand =>
             _buttonBlogCommand ??= new DelegateCommand(ExecuteButtonBlogCommand);
 
-        private void ExecuteButtonBlogCommand()
+        private static void ExecuteButtonBlogCommand()
         {
             Services.Sys.Process.StartProcess.OpenBlog();
         }

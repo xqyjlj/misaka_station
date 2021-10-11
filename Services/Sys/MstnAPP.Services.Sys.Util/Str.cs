@@ -4,10 +4,9 @@ namespace MstnAPP.Services.Sys.Util
 {
     public class Str
     {
-        public static int Count(string str, string value)
+        public static int Count(string sentence, string value)
         {
-            Regex rege = new(str, RegexOptions.Compiled);
-            return rege.Matches(value).Count;
+            return Regex.Matches(sentence, value).Count;
         }
 
         public static string Simplified(string str)
@@ -22,7 +21,7 @@ namespace MstnAPP.Services.Sys.Util
             return str;
         }
 
-        public static string Replace(string str, string oldStr, string newStr)
+        private static string Replace(string str, string oldStr, string newStr)
         {
             if (str.Contains(oldStr))
             {

@@ -14,8 +14,6 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
 
         private readonly ISerial _serial;//串口对象
 
-        private readonly IEventAggregator _eventAggregator;//事件聚合器
-
         private int _flushTime = 500;//刷新事件
 
         private readonly Timer _timer;//定时器
@@ -29,12 +27,12 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         public TaskViewModel(ISerial serial, IEventAggregator eventAggregator)
         {
             _serial = serial;
-            _eventAggregator = eventAggregator;
+            var eventAggregator1 = eventAggregator;
 
             InitCmdMap();
 
-            _ = _eventAggregator.GetEvent<EventFlushTime>().Subscribe(EventFlushTimeReceived);
-            _ = _eventAggregator.GetEvent<EventTask>().Subscribe(EventTaskReceived);
+            _ = eventAggregator1.GetEvent<EventFlushTime>().Subscribe(EventFlushTimeReceived);
+            _ = eventAggregator1.GetEvent<EventTask>().Subscribe(EventTaskReceived);
 
             _serial.ConnectChanged += new EConnectChanged(SerialConnectChanged);
 

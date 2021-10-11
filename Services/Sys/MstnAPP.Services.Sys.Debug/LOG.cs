@@ -2,7 +2,7 @@
 
 namespace MstnAPP.Services.Sys.Debug
 {
-    public class LOG
+    public class Log
     {
         public static void E(string str)
         {

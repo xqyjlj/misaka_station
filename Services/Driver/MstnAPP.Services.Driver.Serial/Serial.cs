@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 
+// ReSharper disable once CheckNamespace
 namespace MstnAPP.Services.Driver
 {
     public class Serial : ISerial
@@ -90,8 +91,8 @@ namespace MstnAPP.Services.Driver
             InitParityMap();
             InitHandshakeMap();
 
-            _serial.ErrorReceived += new SerialErrorReceivedEventHandler(SerialErrorHandler);
-            _serial.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
+            _serial.ErrorReceived += SerialErrorHandler;
+            _serial.DataReceived += DataReceivedHandler;
 
             _serial.WriteTimeout = SerialPort.InfiniteTimeout;
             _serial.ReadTimeout = SerialPort.InfiniteTimeout;
@@ -116,7 +117,7 @@ namespace MstnAPP.Services.Driver
             else
             {
                 _serial.PortName = "COM0";
-                LOG.E("尝试设置错误的端口：" + port + "。");
+                Log.E("尝试设置错误的端口：" + port + "。");
                 return false;
             }
         }
@@ -128,7 +129,7 @@ namespace MstnAPP.Services.Driver
         /// <returns>是否设置成功</returns>
         public bool SetPortName(uint port)
         {
-            string portName = "COM" + port.ToString(new CultureInfo("zh-CN", false));
+            var portName = "COM" + port.ToString(new CultureInfo("zh-CN", false));
             return SetPortName(portName);
         }
 
@@ -174,7 +175,7 @@ namespace MstnAPP.Services.Driver
         /// <returns>是否设置成功</returns>
         public bool SetParity(string parity)
         {
-            string strParity = parity.ToLower(new CultureInfo("zh-CN", false));
+            var strParity = parity.ToLower(new CultureInfo("zh-CN", false));
             if (_parityMap.ContainsKey(strParity))
             {
                 SetParity(_parityMap[strParity]);
@@ -183,7 +184,7 @@ namespace MstnAPP.Services.Driver
             else
             {
                 SetParity(Parity.None);
-                LOG.E("尝试设置错误的校验方式：" + parity + "。");
+                Log.E("尝试设置错误的校验方式：" + parity + "。");
                 return false;
             }
         }
@@ -207,7 +208,7 @@ namespace MstnAPP.Services.Driver
             else
             {
                 _serial.DataBits = 8;
-                LOG.E("尝试设置错误的数据位：" + bits.ToString(new CultureInfo("zh-CN", false)) + "。");
+                Log.E("尝试设置错误的数据位：" + bits.ToString(new CultureInfo("zh-CN", false)) + "。");
                 return false;
             }
         }
@@ -260,7 +261,7 @@ namespace MstnAPP.Services.Driver
             else
             {
                 SetStopBits(StopBits.One);
-                LOG.E("尝试设置错误的停止位：" + bits + "。");
+                Log.E("尝试设置错误的停止位：" + bits + "。");
                 return false;
             }
         }
@@ -295,7 +296,7 @@ namespace MstnAPP.Services.Driver
         /// <returns>是否设置成功</returns>
         public bool SetHandshake(string hand)
         {
-            string strHand = hand.ToLower(new CultureInfo("zh-CN", false)).Replace(" ", "");
+            var strHand = hand.ToLower(new CultureInfo("zh-CN", false)).Replace(" ", "");
             if (_handshakeMap.ContainsKey(strHand))
             {
                 SetHandshake(_handshakeMap[strHand]);
@@ -304,7 +305,7 @@ namespace MstnAPP.Services.Driver
             else
             {
                 SetHandshake(Handshake.None);
-                LOG.E("尝试设置错误的握手协议：" + hand + "。");
+                Log.E("尝试设置错误的握手协议：" + hand + "。");
                 return false;
             }
         }
@@ -322,27 +323,27 @@ namespace MstnAPP.Services.Driver
         /// <param name="e">事件</param>
         private void SerialErrorHandler(object sender, SerialErrorReceivedEventArgs e)
         {
-            SerialPort sp = (SerialPort)sender;
+            var sp = (SerialPort)sender;
             switch (e.EventType)
             {
                 case SerialError.Frame:
-                    LOG.E(sp.PortName + "：硬件检测到一个组帧错误。");
+                    Log.E(sp.PortName + "：硬件检测到一个组帧错误。");
                     break;
 
                 case SerialError.Overrun:
-                    LOG.E(sp.PortName + "：发生字符缓冲区溢出。 下一个字符将丢失。");
+                    Log.E(sp.PortName + "：发生字符缓冲区溢出。 下一个字符将丢失。");
                     break;
 
                 case SerialError.RXOver:
-                    LOG.E(sp.PortName + "：发生输入缓冲区溢出。 输入缓冲区空间不足，或在文件尾 (EOF) 字符之后接收到字符。");
+                    Log.E(sp.PortName + "：发生输入缓冲区溢出。 输入缓冲区空间不足，或在文件尾 (EOF) 字符之后接收到字符。");
                     break;
 
                 case SerialError.RXParity:
-                    LOG.E(sp.PortName + "：硬件检测到奇偶校验错误。");
+                    Log.E(sp.PortName + "：硬件检测到奇偶校验错误。");
                     break;
 
                 case SerialError.TXFull:
-                    LOG.E(sp.PortName + "：应用程序尝试传输一个字符，但是输出缓冲区已满。");
+                    Log.E(sp.PortName + "：应用程序尝试传输一个字符，但是输出缓冲区已满。");
                     break;
 
                 default:
@@ -357,8 +358,8 @@ namespace MstnAPP.Services.Driver
         /// <param name="e">事件</param>
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
-            SerialPort sp = (SerialPort)sender;
-            string indata = sp.ReadExisting();
+            var sp = (SerialPort)sender;
+            var indata = sp.ReadExisting();
             DataReceived(indata);
         }
 
@@ -379,23 +380,23 @@ namespace MstnAPP.Services.Driver
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    LOGBOX.E("对端口的访问被拒绝（普遍由于另一个进程已经打开了指定的 COM 端口）", "串口打开错误");
+                    LogBox.E("对端口的访问被拒绝（普遍由于另一个进程已经打开了指定的 COM 端口）", "串口打开错误");
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    LOGBOX.E("参数出现错误（请检查波特率等参数）", "串口打开错误");
+                    LogBox.E("参数出现错误（请检查波特率等参数）", "串口打开错误");
                 }
                 catch (ArgumentException)
                 {
-                    LOGBOX.E("端口名称不是以“COM”开始的", "串口打开错误");
+                    LogBox.E("端口名称不是以“COM”开始的", "串口打开错误");
                 }
                 catch (IOException)
                 {
-                    LOGBOX.E("此端口处于无效状态", "串口打开错误");
+                    LogBox.E("此端口处于无效状态", "串口打开错误");
                 }
                 catch (InvalidOperationException)
                 {
-                    LOGBOX.E("此端口重复打开", "串口打开错误");
+                    LogBox.E("此端口重复打开", "串口打开错误");
                 }
             }
             ConnectChanged(Connected());
@@ -414,23 +415,23 @@ namespace MstnAPP.Services.Driver
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    LOGBOX.E("对端口的访问被拒绝（普遍由于另一个进程已经打开了指定的 COM 端口）", "串口关闭错误");
+                    LogBox.E("对端口的访问被拒绝（普遍由于另一个进程已经打开了指定的 COM 端口）", "串口关闭错误");
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    LOGBOX.E("参数出现错误（请检查波特率等参数）", "串口关闭错误");
+                    LogBox.E("参数出现错误（请检查波特率等参数）", "串口关闭错误");
                 }
                 catch (ArgumentException)
                 {
-                    LOGBOX.E("端口名称不是以“COM”开始的", "串口关闭错误");
+                    LogBox.E("端口名称不是以“COM”开始的", "串口关闭错误");
                 }
                 catch (IOException)
                 {
-                    LOGBOX.E("此端口处于无效状态", "串口关闭错误");
+                    LogBox.E("此端口处于无效状态", "串口关闭错误");
                 }
                 catch (InvalidOperationException)
                 {
-                    LOGBOX.E("此端口重复打开", "串口关闭错误");
+                    LogBox.E("此端口重复打开", "串口关闭错误");
                 }
             }
             ConnectChanged(Connected());
@@ -474,7 +475,7 @@ namespace MstnAPP.Services.Driver
             }
             else
             {
-                LOG.W("尝试在串口未打开的情况下操作DTR引脚");
+                Log.W("尝试在串口未打开的情况下操作DTR引脚");
             }
         }
 
@@ -488,7 +489,7 @@ namespace MstnAPP.Services.Driver
             {
                 if (_serial.Handshake == Handshake.RequestToSend || _serial.Handshake == Handshake.RequestToSendXOnXOff)
                 {
-                    LOG.W("尝试在硬件流控的情况下操作RTS引脚");
+                    Log.W("尝试在硬件流控的情况下操作RTS引脚");
                 }
                 else
                 {
@@ -497,7 +498,7 @@ namespace MstnAPP.Services.Driver
             }
             else
             {
-                LOG.W("尝试在串口未打开的情况下操作RTS引脚");
+                Log.W("尝试在串口未打开的情况下操作RTS引脚");
             }
         }
 
@@ -513,7 +514,7 @@ namespace MstnAPP.Services.Driver
             }
             else
             {
-                LOG.W("尝试在串口未打开的情况下读取CD引脚");
+                Log.W("尝试在串口未打开的情况下读取CD引脚");
                 return false;
             }
         }
@@ -530,7 +531,7 @@ namespace MstnAPP.Services.Driver
             }
             else
             {
-                LOG.W("尝试在串口未打开的情况下读取Cts引脚");
+                Log.W("尝试在串口未打开的情况下读取Cts引脚");
                 return false;
             }
         }
@@ -547,7 +548,7 @@ namespace MstnAPP.Services.Driver
             }
             else
             {
-                LOG.W("尝试在串口未打开的情况下读取Dsr引脚");
+                Log.W("尝试在串口未打开的情况下读取Dsr引脚");
                 return false;
             }
         }

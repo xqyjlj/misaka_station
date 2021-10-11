@@ -25,14 +25,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             set
             {
                 _ = SetProperty(ref _tabControlSelectedIndex, value);
-                if (_tabControlSelectedIndex == 1)
-                {
-                    _eventAggregator.GetEvent<EventTask>().Publish(true);
-                }
-                else
-                {
-                    _eventAggregator.GetEvent<EventTask>().Publish(false);
-                }
+                _eventAggregator.GetEvent<EventTask>().Publish(_tabControlSelectedIndex == 1);
             }
         }
 

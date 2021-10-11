@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFramework>net5.0-windows</TargetFramework>
-	<Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Services\Sys\MstnAPP.Services.Sys.Util\MstnAPP.Services.Sys.Util.csproj" />
+    <ProjectReference Include="..\MstnAPP.Services.Driver.Serial\MstnAPP.Services.Driver.Serial.csproj" />
   </ItemGroup>
 
 </Project>

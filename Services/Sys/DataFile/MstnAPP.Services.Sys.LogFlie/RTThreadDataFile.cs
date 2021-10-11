@@ -1,12 +1,12 @@
 ﻿using System.IO;
 
-namespace MstnAPP.Services.Sys.DataFile
+namespace MstnAPP.Services.Sys.LogFile
 {
     public class RTThreadDataFile
     {
         public static void AppendAllText(string path, string contents)
         {
-            if (path != null && path != "")
+            if (!string.IsNullOrEmpty(path))
             {
                 File.AppendAllText(path, contents);
             }

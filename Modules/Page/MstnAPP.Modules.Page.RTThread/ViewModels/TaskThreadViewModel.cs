@@ -13,20 +13,17 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
     {
         public bool KeepAlive => false;
 
-        private readonly IEventAggregator _eventAggregator;
-
         public TaskThreadViewModel(IEventAggregator eventAggregator)
         {
-            _eventAggregator = eventAggregator;
-            _ = _eventAggregator.GetEvent<EventThread>().Subscribe(EventThreadReceived);
+            _ = eventAggregator.GetEvent<EventThread>().Subscribe(EventThreadReceived);
         }
 
-        private ObservableCollection<ModelThread> _DataGridItems = new();
+        private ObservableCollection<ModelThread> _dataGridItems = new();
 
         public ObservableCollection<ModelThread> DataGridItems
         {
-            get => _DataGridItems;
-            set => _ = SetProperty(ref _DataGridItems, value);
+            get => _dataGridItems;
+            set => _ = SetProperty(ref _dataGridItems, value);
         }
 
         private void EventThreadReceived(List<string> list)
@@ -36,42 +33,38 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
 
         private void ParseData(List<string> list)
         {
-            string head, msg;
-
-            msg = list[0];
-            head = msg[0..^11];//"list_thread".Length
+            var msg = list[0];
+            var head = msg[0..^11];
             msg = list[^1]; //列表中的最后一个字符串
 
-            if (msg == head)  //第一个和最后一个 相同表示报文接收完毕
+            if (msg != head) return;
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
+                DataGridItems.Clear();
+            });
+
+            var count = list.Count - 4;
+            for (var i = 3; i < 3 + count; i++)
+            {
+                msg = list[i];
+
+                var subs = msg.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                if (subs.Length != 8) continue;
+                ModelThread model = new()
+                {
+                    Name = subs[0],
+                    Pri = subs[1],
+                    Status = subs[2],
+                    Sp = subs[3],
+                    StackSize = subs[4],
+                    MaxUsed = subs[5],
+                    LeftTick = subs[6],
+                    Error = subs[7]
+                };
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
-                    DataGridItems.Clear();
+                    DataGridItems.Add(model);
                 });
-
-                int count = list.Count - 4;
-                for (int i = 3; i < 3 + count; i++)
-                {
-                    msg = list[i];
-
-                    string[] subs = msg.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                    if (subs.Length == 8)
-                    {
-                        ModelThread model = new();
-                        model.Name = subs[0];
-                        model.Pri = subs[1];
-                        model.Status = subs[2];
-                        model.Sp = subs[3];
-                        model.StackSize = subs[4];
-                        model.MaxUsed = subs[5];
-                        model.LeftTick = subs[6];
-                        model.Error = subs[7];
-                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            DataGridItems.Add(model);
-                        });
-                    }
-                }
             }
         }
     }

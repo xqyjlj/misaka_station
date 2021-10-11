@@ -4,7 +4,7 @@ using MstnAPP.Modules.Dialog.WeChat;
 using MstnAPP.Modules.Page.Home;
 using MstnAPP.Modules.Page.RTThread;
 using MstnAPP.Services.Driver;
-using MstnAPP.Services.Sys.DataFile;
+using MstnAPP.Services.Sys.IniFile;
 using MstnAPP.Views;
 using Prism.Ioc;
 using Prism.Modularity;
