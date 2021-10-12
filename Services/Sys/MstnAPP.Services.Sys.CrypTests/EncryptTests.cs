@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MstnAPP.Services.Sys.Cryp;
+using System;
+using System.Diagnostics;
 
 namespace MstnAPP.Services.Sys.CrypTests
 {
@@ -23,6 +25,26 @@ namespace MstnAPP.Services.Sys.CrypTests
         }
 
         [TestMethod()]
+        public void GetMd5ByteTest()
+        {
+            var bytes = new byte[] { 52, 32, 64, 54, 115, 187, 26, 151, 81, 181, 244, 208, 150, 254, 194, 253 };
+            var expected = Convert.ToBase64String(bytes);
+            var resultBytes = Encrypt.GetMd5Byte("Hello-World");
+            var result = Convert.ToBase64String(resultBytes);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod()]
+        public void GetMd5SaltByteTest()
+        {
+            var bytes = new byte[] { 193, 79, 195, 177, 51, 71, 120, 48, 187, 65, 71, 76, 105, 215, 243, 121 };
+            var expected = Convert.ToBase64String(bytes);
+            var resultBytes = Encrypt.GetMd5SaltByte("Hello-World", "5cbb97a8-9208-4d08-92d2-3eab1455c187");
+            var result = Convert.ToBase64String(resultBytes);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod()]
         public void GetSha1Test()
         {
             const string expected = "48F53A40EBF1A3F9EB8BDB78C8EDA93157F12626";
@@ -39,6 +61,26 @@ namespace MstnAPP.Services.Sys.CrypTests
         }
 
         [TestMethod()]
+        public void GetSha1ByteTest()
+        {
+            var bytes = new byte[] { 72, 245, 58, 64, 235, 241, 163, 249, 235, 139, 219, 120, 200, 237, 169, 49, 87, 241, 38, 38 };
+            var expected = Convert.ToBase64String(bytes);
+            var resultBytes = Encrypt.GetSha1Byte("Hello-World");
+            var result = Convert.ToBase64String(resultBytes);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod()]
+        public void GetSha1SaltByteTest()
+        {
+            var bytes = new byte[] { 171, 54, 37, 183, 28, 160, 4, 208, 25, 135, 140, 222, 231, 177, 215, 153, 232, 255, 168, 77 };
+            var expected = Convert.ToBase64String(bytes);
+            var resultBytes = Encrypt.GetSha1SaltByte("Hello-World", "5cbb97a8-9208-4d08-92d2-3eab1455c187");
+            var result = Convert.ToBase64String(resultBytes);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod()]
         public void GetSha256Test()
         {
             const string expected = "DF99966A707B8ED42C5D8CD1DC69A6E22517245BE8B784B7A87705AC4C0835C5";
@@ -51,6 +93,26 @@ namespace MstnAPP.Services.Sys.CrypTests
         {
             const string expected = "A0B29403B9EAAB8A25EF7697DB0458E5F2739F52CBCC0C155A101478A7DF2CE3";
             var result = Encrypt.GetSha256Salt("Hello-World", "5cbb97a8-9208-4d08-92d2-3eab1455c187");
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod()]
+        public void GetSha256ByteTest()
+        {
+            var bytes = new byte[] { 223, 153, 150, 106, 112, 123, 142, 212, 44, 93, 140, 209, 220, 105, 166, 226, 37, 23, 36, 91, 232, 183, 132, 183, 168, 119, 5, 172, 76, 8, 53, 197 };
+            var expected = Convert.ToBase64String(bytes);
+            var resultBytes = Encrypt.GetSha256Byte("Hello-World");
+            var result = Convert.ToBase64String(resultBytes);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod()]
+        public void GetSha256SaltByteTest()
+        {
+            var bytes = new byte[] { 160, 178, 148, 3, 185, 234, 171, 138, 37, 239, 118, 151, 219, 4, 88, 229, 242, 115, 159, 82, 203, 204, 12, 21, 90, 16, 20, 120, 167, 223, 44, 227 };
+            var expected = Convert.ToBase64String(bytes);
+            var resultBytes = Encrypt.GetSha256SaltByte("Hello-World", "5cbb97a8-9208-4d08-92d2-3eab1455c187");
+            var result = Convert.ToBase64String(resultBytes);
             Assert.AreEqual(expected, result);
         }
     }

@@ -41,6 +41,29 @@ namespace MstnAPP.Services.Sys.Cryp
         }
 
         /// <summary>
+        /// 计算MD5值
+        /// </summary>
+        /// <param name="source">待加密数据</param>
+        /// <returns>MD5值</returns>
+        public static byte[] GetMd5Byte(string source)
+        {
+            var hash = MD5.Create();
+            return hash.ComputeHash(Encoding.UTF8.GetBytes(source));
+        }
+
+        /// <summary>
+        /// 计算加盐的MD5值
+        /// </summary>
+        /// <param name="source">待加密数据</param>
+        /// <param name="salt">盐</param>
+        /// <returns>MD5值</returns>
+        public static byte[] GetMd5SaltByte(string source, string salt)
+        {
+            var hash = MD5.Create();
+            return hash.ComputeHash(Encoding.UTF8.GetBytes(source + salt));
+        }
+
+        /// <summary>
         /// 计算Sha1值
         /// </summary>
         /// <param name="source">待加密数据</param>
@@ -76,6 +99,29 @@ namespace MstnAPP.Services.Sys.Cryp
         }
 
         /// <summary>
+        /// 计算Sha1值
+        /// </summary>
+        /// <param name="source">待加密数据</param>
+        /// <returns>Sha1值</returns>
+        public static byte[] GetSha1Byte(string source)
+        {
+            var hash = SHA1.Create();
+            return hash.ComputeHash(Encoding.UTF8.GetBytes(source));
+        }
+
+        /// <summary>
+        /// 计算加盐的Sha1值
+        /// </summary>
+        /// <param name="source">待加密数据</param>
+        /// <param name="salt">盐</param>
+        /// <returns>Sha1值</returns>
+        public static byte[] GetSha1SaltByte(string source, string salt)
+        {
+            var hash = SHA1.Create();
+            return hash.ComputeHash(Encoding.UTF8.GetBytes(source + salt));
+        }
+
+        /// <summary>
         /// 计算Sha256值
         /// </summary>
         /// <param name="source">待加密数据</param>
@@ -108,6 +154,29 @@ namespace MstnAPP.Services.Sys.Cryp
                 str.Append(t.ToString("X2"));
             }
             return str.ToString();
+        }
+
+        /// <summary>
+        /// 计算Sha256值
+        /// </summary>
+        /// <param name="source">待加密数据</param>
+        /// <returns>Sha256值</returns>
+        public static byte[] GetSha256Byte(string source)
+        {
+            var hash = SHA256.Create();
+            return hash.ComputeHash(Encoding.UTF8.GetBytes(source));
+        }
+
+        /// <summary>
+        /// 计算加盐的Sha256值
+        /// </summary>
+        /// <param name="source">待加密数据</param>
+        /// <param name="salt">盐</param>
+        /// <returns>Sha256值</returns>
+        public static byte[] GetSha256SaltByte(string source, string salt)
+        {
+            var hash = SHA256.Create();
+            return hash.ComputeHash(Encoding.UTF8.GetBytes(source + salt));
         }
     }
 }
