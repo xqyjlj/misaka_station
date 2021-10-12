@@ -4,6 +4,7 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/XamlNaming/Abbreviations/=QQ/@EntryIndexedValue">QQ</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Controler/@EntryIndexedValue">True</s:Boolean>
     <s:Boolean x:Key="/Default/UserDictionary/Words/=Cryp/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=encryptor/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=memheap/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=mempool/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Misaka/@EntryIndexedValue">True</s:Boolean>
@@ -12,4 +13,5 @@
 	
     <s:Boolean x:Key="/Default/UserDictionary/Words/=Mstn/@EntryIndexedValue">True</s:Boolean>
     <s:Boolean x:Key="/Default/UserDictionary/Words/=QQ/@EntryIndexedValue">True</s:Boolean>
+	
 </wpf:ResourceDictionary>

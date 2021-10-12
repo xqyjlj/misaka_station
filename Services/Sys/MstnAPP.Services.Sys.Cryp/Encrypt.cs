@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace MstnAPP.Services.Sys.Cryp
@@ -177,6 +178,93 @@ namespace MstnAPP.Services.Sys.Cryp
         {
             var hash = SHA256.Create();
             return hash.ComputeHash(Encoding.UTF8.GetBytes(source + salt));
+        }
+
+        /// <summary>
+        /// 计算AES加密值
+        /// </summary>
+        /// <param name="plainText">待加密数据</param>
+        /// <param name="key">密钥</param>
+        /// <param name="iv">向量</param>
+        /// <returns>AES加密值</returns>
+        public static byte[] GetAesByte(string plainText, byte[] key, byte[] iv)
+        {
+            if (plainText is not { Length: > 0 })
+                throw new ArgumentNullException(nameof(plainText));
+            if (key is not { Length: > 0 })
+                throw new ArgumentNullException(nameof(key));
+            if (iv is not { Length: > 0 })
+                throw new ArgumentNullException(nameof(iv));
+
+            var aesAlg = Aes.Create();
+            aesAlg.Key = key;
+            aesAlg.IV = iv;
+            aesAlg.Mode = CipherMode.CBC;
+            aesAlg.Padding = PaddingMode.PKCS7;
+
+            var encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+            var encrypted = encryptor.TransformFinalBlock(Encoding.UTF8.GetBytes(plainText), 0, plainText.Length);
+
+            return encrypted;
+        }
+
+        /// <summary>
+        /// 计算AES加密值
+        /// </summary>
+        /// <param name="plainText">待加密数据</param>
+        /// <param name="key">密钥</param>
+        /// <param name="iv">向量</param>
+        /// <returns>AES加密值</returns>
+        public static byte[] GetAesByte(byte[] plainText, byte[] key, byte[] iv)
+        {
+            if (plainText is not { Length: > 0 })
+                throw new ArgumentNullException(nameof(plainText));
+            if (key is not { Length: > 0 })
+                throw new ArgumentNullException(nameof(key));
+            if (iv is not { Length: > 0 })
+                throw new ArgumentNullException(nameof(iv));
+
+            var aesAlg = Aes.Create();
+            aesAlg.Key = key;
+            aesAlg.IV = iv;
+            aesAlg.Mode = CipherMode.CBC;
+            aesAlg.Padding = PaddingMode.PKCS7;
+
+            var encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+            var encrypted = encryptor.TransformFinalBlock(plainText, 0, plainText.Length);
+
+            return encrypted;
+        }
+
+        /// <summary>
+        /// 计算AES加密值
+        /// </summary>
+        /// <param name="plainText">待加密数据</param>
+        /// <param name="key">密钥</param>
+        /// <param name="iv">向量</param>
+        /// <returns>AES加密值</returns>
+        public static byte[] GetAesByte(string plainText, string key, string iv)
+        {
+            if (plainText is not { Length: > 0 })
+                throw new ArgumentNullException(nameof(plainText));
+            if (key is not { Length: > 0 })
+                throw new ArgumentNullException(nameof(key));
+            if (iv is not { Length: > 0 })
+                throw new ArgumentNullException(nameof(iv));
+
+            var aesAlg = Aes.Create();
+            aesAlg.Key = Encoding.UTF8.GetBytes(key);
+            aesAlg.IV = Encoding.UTF8.GetBytes(iv);
+            aesAlg.Mode = CipherMode.CBC;
+            aesAlg.Padding = PaddingMode.PKCS7;
+
+            var encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+            var encrypted = encryptor.TransformFinalBlock(Encoding.UTF8.GetBytes(plainText), 0, plainText.Length);
+
+            return encrypted;
         }
     }
 }

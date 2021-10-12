@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MstnAPP.Services.Sys.Cryp;
 using System;
-using System.Diagnostics;
+using System.Text;
 
 namespace MstnAPP.Services.Sys.CrypTests
 {
@@ -113,6 +113,24 @@ namespace MstnAPP.Services.Sys.CrypTests
             var expected = Convert.ToBase64String(bytes);
             var resultBytes = Encrypt.GetSha256SaltByte("Hello-World", "5cbb97a8-9208-4d08-92d2-3eab1455c187");
             var result = Convert.ToBase64String(resultBytes);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod()]
+        public void GetAesByteTest()
+        {
+            var bytes = new byte[] { 210, 204, 81, 245, 57, 43, 125, 132, 140, 155, 177, 57, 6, 69, 51, 193 };
+            var expected = Convert.ToBase64String(bytes);
+            var key = Encoding.UTF8.GetBytes("^F^*Cxy.!#-mg8gob.U1FKw5j-ia:V?m");
+            var iv = Encoding.UTF8.GetBytes("U2}gdv}fs%*]90F!");
+            var resultBytes = Encrypt.GetAesByte("Hello-World", key, iv);
+            var result = Convert.ToBase64String(resultBytes);
+            Assert.AreEqual(expected, result);
+            resultBytes = Encrypt.GetAesByte(Encoding.UTF8.GetBytes("Hello-World"), key, iv);
+            result = Convert.ToBase64String(resultBytes);
+            Assert.AreEqual(expected, result);
+            resultBytes = Encrypt.GetAesByte("Hello-World", "^F^*Cxy.!#-mg8gob.U1FKw5j-ia:V?m", "U2}gdv}fs%*]90F!");
+            result = Convert.ToBase64String(resultBytes);
             Assert.AreEqual(expected, result);
         }
     }
