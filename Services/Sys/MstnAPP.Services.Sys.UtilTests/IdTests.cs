@@ -1,17 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MstnAPP.Services.Sys.Util;
+﻿using MstnAPP.Services.Sys.Util;
+using Xunit;
 
 namespace MstnAPP.Services.Sys.UtilTests
 {
-    [TestClass()]
     public class IdTests
     {
-        [TestMethod()]
+        [Fact]
         public void GetGuidTest()
         {
             const string expected = "";
             var result = Id.GetGuid();
-            Assert.AreNotEqual(expected, result);
+            Assert.NotEqual(expected, result);
         }
     }
 }
