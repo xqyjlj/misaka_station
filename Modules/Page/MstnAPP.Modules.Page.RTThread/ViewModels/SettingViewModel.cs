@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using MstnApp.Event.Core;
+﻿using MstnApp.Event.Core;
 using MstnAPP.Modules.Page.RTThread.Event;
 using MstnAPP.Modules.Page.RTThread.Services;
 using MstnAPP.Services.Driver;
@@ -8,7 +7,12 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using System;
 using System.Collections.Generic;
+using MstnAPP.Services.Sys.Cryp;
+using System.Text;
+using Microsoft.Win32;
+using Registry = MstnAPP.Services.Sys.Reg.Registry;
 
 namespace MstnAPP.Modules.Page.RTThread.ViewModels
 {
@@ -50,7 +54,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         /// <param name="navigationContext">导航上下文</param>
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            SaveParameters();
+            WriteParameters();
             PublishEventFlushTime();
         }
 
@@ -80,7 +84,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         /// <param name="message"></param>
         private void EventCloseReceived(string message)
         {
-            SaveParameters();
+            WriteParameters();
         }
 
         /// <summary>
@@ -190,7 +194,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         /// <summary>
         /// 保存参数
         /// </summary>
-        private void SaveParameters()
+        private void WriteParameters()
         {
             if (ListComboBoxPortSelectedItem != null)
             {
@@ -224,7 +228,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             _iniFile.SetRTThreadIsExistPassword(CheckBoxIsExistPasswordIsChecked);
             if (PasswordBoxPasswordPassword != null)
             {
-                _iniFile.SetRTThreadPassword(PasswordBoxPasswordPassword);
+                WritePassword();
             }
             _iniFile.SetRTThreadFlushTime(SliderFlushTimeValue);
         }
@@ -248,7 +252,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             TextBoxSaveDataPathText = _iniFile.GetRTThreadSaveDataPath();
             SliderFlushTimeValue = _iniFile.GetRTThreadFlushTime();
             CheckBoxIsExistPasswordIsChecked = _iniFile.GetRTThreadIsExistPassword();
-            PasswordBoxPasswordPassword = _iniFile.GetRTThreadPassword();
+            ReadPassword();
         }
 
         /// <summary>
@@ -259,6 +263,27 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             _eventAggregator.GetEvent<EventFlushTime>().Publish(SliderFlushTimeValue);
         }
 
+        private const string Iv = "%d=Xx,#8Wsb,!Wht";
+        private void ReadPassword()
+        {
+            var password = _iniFile.GetRTThreadPassword();
+            if (password.Length <= 0) return;
+            var bytes = Convert.FromBase64String(password);
+            var guid = Registry.GetMachineGuid();
+            var key = Encrypt.GetMd5(guid);
+            var resultBytes = Decrypt.GetAesByte(bytes, key, Iv);
+            PasswordBoxPasswordPassword = Encoding.UTF8.GetString(resultBytes);
+        }
+
+        private void WritePassword()
+        {
+            var password = PasswordBoxPasswordPassword;
+            if (password.Length <= 0) return;
+            var guid = Registry.GetMachineGuid();
+            var key = Encrypt.GetMd5(guid);
+            var resultBytes = Encrypt.GetAesByte(password, key, Iv);
+            _iniFile.SetRTThreadPassword(Convert.ToBase64String(resultBytes));
+        }
         #region 创建Items
 
         private static IEnumerable<string> GenerateBaudRateItems()
@@ -620,10 +645,12 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
 
         private void ExecuteButtonSaveDataPathChooseCommand()
         {
-            var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "文本文件|*.txt";
-            saveFileDialog.FilterIndex = 2;
-            saveFileDialog.RestoreDirectory = true;
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "文本文件|*.txt",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
             if (saveFileDialog.ShowDialog() == true)
             {
                 TextBoxSaveDataPathText = saveFileDialog.FileName;
