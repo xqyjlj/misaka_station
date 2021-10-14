@@ -9,6 +9,7 @@ using MstnAPP.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
+using MstnAPP.Services.Driver.Serial;
 
 namespace MstnAPP
 {

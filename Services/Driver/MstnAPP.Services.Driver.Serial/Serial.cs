@@ -1,12 +1,11 @@
-﻿using MstnAPP.Services.Sys.Debug;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
+using MstnAPP.Services.Sys.Debug;
 
-// ReSharper disable once CheckNamespace
-namespace MstnAPP.Services.Driver
+namespace MstnAPP.Services.Driver.Serial
 {
     public class Serial : ISerial
     {

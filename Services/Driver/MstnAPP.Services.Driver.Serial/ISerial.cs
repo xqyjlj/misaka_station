@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO.Ports;
 
-namespace MstnAPP.Services.Driver
+namespace MstnAPP.Services.Driver.Serial
 {
     /// <summary>
     /// 串口名改变事件

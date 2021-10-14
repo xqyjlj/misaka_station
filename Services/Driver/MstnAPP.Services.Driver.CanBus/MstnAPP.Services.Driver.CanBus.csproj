@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net5.0-windows</TargetFramework>
+	<Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DriverDll\MstnAPP.Services.Driver.DriverDll.Kvaser\MstnAPP.Services.Driver.DriverDll.Kvaser.csproj" />
+    <ProjectReference Include="..\MstnAPP.Services.Driver.ICanBus\MstnAPP.Services.Driver.ICanBus.csproj" />
+  </ItemGroup>
+
+</Project>

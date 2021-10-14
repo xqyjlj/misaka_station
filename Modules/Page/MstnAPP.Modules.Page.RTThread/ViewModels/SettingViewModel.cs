@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using MstnAPP.Services.Sys.Cryp;
 using System.Text;
 using Microsoft.Win32;
+using MstnAPP.Services.Driver.Serial;
 using Registry = MstnAPP.Services.Sys.Reg.Registry;
 
 namespace MstnAPP.Modules.Page.RTThread.ViewModels

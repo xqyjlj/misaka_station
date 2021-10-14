@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net5.0-windows</TargetFramework>
+	<Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Dll\**" />
+    <EmbeddedResource Remove="Dll\**" />
+    <None Remove="Dll\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MstnAPP.Services.Driver.ICanBus\MstnAPP.Services.Driver.ICanBus.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Condition=" '$(Platform)' == 'x64'" Include="canlibCLSNET">
+      <HintPath>Dll\x64\canlibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x86'" Include="canlibCLSNET">
+      <HintPath>Dll\x86\canlibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x64'" Include="kvadblibCLSNET">
+      <HintPath>Dll\x64\kvadblibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x86'" Include="kvadblibCLSNET">
+      <HintPath>Dll\x86\kvadblibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x64'" Include="kvlclibCLSNET">
+      <HintPath>Dll\x64\kvlclibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x86'" Include="kvlclibCLSNET">
+      <HintPath>Dll\x86\kvlclibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x64'" Include="kvmlibCLSNET">
+      <HintPath>Dll\x64\kvmlibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x86'" Include="kvmlibCLSNET">
+      <HintPath>Dll\x86\kvmlibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x64'" Include="kvrlibCLSNET">
+      <HintPath>Dll\x64\kvrlibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x86'" Include="kvrlibCLSNET">
+      <HintPath>Dll\x86\kvrlibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x64'" Include="linlibCLSNET">
+      <HintPath>Dll\x64\linlibCLSNET.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(Platform)' == 'x86'" Include="linlibCLSNET">
+      <HintPath>Dll\x86\linlibCLSNET.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

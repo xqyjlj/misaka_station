@@ -5,6 +5,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using System.Collections.Generic;
 using System.Timers;
+using MstnAPP.Services.Driver.Serial;
 
 namespace MstnAPP.Modules.Page.RTThread.ViewModels
 {
