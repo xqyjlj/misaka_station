@@ -320,7 +320,8 @@ namespace MstnAPP.Services.Driver.Serial
         /// </summary>
         /// <param name="sender">事件源</param>
         /// <param name="e">事件</param>
-        private void SerialErrorHandler(object sender, SerialErrorReceivedEventArgs e)
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        private static void SerialErrorHandler(object sender, SerialErrorReceivedEventArgs e)
         {
             var sp = (SerialPort)sender;
             switch (e.EventType)
@@ -344,8 +345,8 @@ namespace MstnAPP.Services.Driver.Serial
                 case SerialError.TXFull:
                     Log.E(sp.PortName + "：应用程序尝试传输一个字符，但是输出缓冲区已满。");
                     break;
-
                 default:
+                    Log.E(sp.PortName + "：SerialErrorReceivedEventArgs ：意料之外的错误");
                     break;
             }
         }
@@ -358,8 +359,8 @@ namespace MstnAPP.Services.Driver.Serial
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
             var sp = (SerialPort)sender;
-            var indata = sp.ReadExisting();
-            DataReceived(indata);
+            var data = sp.ReadExisting();
+            DataReceived?.Invoke(data);
         }
 
         #endregion 回调函数
@@ -371,7 +372,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// </summary>
         public void Open()
         {
-            if (!Connected())
+            if (!Connected)
             {
                 try
                 {
@@ -398,7 +399,8 @@ namespace MstnAPP.Services.Driver.Serial
                     LogBox.E("此端口重复打开", "串口打开错误");
                 }
             }
-            ConnectChanged(Connected());
+
+            ConnectChanged?.Invoke(Connected);
         }
 
         /// <summary>
@@ -406,7 +408,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// </summary>
         public void Close()
         {
-            if (Connected())
+            if (Connected)
             {
                 try
                 {
@@ -433,24 +435,22 @@ namespace MstnAPP.Services.Driver.Serial
                     LogBox.E("此端口重复打开", "串口关闭错误");
                 }
             }
-            ConnectChanged(Connected());
+
+            ConnectChanged?.Invoke(Connected);
         }
 
         /// <summary>
         /// 串口连接状态
         /// </summary>
         /// <returns>串口连接状态</returns>
-        public bool Connected()
-        {
-            return _serial.IsOpen;
-        }
+        public bool Connected => _serial.IsOpen;
 
         /// <summary>
         /// 刷新串口
         /// </summary>
         public void FlushPorts()
         {
-            PortNamesChanged(GetPortNames());
+            PortNamesChanged?.Invoke(GetPortNames());
         }
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// <param name="dtr">DTR引脚电平</param>
         public void SetDtr(bool dtr)
         {
-            if (Connected())
+            if (Connected)
             {
                 _serial.DtrEnable = dtr;
             }
@@ -484,9 +484,9 @@ namespace MstnAPP.Services.Driver.Serial
         /// <param name="rts">RTS引脚电平</param>
         public void SetRts(bool rts)
         {
-            if (Connected())
+            if (Connected)
             {
-                if (_serial.Handshake == Handshake.RequestToSend || _serial.Handshake == Handshake.RequestToSendXOnXOff)
+                if (_serial is { Handshake: Handshake.RequestToSend or Handshake.RequestToSendXOnXOff })
                 {
                     Log.W("尝试在硬件流控的情况下操作RTS引脚");
                 }
@@ -507,7 +507,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// <returns>CD引脚电平</returns>
         public bool GetCd()
         {
-            if (Connected())
+            if (Connected)
             {
                 return _serial.CDHolding;
             }
@@ -524,7 +524,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// <returns>CTS引脚电平</returns>
         public bool GetCts()
         {
-            if (Connected())
+            if (Connected)
             {
                 return _serial.CtsHolding;
             }
@@ -541,7 +541,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// <returns>DSR引脚电平</returns>
         public bool GetDsr()
         {
-            if (Connected())
+            if (Connected)
             {
                 return _serial.DsrHolding;
             }
@@ -558,7 +558,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// <param name="text">数据</param>
         public void Write(string text)
         {
-            if (Connected())
+            if (Connected)
             {
                 _serial.Write(text);
             }
@@ -572,7 +572,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// <param name="count">要写入的字节数</param>
         public void Write(byte[] buffer, int offset, int count)
         {
-            if (Connected())
+            if (Connected)
             {
                 _serial.Write(buffer, offset, count);
             }
@@ -586,7 +586,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// <param name="count">要写入的字节数</param>
         public void Write(char[] buffer, int offset, int count)
         {
-            if (Connected())
+            if (Connected)
             {
                 _serial.Write(buffer, offset, count);
             }
@@ -598,7 +598,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// <param name="text">数据</param>
         public void Transmit(string text)
         {
-            if (Connected())
+            if (Connected)
             {
                 _serial.Write(text);
             }
@@ -612,7 +612,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// <param name="count">要写入的字节数</param>
         public void Transmit(byte[] buffer, int offset, int count)
         {
-            if (Connected())
+            if (Connected)
             {
                 _serial.Write(buffer, offset, count);
             }
@@ -626,7 +626,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// <param name="count">要写入的字节数</param>
         public void Transmit(char[] buffer, int offset, int count)
         {
-            if (Connected())
+            if (Connected)
             {
                 _serial.Write(buffer, offset, count);
             }

@@ -73,7 +73,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
 
             _ = _eventAggregator.GetEvent<EventClose>().Subscribe(EventCloseReceived);
 
-            _serialData = new(_eventAggregator);
+            _serialData = new ServicesSerialData(_eventAggregator);
 
             InitListComboBox();
             ReadParameters();
@@ -156,7 +156,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         {
             if (_isHasBeenSetSerial)
             {
-                if (_serial.Connected())
+                if (_serial.Connected)
                 {
                     _serial.Close();
                 }
@@ -547,7 +547,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
                 {
                     CloseSerial();
                 }
-                _ = SetProperty(ref _toggleButtonSerialIsChecked, _serial.Connected());
+                _ = SetProperty(ref _toggleButtonSerialIsChecked, _serial.Connected);
             }
         }
 

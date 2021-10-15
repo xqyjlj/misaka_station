@@ -149,7 +149,7 @@ namespace MstnAPP.Services.Driver.Serial
         /// 串口连接状态
         /// </summary>
         /// <returns>串口连接状态</returns>
-        bool Connected();
+        bool Connected { get; }
 
         /// <summary>
         /// 设置DTR引脚电平

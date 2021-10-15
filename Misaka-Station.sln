@@ -67,9 +67,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MstnAPP.Services.Driver.Can
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DriverDll", "DriverDll", "{2B3D8BD1-AB4B-414F-957D-01324E1F8A7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MstnAPP.Services.Driver.DriverDll.Kvaser", "Services\Driver\DriverDll\MstnAPP.Services.Driver.DriverDll.Kvaser\MstnAPP.Services.Driver.DriverDll.Kvaser.csproj", "{954B28E7-76B2-410E-9935-0FC36FF1AD2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MstnAPP.Services.Driver.DriverDll.Kvaser", "Services\Driver\DriverDll\MstnAPP.Services.Driver.DriverDll.Kvaser\MstnAPP.Services.Driver.DriverDll.Kvaser.csproj", "{954B28E7-76B2-410E-9935-0FC36FF1AD2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MstnAPP.Services.Driver.ICanBus", "Services\Driver\MstnAPP.Services.Driver.ICanBus\MstnAPP.Services.Driver.ICanBus.csproj", "{6B338B43-89A9-4938-B27F-97B10A3EDC0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MstnAPP.Services.Driver.ICanBus", "Services\Driver\MstnAPP.Services.Driver.ICanBus\MstnAPP.Services.Driver.ICanBus.csproj", "{6B338B43-89A9-4938-B27F-97B10A3EDC0F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E8ADD5EB-04FF-4679-9860-DB60DA015DBB}"
 EndProject
@@ -77,9 +77,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Driver", "Driver", "{E3956D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sys", "Sys", "{EF0BF2C7-C5DE-4D5F-B4A1-83FD99B57E57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MstnAPP.Services.Driver.DriverDll.KvaserTests", "Services\Driver\DriverDll\MstnAPP.Services.Driver.DriverDll.KvaserTests\MstnAPP.Services.Driver.DriverDll.KvaserTests.csproj", "{D27883DB-182F-4BB0-84CF-C8C14F57C154}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MstnAPP.Services.Driver.DriverDll.KvaserTests", "Services\Driver\DriverDll\MstnAPP.Services.Driver.DriverDll.KvaserTests\MstnAPP.Services.Driver.DriverDll.KvaserTests.csproj", "{D27883DB-182F-4BB0-84CF-C8C14F57C154}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DriverDll", "DriverDll", "{58DBBE27-CCBE-470E-B60B-AA44C6158D1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MstnAPP.Services.Driver.CanBusTests", "Services\Driver\MstnAPP.Services.Driver.CanBusTests\MstnAPP.Services.Driver.CanBusTests.csproj", "{9B3B183D-A19E-4858-957B-2211A759C7E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -583,8 +585,8 @@ Global
 		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Debug|ARM64.Build.0 = Debug|Any CPU
 		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Debug|x64.Build.0 = Debug|Any CPU
-		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Debug|x86.Build.0 = Debug|Any CPU
+		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Debug|x86.ActiveCfg = Debug|x86
+		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Debug|x86.Build.0 = Debug|x86
 		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Release|ARM32.ActiveCfg = Release|Any CPU
@@ -595,6 +597,26 @@ Global
 		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Release|x64.Build.0 = Release|Any CPU
 		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Release|x86.ActiveCfg = Release|Any CPU
 		{D27883DB-182F-4BB0-84CF-C8C14F57C154}.Release|x86.Build.0 = Release|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Debug|ARM32.ActiveCfg = Debug|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Debug|ARM32.Build.0 = Debug|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Debug|x64.Build.0 = Debug|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Debug|x86.ActiveCfg = Debug|x86
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Debug|x86.Build.0 = Debug|x86
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Release|ARM32.ActiveCfg = Release|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Release|ARM32.Build.0 = Release|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Release|ARM64.Build.0 = Release|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Release|x64.ActiveCfg = Release|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Release|x64.Build.0 = Release|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Release|x86.ActiveCfg = Release|Any CPU
+		{9B3B183D-A19E-4858-957B-2211A759C7E6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -633,6 +655,7 @@ Global
 		{EF0BF2C7-C5DE-4D5F-B4A1-83FD99B57E57} = {E8ADD5EB-04FF-4679-9860-DB60DA015DBB}
 		{D27883DB-182F-4BB0-84CF-C8C14F57C154} = {58DBBE27-CCBE-470E-B60B-AA44C6158D1E}
 		{58DBBE27-CCBE-470E-B60B-AA44C6158D1E} = {E3956D52-D645-40F3-AFA4-757AAD437A4C}
+		{9B3B183D-A19E-4858-957B-2211A759C7E6} = {E3956D52-D645-40F3-AFA4-757AAD437A4C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5387F690-6D0E-4BF5-8594-BB638F15184F}

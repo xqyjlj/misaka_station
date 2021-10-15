@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Sys\MstnAPP.Services.Sys.Debug\MstnAPP.Services.Sys.Debug.csproj" />
     <ProjectReference Include="..\..\MstnAPP.Services.Driver.ICanBus\MstnAPP.Services.Driver.ICanBus.csproj" />
   </ItemGroup>
 
