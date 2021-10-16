@@ -32,7 +32,11 @@ namespace MstnAPP.Services.Driver.ICanBus
 
     public interface ICan
     {
+        public event EPortNameChanged PortNameChanged;
+
         public event EConnectChanged ConnectChanged;
+
+        public event EDataReceived DataReceived;
 
         /// <summary>
         /// 读取端口名称列表
@@ -47,7 +51,7 @@ namespace MstnAPP.Services.Driver.ICanBus
         /// <param name="rate">波特率</param>
         /// <param name="channel">通道</param>
         /// <returns>是否成功</returns>
-        public bool Open(string port, string rate, string channel);
+        public bool Open(string port, string rate);
 
         /// <summary>
         /// 关闭设备
@@ -64,5 +68,10 @@ namespace MstnAPP.Services.Driver.ICanBus
         /// <param name="length">数据长度</param>
         /// <param name="flag">数据标志位</param>
         public void Write(byte[] message, int id, int length, CanBusEnum flag);
+
+        /// <summary>
+        /// 刷新Can接口
+        /// </summary>
+        public void FlushPorts();
     }
 }

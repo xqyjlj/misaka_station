@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+	<PropertyGroup>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+		<AssemblyName>MstnAPP.Modules.Page.CanHelper</AssemblyName>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="MaterialDesignColors" Version="2.0.3" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
+		<PackageReference Include="Prism.Wpf" Version="8.1.97" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Services\Driver\MstnAPP.Services.Driver.ICanBus\MstnAPP.Services.Driver.ICanBus.csproj" />
+	  <ProjectReference Include="..\..\..\Services\Sys\DataFile\MstnAPP.Services.Sys.IniFile\MstnAPP.Services.Sys.IniFile.csproj" />
+	</ItemGroup>
+</Project>

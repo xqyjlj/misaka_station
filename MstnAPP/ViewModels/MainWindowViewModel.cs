@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using MstnApp.Event.Core;
 using MstnAPP.Models;
+using MstnAPP.Modules.Page.CanHelper.Views;
 using MstnAPP.Modules.Page.Home.Views;
 using MstnAPP.Modules.Page.RTThread.Views;
 using MstnAPP.Services.Sys.IniFile;
@@ -60,6 +61,7 @@ namespace MstnAPP.ViewModels
         {
             yield return new ModelItem("主页", "主页", "HomePage", typeof(HomePage));
             yield return new ModelItem("RT-Thread", "RT-Thread", "RTThreadPage", typeof(RTThreadPage));
+            yield return new ModelItem("Can助手", "Can助手", "CanHelperPage", typeof(CanHelperPage));
         }
 
         private readonly ICollectionView _listBoxModelItemsView;

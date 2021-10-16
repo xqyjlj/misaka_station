@@ -1,15 +1,17 @@
 ﻿using MstnAPP.Modules.Dialog.Feedback;
 using MstnAPP.Modules.Dialog.QQ;
 using MstnAPP.Modules.Dialog.WeChat;
+using MstnAPP.Modules.Page.CanHelper;
 using MstnAPP.Modules.Page.Home;
 using MstnAPP.Modules.Page.RTThread;
-using MstnAPP.Services.Driver;
+using MstnAPP.Services.Driver.CanBus;
+using MstnAPP.Services.Driver.ICanBus;
+using MstnAPP.Services.Driver.Serial;
 using MstnAPP.Services.Sys.IniFile;
 using MstnAPP.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
-using MstnAPP.Services.Driver.Serial;
 
 namespace MstnAPP
 {
@@ -37,6 +39,7 @@ namespace MstnAPP
         {
             _ = containerRegistry.RegisterSingleton<IIniFile, IniFile>();
             _ = containerRegistry.RegisterSingleton<ISerial, Serial>();
+            _ = containerRegistry.RegisterSingleton<ICan, Can>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -46,6 +49,7 @@ namespace MstnAPP
             _ = moduleCatalog.AddModule<WeChatModule>();
             _ = moduleCatalog.AddModule<QQModule>();
             _ = moduleCatalog.AddModule<RTThreadModule>();
+            _ = moduleCatalog.AddModule<CanHelperModule>();
         }
     }
 }

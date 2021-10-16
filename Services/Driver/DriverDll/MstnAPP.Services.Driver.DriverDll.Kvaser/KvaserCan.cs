@@ -18,12 +18,14 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
 
         public event EDataReceived DataReceived;
 
+        public event EPortNameChanged PortNameChanged;
+
+        public event EConnectChanged ConnectChanged;
+
         private readonly Thread _canReadThread;
         private readonly Thread _canWriteThread;
 
         private readonly Mutex _canMutex = new();
-
-        public event EConnectChanged ConnectChanged;
 
         private int _canHandle;
 
@@ -155,18 +157,6 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
         /// </summary>
         /// <param name="port">端口</param>
         /// <param name="rate">波特率</param>
-        /// <param name="channel">通道</param>
-        /// <returns>是否成功</returns>
-        public bool Open(string port, string rate, string channel)
-        {
-            return Open(port, rate);
-        }
-
-        /// <summary>
-        /// 打开设备
-        /// </summary>
-        /// <param name="port">端口</param>
-        /// <param name="rate">波特率</param>
         /// <returns>是否成功</returns>
         public bool Open(string port, string rate)
         {
@@ -243,6 +233,14 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
             {
                 DataReceived?.Invoke(data, id, length, _reverseFlagMap[flag]);
             }
+        }
+
+        /// <summary>
+        /// 刷新Can接口
+        /// </summary>
+        public void FlushPorts()
+        {
+            PortNameChanged?.Invoke(GetPortNames());
         }
     }
 }

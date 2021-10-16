@@ -1,9 +1,9 @@
-﻿using System;
+﻿using MstnAPP.Services.Sys.Debug;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
-using MstnAPP.Services.Sys.Debug;
 
 namespace MstnAPP.Services.Driver.Serial
 {
@@ -345,6 +345,7 @@ namespace MstnAPP.Services.Driver.Serial
                 case SerialError.TXFull:
                     Log.E(sp.PortName + "：应用程序尝试传输一个字符，但是输出缓冲区已满。");
                     break;
+
                 default:
                     Log.E(sp.PortName + "：SerialErrorReceivedEventArgs ：意料之外的错误");
                     break;
@@ -591,6 +592,7 @@ namespace MstnAPP.Services.Driver.Serial
                 _serial.Write(buffer, offset, count);
             }
         }
+
         #endregion 操作函数
     }
 }

@@ -1,7 +1,9 @@
-﻿using MstnApp.Event.Core;
+﻿using Microsoft.Win32;
+using MstnApp.Event.Core;
 using MstnAPP.Modules.Page.RTThread.Event;
 using MstnAPP.Modules.Page.RTThread.Services;
-using MstnAPP.Services.Driver;
+using MstnAPP.Services.Driver.Serial;
+using MstnAPP.Services.Sys.Cryp;
 using MstnAPP.Services.Sys.IniFile;
 using Prism.Commands;
 using Prism.Events;
@@ -9,10 +11,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
-using MstnAPP.Services.Sys.Cryp;
 using System.Text;
-using Microsoft.Win32;
-using MstnAPP.Services.Driver.Serial;
 using Registry = MstnAPP.Services.Sys.Reg.Registry;
 
 namespace MstnAPP.Modules.Page.RTThread.ViewModels
@@ -265,6 +264,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         }
 
         private const string Iv = "%d=Xx,#8Wsb,!Wht";
+
         private void ReadPassword()
         {
             var password = _iniFile.GetRTThreadPassword();
@@ -285,6 +285,7 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
             var resultBytes = Encrypt.GetAesByte(password, key, Iv);
             _iniFile.SetRTThreadPassword(Convert.ToBase64String(resultBytes));
         }
+
         #region 创建Items
 
         private static IEnumerable<string> GenerateBaudRateItems()

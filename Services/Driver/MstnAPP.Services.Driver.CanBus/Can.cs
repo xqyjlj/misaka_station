@@ -9,6 +9,10 @@ namespace MstnAPP.Services.Driver.CanBus
 {
     public class Can : ICan
     {
+        public event EDataReceived DataReceived;
+
+        public event EPortNameChanged PortNameChanged;
+
         public event EConnectChanged ConnectChanged;
 
         private readonly ObservableCollection<ModelCan> _modelsCan = new();
@@ -21,6 +25,9 @@ namespace MstnAPP.Services.Driver.CanBus
             var count = 0;
             foreach (var item in GenerateModelItems())
             {
+                item.Driver.ConnectChanged += OnConnectChanged;
+                item.Driver.DataReceived += OnDataReceived;
+                item.Driver.PortNameChanged += OnPortNameChanged;
                 _modelCanMap.Add(item.Name, count++);
                 _modelsCan.Add(item);
             }
@@ -36,10 +43,10 @@ namespace MstnAPP.Services.Driver.CanBus
             return rtn;
         }
 
-        public bool Open(string port, string rate, string channel)
+        public bool Open(string port, string rate)
         {
             _driverCan = GetCanDriver(port);
-            var rtn = _driverCan != null && _driverCan.Open(port, rate, channel);
+            var rtn = _driverCan != null && _driverCan.Open(port, rate);
             return rtn;
         }
 
@@ -62,9 +69,16 @@ namespace MstnAPP.Services.Driver.CanBus
             }
         }
 
-        public void Write(int id, byte[] msg, int length, CanBusEnum flag)
+        /// <summary>
+        /// 发送CAN消息
+        /// </summary>
+        /// <param name="message">Can接口数据</param>
+        /// <param name="id">Can ID</param>
+        /// <param name="length">数据长度</param>
+        /// <param name="flag">数据标志位</param>
+        public void Write(byte[] message, int id, int length, CanBusEnum flag)
         {
-            _driverCan?.Write(id, msg, length, flag);
+            _driverCan?.Write(message, id, length, flag);
         }
 
         private static IEnumerable<ModelCan> GenerateModelItems()
@@ -88,6 +102,32 @@ namespace MstnAPP.Services.Driver.CanBus
             if (index < 0 && _modelsCan.Count <= index) return null;
             var driver = _modelsCan[index].Driver;
             return driver;
+        }
+
+        /// <summary>
+        /// 刷新Can接口
+        /// </summary>
+        public void FlushPorts()
+        {
+            foreach (var item in _modelsCan)
+            {
+                item.Driver.FlushPorts();
+            }
+        }
+
+        private void OnConnectChanged(bool isConnect)
+        {
+            ConnectChanged?.Invoke(isConnect);
+        }
+
+        private void OnDataReceived(byte[] message, int id, int length, CanBusEnum flag)
+        {
+            DataReceived?.Invoke(message, id, length, flag);
+        }
+
+        private void OnPortNameChanged(List<string> portNames)
+        {
+            PortNameChanged?.Invoke(GetPortNames());
         }
     }
 }
