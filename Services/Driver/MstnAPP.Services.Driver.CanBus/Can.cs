@@ -62,14 +62,9 @@ namespace MstnAPP.Services.Driver.CanBus
             }
         }
 
-        public bool Write(int id, byte[] msg, int length, CanBusEnum flag)
+        public void Write(int id, byte[] msg, int length, CanBusEnum flag)
         {
-            return _driverCan != null && _driverCan.Write(id, msg, length, flag);
-        }
-
-        public bool Transmit(int id, byte[] msg, int length, CanBusEnum flag)
-        {
-            return _driverCan != null && _driverCan.Transmit(id, msg, length, flag);
+            _driverCan?.Write(id, msg, length, flag);
         }
 
         private static IEnumerable<ModelCan> GenerateModelItems()

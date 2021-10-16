@@ -24,8 +24,11 @@ namespace MstnAPP.Services.Driver.ICanBus
     /// <summary>
     /// Can接口数据接收事件
     /// </summary>
-    /// <param name="data">Can接口数据</param>
-    public delegate void EDataReceived(byte[] data);
+    /// <param name="message">Can接口数据</param>
+    /// <param name="id">Can ID</param>
+    /// <param name="length">数据长度</param>
+    /// <param name="flag">数据标志位</param>
+    public delegate void EDataReceived(byte[] message, int id, int length, CanBusEnum flag);
 
     public interface ICan
     {
@@ -56,21 +59,10 @@ namespace MstnAPP.Services.Driver.ICanBus
         /// <summary>
         /// 发送CAN消息
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="msg"></param>
-        /// <param name="length"></param>
-        /// <param name="flag"></param>
-        /// <returns></returns>
-        public bool Write(int id, byte[] msg, int length, CanBusEnum flag);
-
-        /// <summary>
-        /// 发送CAN消息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="msg"></param>
-        /// <param name="length"></param>
-        /// <param name="flag"></param>
-        /// <returns></returns>
-        public bool Transmit(int id, byte[] msg, int length, CanBusEnum flag);
+        /// <param name="message">Can接口数据</param>
+        /// <param name="id">Can ID</param>
+        /// <param name="length">数据长度</param>
+        /// <param name="flag">数据标志位</param>
+        public void Write(byte[] message, int id, int length, CanBusEnum flag);
     }
 }

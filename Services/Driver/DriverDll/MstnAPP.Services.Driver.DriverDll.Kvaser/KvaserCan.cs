@@ -3,29 +3,75 @@ using MstnAPP.Services.Driver.ICanBus;
 using MstnAPP.Services.Sys.Debug;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace MstnAPP.Services.Driver.DriverDll.Kvaser
 {
     public class KvaserCan : ICan
     {
         private readonly Dictionary<string, int> _rateMap = new();
+        private readonly Dictionary<CanBusEnum, int> _flagMap = new();
+        private readonly Dictionary<int, CanBusEnum> _reverseFlagMap = new();
+
+        private readonly KvaserCanRead _canRead = new();
+        private readonly KvaserCanWrite _canWrite = new();
+
+        public event EDataReceived DataReceived;
+
+        private readonly Thread _canReadThread;
+        private readonly Thread _canWriteThread;
+
+        private readonly Mutex _canMutex = new();
 
         public event EConnectChanged ConnectChanged;
 
-        private int _canHandle = -1;
+        private int _canHandle;
 
-        public bool Connected { get; private set; }
+        private int CanHandle
+        {
+            get => _canHandle;
+            set
+            {
+                _canHandle = value;
+                _canRead.CanHandle = value;
+                _canWrite.CanHandle = value;
+            }
+        }
+
+        private bool _connected;
+
+        public bool Connected
+        {
+            get => _connected;
+            set
+            {
+                _connected = value;
+                ConnectChanged?.Invoke(value);
+                _canRead.CanConnected = value;
+                _canWrite.CanConnected = value;
+            }
+        }
 
         public KvaserCan()
         {
             Canlib.canInitializeLibrary();//Kvaser的Can驱动需要提前初始化
+
             InitRateMap();
+            InitFlagMap();
+
+            _canRead.KvaserDataReceived += OnDataReceived;
+            _canRead.CanMutex = _canMutex;
+            _canWrite.CanMutex = _canMutex;
+
+            _canReadThread = new Thread(_canRead.DataRead);
+            _canWriteThread = new Thread(_canWrite.DataWrite);
         }
 
         ~KvaserCan()
         {
             Close();
-            //TODO 此处退出多线程
+            _canRead.Abort();
+            _canWrite.Abort();
         }
 
         /// <summary>
@@ -55,6 +101,21 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
         }
 
         /// <summary>
+        /// 初始化标志表
+        /// </summary>
+        private void InitFlagMap()
+        {
+            _flagMap.Add(CanBusEnum.Rtr, Canlib.canMSG_RTR);
+            _flagMap.Add(CanBusEnum.Std, Canlib.canMSG_STD);
+            _flagMap.Add(CanBusEnum.Ext, Canlib.canMSG_EXT);
+
+            foreach (var (key, value) in _flagMap)
+            {
+                _reverseFlagMap.Add(value, key);
+            }
+        }
+
+        /// <summary>
         /// 读取端口名称列表
         /// </summary>
         /// <returns>端口名称列表</returns>
@@ -79,21 +140,12 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
         /// </summary>
         public void Close()
         {
-            if (_canHandle < 0) return;
-            if (Canlib.canClose(_canHandle) != Canlib.canStatus.canOK) return;
-            _canHandle = -1;
-            SetConnected(false);
-            //TODO 此处设置停止多线程
-        }
-
-        /// <summary>
-        /// 设置设备是否打开
-        /// </summary>
-        /// <param name="connected"></param>
-        private void SetConnected(bool connected)
-        {
-            Connected = connected;
-            ConnectChanged?.Invoke(Connected);
+            if (CanHandle < 0) return;
+            if (Canlib.canClose(CanHandle) != Canlib.canStatus.canOK) return;
+            CanHandle = -1;
+            Connected = false;
+            _canRead.Suspend();
+            _canWrite.Suspend();
         }
 
         private bool _isReceiveData;
@@ -118,53 +170,54 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
         /// <returns>是否成功</returns>
         public bool Open(string port, string rate)
         {
-            if (!_isReceiveData)
-            {
-                // TODO 此处加入激活接收线程
-                _isReceiveData = true;
-            }
             Close();
             var head = port.LastIndexOf("[", StringComparison.Ordinal);
             var end = port.LastIndexOf("]", StringComparison.Ordinal);
-            var id = port.Substring(head+1, end - head-1);
+            var id = port.Substring(head + 1, end - head - 1);
             var driveId = Convert.ToInt32(id);
 
-            _canHandle = Canlib.canOpenChannel(driveId, Canlib.canOPEN_EXCLUSIVE | Canlib.canOPEN_ACCEPT_VIRTUAL);
-            if (_canHandle < 0)
+            CanHandle = Canlib.canOpenChannel(driveId, Canlib.canOPEN_EXCLUSIVE | Canlib.canOPEN_ACCEPT_VIRTUAL);
+            if (CanHandle < 0)
             {
                 LogBox.E("CAN设备 Kvaser 打开失败");
-                SetConnected(false);
+                Connected = false;
                 return false;
             }
 
             if (!_rateMap.ContainsKey(rate.ToUpper()))
             {
                 LogBox.E("无法配置此波特率，请联系开发者进行配置");
-                SetConnected(false);
+                Connected = false;
                 return false;
             }
 
-            if (Canlib.canSetBusParams(_canHandle, _rateMap[rate.ToUpper()], 0, 0, 0, 0, 0) != Canlib.canStatus.canOK)
+            if (Canlib.canSetBusParams(CanHandle, _rateMap[rate.ToUpper()], 0, 0, 0, 0, 0) != Canlib.canStatus.canOK)
             {
                 LogBox.E("无法配置此波特率，请联系开发者进行配置");
-                SetConnected(false);
+                Connected = false;
                 return false;
             }
-            if (Canlib.canSetBusOutputControl(_canHandle, Canlib.canDRIVER_NORMAL) != Canlib.canStatus.canOK)
+            if (Canlib.canSetBusOutputControl(CanHandle, Canlib.canDRIVER_NORMAL) != Canlib.canStatus.canOK)
             {
                 LogBox.E("配置总线模式错误");
-                SetConnected(false);
+                Connected = false;
                 return false;
             }
-            if (Canlib.canBusOn(_canHandle) != Canlib.canStatus.canOK)
+            if (Canlib.canBusOn(CanHandle) != Canlib.canStatus.canOK)
             {
                 LogBox.E("打开指定通道失败");
-                SetConnected(false);
+                Connected = false;
                 return false;
             }
 
-            //TODO 此处设置多线程句柄
-            SetConnected(true);
+            Connected = true;
+            _canRead.Resume();
+            _canWrite.Resume();
+
+            if (_isReceiveData) return true;
+            _canReadThread.Start();
+            _canWriteThread.Start();
+            _isReceiveData = true;
 
             return true;
         }
@@ -172,55 +225,24 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
         /// <summary>
         /// 发送CAN消息
         /// </summary>
-        /// <param name="handle">句柄</param>
-        /// <param name="id">CAN ID</param>
-        /// <param name="msg">待发送消息</param>
-        /// <param name="length">消息长度</param>
-        /// <param name="flag">消息标志位</param>
-        /// <returns>是否发送成功</returns>
-        public bool Write(int handle, int id, byte[] msg, int length, CanBusEnum flag)
+        /// <param name="message">Can接口数据</param>
+        /// <param name="id">Can ID</param>
+        /// <param name="length">数据长度</param>
+        /// <param name="flag">数据标志位</param>
+        public void Write(byte[] message, int id, int length, CanBusEnum flag)
         {
-            return Write(id, msg, length, flag);
+            if (_flagMap.ContainsKey(flag))
+            {
+                _canWrite.Write(message, id, length, _flagMap[flag]);
+            }
         }
 
-        /// <summary>
-        /// 发送CAN消息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="msg"></param>
-        /// <param name="length"></param>
-        /// <param name="flag"></param>
-        /// <returns></returns>
-        public bool Write(int id, byte[] msg, int length, CanBusEnum flag)
+        private void OnDataReceived(byte[] data, int id, int length, int flag)
         {
-            return false;
-        }
-
-        /// <summary>
-        /// 发送CAN消息
-        /// </summary>
-        /// <param name="handle">句柄</param>
-        /// <param name="id">CAN ID</param>
-        /// <param name="msg">待发送消息</param>
-        /// <param name="length">消息长度</param>
-        /// <param name="flag">消息标志位</param>
-        /// <returns>是否发送成功</returns>
-        public bool Transmit(int handle, int id, byte[] msg, int length, CanBusEnum flag)
-        {
-            return Write(handle,id, msg, length, flag);
-        }
-
-        /// <summary>
-        /// 发送CAN消息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="msg"></param>
-        /// <param name="length"></param>
-        /// <param name="flag"></param>
-        /// <returns></returns>
-        public bool Transmit(int id, byte[] msg, int length, CanBusEnum flag)
-        {
-            return Write(id, msg, length, flag);
+            if (_reverseFlagMap.ContainsKey(flag))
+            {
+                DataReceived?.Invoke(data, id, length, _reverseFlagMap[flag]);
+            }
         }
     }
 }

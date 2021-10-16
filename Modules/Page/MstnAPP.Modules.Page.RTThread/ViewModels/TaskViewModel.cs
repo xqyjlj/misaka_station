@@ -1,11 +1,10 @@
 ﻿using MstnAPP.Modules.Page.RTThread.Event;
-using MstnAPP.Services.Driver;
+using MstnAPP.Services.Driver.Serial;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System.Collections.Generic;
 using System.Timers;
-using MstnAPP.Services.Driver.Serial;
 
 namespace MstnAPP.Modules.Page.RTThread.ViewModels
 {
@@ -28,12 +27,11 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         public TaskViewModel(ISerial serial, IEventAggregator eventAggregator)
         {
             _serial = serial;
-            var eventAggregator1 = eventAggregator;
 
             InitCmdMap();
 
-            _ = eventAggregator1.GetEvent<EventFlushTime>().Subscribe(EventFlushTimeReceived);
-            _ = eventAggregator1.GetEvent<EventTask>().Subscribe(EventTaskReceived);
+            _ = eventAggregator.GetEvent<EventFlushTime>().Subscribe(EventFlushTimeReceived);
+            _ = eventAggregator.GetEvent<EventTask>().Subscribe(EventTaskReceived);
 
             _serial.ConnectChanged += new EConnectChanged(SerialConnectChanged);
 
@@ -80,14 +78,10 @@ namespace MstnAPP.Modules.Page.RTThread.ViewModels
         /// <param name="e">事件</param>
         private void TimeElapsed(object source, ElapsedEventArgs e)
         {
-            if (TabControlSelectedIndex is >= 0 and <= 10)
-            {
-                if (_isInTask && _isSerialConnect)
-                {
-                    _serial.Transmit(_cmdMap[TabControlSelectedIndex]);
-                    _serial.Transmit("\r\n");
-                }
-            }
+            if (TabControlSelectedIndex is < 0 or > 10) return;
+            if (!_isInTask || !_isSerialConnect) return;
+            _serial.Write(_cmdMap[TabControlSelectedIndex]);
+            _serial.Write("\r\n");
         }
 
         /// <summary>

@@ -202,27 +202,5 @@ namespace MstnAPP.Services.Driver.Serial
         /// <param name="offset">buffer 参数中从零开始的字节偏移量，从此处开始将字节复制到端口</param>
         /// <param name="count">要写入的字节数</param>
         public void Write(char[] buffer, int offset, int count);
-
-        /// <summary>
-        /// 发送串口数据
-        /// </summary>
-        /// <param name="text">数据</param>
-        public void Transmit(string text);
-
-        /// <summary>
-        /// 发送串口数据
-        /// </summary>
-        /// <param name="buffer">数据</param>
-        /// <param name="offset">buffer 参数中从零开始的字节偏移量，从此处开始将字节复制到端口</param>
-        /// <param name="count">要写入的字节数</param>
-        public void Transmit(byte[] buffer, int offset, int count);
-
-        /// <summary>
-        /// 发送串口数据
-        /// </summary>
-        /// <param name="buffer">数据</param>
-        /// <param name="offset">buffer 参数中从零开始的字节偏移量，从此处开始将字节复制到端口</param>
-        /// <param name="count">要写入的字节数</param>
-        public void Transmit(char[] buffer, int offset, int count);
     }
 }
