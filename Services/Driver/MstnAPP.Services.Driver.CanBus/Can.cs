@@ -74,11 +74,11 @@ namespace MstnAPP.Services.Driver.CanBus
         /// </summary>
         /// <param name="message">Can接口数据</param>
         /// <param name="id">Can ID</param>
-        /// <param name="length">数据长度</param>
+        /// <param name="dlc">数据长度</param>
         /// <param name="flag">数据标志位</param>
-        public void Write(byte[] message, int id, int length, CanBusEnum flag)
+        public void Write(byte[] message, int id, int dlc, CanBusEnum flag)
         {
-            _driverCan?.Write(message, id, length, flag);
+            _driverCan?.Write(message, id, dlc, flag);
         }
 
         private static IEnumerable<ModelCan> GenerateModelItems()
@@ -115,19 +115,26 @@ namespace MstnAPP.Services.Driver.CanBus
             }
         }
 
-        private void OnConnectChanged(bool isConnect)
+        /// <summary>
+        /// 释放所有Can资源
+        /// </summary>
+        public void Destroy()
         {
-            ConnectChanged?.Invoke(isConnect);
+            foreach (var item in _modelsCan)
+            {
+                item.Driver.Destroy();
+            }
         }
 
-        private void OnDataReceived(byte[] message, int id, int length, CanBusEnum flag)
-        {
-            DataReceived?.Invoke(message, id, length, flag);
-        }
+        private void OnConnectChanged(bool isConnect)
+            => ConnectChanged?.Invoke(isConnect);
+
+
+        private void OnDataReceived(byte[] message, int id, int dlc, CanBusEnum flag)
+            => DataReceived?.Invoke(message, id, dlc, flag);
 
         private void OnPortNameChanged(List<string> portNames)
-        {
-            PortNameChanged?.Invoke(GetPortNames());
-        }
+            => PortNameChanged?.Invoke(GetPortNames());
+
     }
 }

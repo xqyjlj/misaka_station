@@ -91,6 +91,7 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
         /// </summary>
         public void Abort()
         {
+            Resume();
             _isAbort = true;
         }
     }

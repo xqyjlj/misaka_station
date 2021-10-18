@@ -26,9 +26,9 @@ namespace MstnAPP.Services.Driver.ICanBus
     /// </summary>
     /// <param name="message">Can接口数据</param>
     /// <param name="id">Can ID</param>
-    /// <param name="length">数据长度</param>
+    /// <param name="dlc">数据长度</param>
     /// <param name="flag">数据标志位</param>
-    public delegate void EDataReceived(byte[] message, int id, int length, CanBusEnum flag);
+    public delegate void EDataReceived(byte[] message, int id, int dlc, CanBusEnum flag);
 
     public interface ICan
     {
@@ -37,6 +37,11 @@ namespace MstnAPP.Services.Driver.ICanBus
         public event EConnectChanged ConnectChanged;
 
         public event EDataReceived DataReceived;
+
+        /// <summary>
+        /// 释放所有Can资源
+        /// </summary>
+        public void Destroy();
 
         /// <summary>
         /// 读取端口名称列表
@@ -65,9 +70,9 @@ namespace MstnAPP.Services.Driver.ICanBus
         /// </summary>
         /// <param name="message">Can接口数据</param>
         /// <param name="id">Can ID</param>
-        /// <param name="length">数据长度</param>
+        /// <param name="dlc">数据长度</param>
         /// <param name="flag">数据标志位</param>
-        public void Write(byte[] message, int id, int length, CanBusEnum flag);
+        public void Write(byte[] message, int id, int dlc, CanBusEnum flag);
 
         /// <summary>
         /// 刷新Can接口

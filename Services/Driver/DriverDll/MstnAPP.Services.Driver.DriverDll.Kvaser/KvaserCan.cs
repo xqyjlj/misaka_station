@@ -71,9 +71,9 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
 
         ~KvaserCan()
         {
-            Close();
             _canRead.Abort();
             _canWrite.Abort();
+            Close();
         }
 
         /// <summary>
@@ -217,21 +217,21 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
         /// </summary>
         /// <param name="message">Can接口数据</param>
         /// <param name="id">Can ID</param>
-        /// <param name="length">数据长度</param>
+        /// <param name="dlc">数据长度</param>
         /// <param name="flag">数据标志位</param>
-        public void Write(byte[] message, int id, int length, CanBusEnum flag)
+        public void Write(byte[] message, int id, int dlc, CanBusEnum flag)
         {
             if (_flagMap.ContainsKey(flag))
             {
-                _canWrite.Write(message, id, length, _flagMap[flag]);
+                _canWrite.Write(message, id, dlc, _flagMap[flag]);
             }
         }
 
-        private void OnDataReceived(byte[] data, int id, int length, int flag)
+        private void OnDataReceived(byte[] data, int id, int dlc, int flag)
         {
             if (_reverseFlagMap.ContainsKey(flag))
             {
-                DataReceived?.Invoke(data, id, length, _reverseFlagMap[flag]);
+                DataReceived?.Invoke(data, id, dlc, _reverseFlagMap[flag]);
             }
         }
 
@@ -239,8 +239,16 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
         /// 刷新Can接口
         /// </summary>
         public void FlushPorts()
+            => PortNameChanged?.Invoke(GetPortNames());
+
+        /// <summary>
+        /// 释放Can资源
+        /// </summary>
+        public void Destroy()
         {
-            PortNameChanged?.Invoke(GetPortNames());
+            _canRead.Abort();
+            _canWrite.Abort();
+            Close();
         }
     }
 }

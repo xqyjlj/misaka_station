@@ -41,7 +41,7 @@ namespace MstnAPP.Services.Driver.DriverDll.Kvaser
                         if (_modelCanWriteFrames.Count > 0)
                         {
                             var item = _modelCanWriteFrames[0];
-                            var status = Canlib.canWrite(CanHandle, item.Id, item.Message, item.Length, item.Flag);
+                            var status = Canlib.canWrite(CanHandle, item.Id, item.Message, item.Dlc, item.Flag);
                             if (status == Canlib.canStatus.canOK)
                             {
                                 _modelCanWriteFrames.RemoveAt(0);

@@ -12,7 +12,7 @@ namespace MstnAPP.Modules.Page.Home
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<HomePage>("HomePage");
+            containerRegistry.RegisterForNavigation<HomePage>("Home.Page");
         }
     }
 }

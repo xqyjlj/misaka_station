@@ -36,7 +36,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="线程" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskThreadContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.Thread.ContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -50,7 +50,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="内存池" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskMemPoolContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.MemPool.ContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -64,7 +64,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="内存堆" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskMemHeapContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.MemHeap.ContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -78,7 +78,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="动态内存" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskFreeContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.Free.ContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -92,7 +92,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="信号量" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskSemContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.Sem.ContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -106,7 +106,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="互斥集" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskMutexContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.Mutex.ContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -120,7 +120,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="事件集" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskEventContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.Event.ContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -134,7 +134,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="邮箱" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskMailboxContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.Mailbox.ContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -148,7 +148,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="消息队列" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskMsgQueueContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.MsgQueue.ContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -162,7 +162,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="设备" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskDeviceContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.Device.ContentRegion" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -176,7 +176,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="时钟" />
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl prism:RegionManager.RegionName="RTThreadPageTaskTimerContentRegion" />
+                <ContentControl prism:RegionManager.RegionName="RTThread.Page.Task.Timer.ContentRegion" />
             </TabItem>
         </TabControl>
     </Grid>

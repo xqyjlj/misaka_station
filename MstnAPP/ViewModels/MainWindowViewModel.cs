@@ -59,9 +59,9 @@ namespace MstnAPP.ViewModels
 
         private static IEnumerable<ModelItem> GenerateModelItems()
         {
-            yield return new ModelItem("主页", "主页", "HomePage", typeof(HomePage));
-            yield return new ModelItem("RT-Thread", "RT-Thread", "RTThreadPage", typeof(RTThreadPage));
-            yield return new ModelItem("Can助手", "Can助手", "CanHelperPage", typeof(CanHelperPage));
+            yield return new ModelItem("主页", "主页", "Home.Page", typeof(HomePage));
+            yield return new ModelItem("RT-Thread", "RT-Thread", "RTThread.Page", typeof(RTThreadPage));
+            yield return new ModelItem("Can助手", "Can助手", "CanHelper.Page", typeof(CanHelperPage));
         }
 
         private readonly ICollectionView _listBoxModelItemsView;

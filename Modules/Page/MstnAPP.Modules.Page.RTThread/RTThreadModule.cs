@@ -10,24 +10,24 @@ namespace MstnAPP.Modules.Page.RTThread
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageSettingContentRegion", typeof(Setting));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskContentRegion", typeof(Task));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskThreadContentRegion", typeof(TaskThread));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskMemPoolContentRegion", typeof(TaskMemPool));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskMemHeapContentRegion", typeof(TaskMemHeap));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskFreeContentRegion", typeof(TaskFree));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskSemContentRegion", typeof(TaskSem));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskMutexContentRegion", typeof(TaskMutex));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskEventContentRegion", typeof(TaskEvent));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskMailboxContentRegion", typeof(TaskMailbox));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskMsgQueueContentRegion", typeof(TaskMsgQueue));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskDeviceContentRegion", typeof(TaskDevice));
-            _ = regionManager.RegisterViewWithRegion("RTThreadPageTaskTimerContentRegion", typeof(TaskTimer));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Setting.ContentRegion", typeof(Setting));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.ContentRegion", typeof(Task));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.Thread.ContentRegion", typeof(TaskThread));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.MemPool.ContentRegion", typeof(TaskMemPool));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.MemHeap.ContentRegion", typeof(TaskMemHeap));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.Free.ContentRegion", typeof(TaskFree));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.Sem.ContentRegion", typeof(TaskSem));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.Mutex.ContentRegion", typeof(TaskMutex));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.Event.ContentRegion", typeof(TaskEvent));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.Mailbox.ContentRegion", typeof(TaskMailbox));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.MsgQueue.ContentRegion", typeof(TaskMsgQueue));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.Device.ContentRegion", typeof(TaskDevice));
+            _ = regionManager.RegisterViewWithRegion("RTThread.Page.Task.Timer.ContentRegion", typeof(TaskTimer));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<RTThreadPage>("RTThreadPage");
+            containerRegistry.RegisterForNavigation<RTThreadPage>("RTThread.Page");
         }
     }
 }

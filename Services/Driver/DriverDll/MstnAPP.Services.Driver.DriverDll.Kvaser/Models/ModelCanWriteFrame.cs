@@ -4,14 +4,14 @@
     {
         public int Id { get; set; }
         public byte[] Message { get; set; }
-        public int Length { get; set; }
+        public int Dlc { get; set; }
         public int Flag { get; set; }
 
-        public ModelCanWriteFrame(int id, byte[] message, int length, int flag)
+        public ModelCanWriteFrame(int id, byte[] message, int dlc, int flag)
         {
             Id = id;
             Message = message;
-            Length = length;
+            Dlc = dlc;
             Flag = flag;
         }
     }

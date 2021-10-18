@@ -1,0 +1,85 @@
+﻿<UserControl
+    x:Class="MstnAPP.Modules.Page.CanHelper.Dialog.Views.ReadDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:prism="http://prismlibrary.com/"
+    Height="400"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontFamily="微软雅黑"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto">
+    <Grid>
+        <DataGrid
+            Margin="5,0,5,0"
+            HorizontalAlignment="Left"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="True"
+            CanUserSortColumns="False"
+            ItemsSource="{Binding DataGridItems}">
+            <DataGrid.Columns>
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding Id}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="ID" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding Dlc}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="DLC" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding D0}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="D0" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding D1}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="D1" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding D2}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="D2" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding D3}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="D3" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding D4}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="D4" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding D5}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="D5" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding D6}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="D6" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding D7}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="D7" />
+                <materialDesign:DataGridTextColumn
+                    Binding="{Binding Time}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="时间戳" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
