@@ -1,11 +1,10 @@
-﻿using MstnAPP.Services.Driver.ICanBus;
+﻿using MstnApp.Event.Core;
+using MstnAPP.Services.Driver.ICanBus;
 using MstnAPP.Services.Sys.IniFile;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using Prism.Regions;
 using System.Collections.Generic;
-using MstnApp.Event.Core;
 
 namespace MstnAPP.Modules.Page.CanHelper.ViewModels
 {

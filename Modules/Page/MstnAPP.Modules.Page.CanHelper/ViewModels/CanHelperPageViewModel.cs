@@ -43,6 +43,7 @@ namespace MstnAPP.Modules.Page.CanHelper.ViewModels
         }
 
         private DelegateCommand _buttonReadMonitorCommand;
+
         public DelegateCommand ButtonReadMonitorCommand =>
             _buttonReadMonitorCommand ??= new DelegateCommand(ExecuteButtonReadMonitorCommand);
 
@@ -52,6 +53,7 @@ namespace MstnAPP.Modules.Page.CanHelper.ViewModels
         }
 
         private DelegateCommand _buttonFrameWriteCommand;
+
         public DelegateCommand ButtonFrameWriteCommand =>
             _buttonFrameWriteCommand ??= new DelegateCommand(ExecuteButtonFrameWriteCommand);
 

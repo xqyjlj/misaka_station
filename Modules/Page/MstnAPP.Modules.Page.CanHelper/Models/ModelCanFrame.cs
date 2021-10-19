@@ -2,7 +2,7 @@
 
 namespace MstnAPP.Modules.Page.CanHelper.Models
 {
-    public class ModelRead : BindableBase
+    public class ModelCanFrame : BindableBase
     {
         private string _id;
 
@@ -10,6 +10,14 @@ namespace MstnAPP.Modules.Page.CanHelper.Models
         {
             get => _id;
             set => _ = SetProperty(ref _id, value);
+        }
+
+        private string _flag;
+
+        public string Flag
+        {
+            get => _flag;
+            set => _ = SetProperty(ref _flag, value);
         }
 
         private string _dlc;

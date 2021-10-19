@@ -1,13 +1,14 @@
-﻿using System.Text.RegularExpressions;
+﻿using MstnAPP.Services.Sys.Debug;
+using System;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace MstnAPP.Services.Sys.Util
 {
     public class Str
     {
         public static int Count(string sentence, string value)
-        {
-            return Regex.Matches(sentence, value).Count;
-        }
+            => Regex.Matches(sentence, value).Count;
 
         public static string Simplified(string str)
         {
@@ -28,6 +29,84 @@ namespace MstnAPP.Services.Sys.Util
                 _ = str.Replace(oldStr, newStr);
             }
             return str;
+        }
+
+        public static uint ToUInt(string str)
+        {
+            uint value = 0;
+            if (str == "") return 0;
+            if (str.ToLower(new CultureInfo("zh-CN", false)) == "0x") return 0;
+            if (str.ToLower(new CultureInfo("zh-CN", false)).Contains("0x"))
+            {
+                try
+                {
+                    value = Convert.ToUInt32(str, 16);
+                }
+                catch (FormatException)
+                {
+                    LogBox.Wn("请输入合法数据");
+                }
+                catch (OverflowException)
+                {
+                    LogBox.Wn("请输入合法数据");
+                }
+            }
+            else
+            {
+                try
+                {
+                    value = Convert.ToUInt32(str, 10);
+                }
+                catch (FormatException)
+                {
+                    LogBox.Wn("请输入合法数据");
+                }
+                catch (OverflowException)
+                {
+                    LogBox.Wn("请输入合法数据");
+                }
+            }
+
+            return value;
+        }
+
+        public static byte ToByte(string str)
+        {
+            byte value = 0;
+            if (str == "") return 0;
+            if (str.ToLower(new CultureInfo("zh-CN", false)) == "0x") return 0;
+            if (str.ToLower(new CultureInfo("zh-CN", false)).Contains("0x"))
+            {
+                try
+                {
+                    value = Convert.ToByte(str, 16);
+                }
+                catch (FormatException)
+                {
+                    LogBox.Wn("请输入合法数据");
+                }
+                catch (OverflowException)
+                {
+                    LogBox.Wn("请输入合法数据");
+                }
+            }
+            else
+            {
+                try
+                {
+                    value = Convert.ToByte(str, 10);
+                }
+                catch (FormatException)
+                {
+                    LogBox.Wn("请输入合法数据");
+                }
+                catch (OverflowException)
+                {
+                    LogBox.Wn("请输入合法数据");
+                }
+            }
+
+            return value;
         }
     }
 }

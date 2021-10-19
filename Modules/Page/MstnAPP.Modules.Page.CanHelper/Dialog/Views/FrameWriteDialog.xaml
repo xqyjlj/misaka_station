@@ -27,23 +27,41 @@
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="150" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel
-                        Grid.Column="0"
-                        Margin="10,10,10,10"
-                        Orientation="Horizontal">
-                        <TextBlock
-                            Margin="8,0,0,0"
-                            VerticalAlignment="Center"
-                            Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                            Text="ID：" />
-                        <TextBox
-                            MinWidth="72"
-                            materialDesign:HintAssist.Hint="Can ID"
-                            Cursor="IBeam" />
-                    </StackPanel>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel
+                            Grid.Row="0"
+                            Margin="10,10,10,10"
+                            Orientation="Horizontal">
+                            <TextBlock
+                                Margin="8,0,0,0"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                Text="ID：" />
+                            <TextBox
+                                x:Name="Id"
+                                MinWidth="72"
+                                materialDesign:HintAssist.Hint="Can ID"
+                                Cursor="IBeam"
+                                Text="{Binding TextBoxId, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <CheckBox
+                            x:Name="CheckBoxIsExtId"
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            Content="拓展"
+                            Cursor="Hand"
+                            IsChecked="{Binding CheckBoxIsExtIdIsChecked}"
+                            Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineCheckBox}" />
+                    </Grid>
+
                     <StackPanel
                         Grid.Column="1"
                         Margin="10,10,10,10"
+                        VerticalAlignment="Top"
                         Orientation="Horizontal">
                         <TextBlock
                             Margin="8,0,0,0"
@@ -51,9 +69,12 @@
                             Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                             Text="DLC：" />
                         <TextBox
+                            x:Name="Dlc"
                             MinWidth="72"
+                            MaxHeight="27"
                             materialDesign:HintAssist.Hint="Can DLC"
-                            Cursor="IBeam" />
+                            Cursor="IBeam"
+                            Text="{Binding TextBoxDlc, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </Grid>
                 <GroupBox
@@ -82,9 +103,11 @@
                                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                 Text="Byte0：" />
                             <TextBox
+                                x:Name="Byte0"
                                 MinWidth="72"
                                 materialDesign:HintAssist.Hint="Byte0"
-                                Cursor="IBeam" />
+                                Cursor="IBeam"
+                                Text="{Binding TextBoxByte0, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel
                             Grid.Row="0"
@@ -97,9 +120,11 @@
                                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                 Text="Byte1：" />
                             <TextBox
+                                x:Name="Byte1"
                                 MinWidth="72"
                                 materialDesign:HintAssist.Hint="Byte1"
-                                Cursor="IBeam" />
+                                Cursor="IBeam"
+                                Text="{Binding TextBoxByte1, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
 
                         <StackPanel
@@ -113,9 +138,11 @@
                                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                 Text="Byte2：" />
                             <TextBox
+                                x:Name="Byte2"
                                 MinWidth="72"
-                                materialDesign:HintAssist.Hint="Byte0"
-                                Cursor="IBeam" />
+                                materialDesign:HintAssist.Hint="Byte2"
+                                Cursor="IBeam"
+                                Text="{Binding TextBoxByte2, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel
                             Grid.Row="1"
@@ -128,9 +155,11 @@
                                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                 Text="Byte3：" />
                             <TextBox
+                                x:Name="Byte3"
                                 MinWidth="72"
-                                materialDesign:HintAssist.Hint="Byte0"
-                                Cursor="IBeam" />
+                                materialDesign:HintAssist.Hint="Byte3"
+                                Cursor="IBeam"
+                                Text="{Binding TextBoxByte3, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
 
                         <StackPanel
@@ -144,9 +173,11 @@
                                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                 Text="Byte4：" />
                             <TextBox
+                                x:Name="Byte4"
                                 MinWidth="72"
                                 materialDesign:HintAssist.Hint="Byte4"
-                                Cursor="IBeam" />
+                                Cursor="IBeam"
+                                Text="{Binding TextBoxByte4, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel
                             Grid.Row="2"
@@ -159,9 +190,11 @@
                                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                 Text="Byte5：" />
                             <TextBox
+                                x:Name="Byte5"
                                 MinWidth="72"
                                 materialDesign:HintAssist.Hint="Byte5"
-                                Cursor="IBeam" />
+                                Cursor="IBeam"
+                                Text="{Binding TextBoxByte5, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
 
                         <StackPanel
@@ -175,9 +208,11 @@
                                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                 Text="Byte6：" />
                             <TextBox
+                                x:Name="Byte6"
                                 MinWidth="72"
                                 materialDesign:HintAssist.Hint="Byte6"
-                                Cursor="IBeam" />
+                                Cursor="IBeam"
+                                Text="{Binding TextBoxByte6, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <StackPanel
                             Grid.Row="3"
@@ -190,9 +225,11 @@
                                 Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                 Text="Byte7：" />
                             <TextBox
+                                x:Name="Byte7"
                                 MinWidth="72"
                                 materialDesign:HintAssist.Hint="Byte7"
-                                Cursor="IBeam" />
+                                Cursor="IBeam"
+                                Text="{Binding TextBoxByte7, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </Grid>
                 </GroupBox>

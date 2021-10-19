@@ -37,6 +37,24 @@ namespace MstnAPP.Modules.Page.CanHelper.Dialog.ViewModels
 
         private void OnDataReceived(byte[] message, int id, int dlc, CanBusEnum flag)
         {
+            var flagValue = "";
+            switch (flag)
+            {
+                case CanBusEnum.Std:
+                    flagValue = "标准帧";
+                    break;
+
+                case CanBusEnum.Ext:
+                    flagValue = "拓展帧";
+                    break;
+
+                case CanBusEnum.Rtr:
+                    return;
+
+                default:
+                    return;
+            }
+
             var dest = new string[8];
 
             for (var i = 0; i < dlc; i++)
@@ -44,9 +62,10 @@ namespace MstnAPP.Modules.Page.CanHelper.Dialog.ViewModels
                 dest[i] = message[i].ToString("D", CultureInfo.InvariantCulture);
             }
 
-            var model = new ModelRead
+            var model = new ModelCanFrame
             {
                 Id = id.ToString("D", CultureInfo.InvariantCulture),
+                Flag = flagValue,
                 Dlc = dlc.ToString("D", CultureInfo.InvariantCulture),
                 D0 = dest[0],
                 D1 = dest[1],
@@ -67,9 +86,9 @@ namespace MstnAPP.Modules.Page.CanHelper.Dialog.ViewModels
 
         #region DataGridItems
 
-        private ObservableCollection<ModelRead> _dataGridItems = new();
+        private ObservableCollection<ModelCanFrame> _dataGridItems = new();
 
-        public ObservableCollection<ModelRead> DataGridItems
+        public ObservableCollection<ModelCanFrame> DataGridItems
         {
             get => _dataGridItems;
             set => _ = SetProperty(ref _dataGridItems, value);

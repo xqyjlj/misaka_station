@@ -30,6 +30,11 @@
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="ID" />
                 <materialDesign:DataGridTextColumn
+                    Binding="{Binding Flag}"
+                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="Flag" />
+                <materialDesign:DataGridTextColumn
                     Binding="{Binding Dlc}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"

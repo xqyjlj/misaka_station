@@ -129,12 +129,10 @@ namespace MstnAPP.Services.Driver.CanBus
         private void OnConnectChanged(bool isConnect)
             => ConnectChanged?.Invoke(isConnect);
 
-
         private void OnDataReceived(byte[] message, int id, int dlc, CanBusEnum flag)
             => DataReceived?.Invoke(message, id, dlc, flag);
 
         private void OnPortNameChanged(List<string> portNames)
             => PortNameChanged?.Invoke(GetPortNames());
-
     }
 }
