@@ -42,6 +42,8 @@ namespace MstnAPP.Modules.Page.CanHelper.ViewModels
             _dialogService = dialog;
         }
 
+        #region ButtonReadMonitorCommand
+
         private DelegateCommand _buttonReadMonitorCommand;
 
         public DelegateCommand ButtonReadMonitorCommand =>
@@ -52,6 +54,10 @@ namespace MstnAPP.Modules.Page.CanHelper.ViewModels
             _dialogService.Show("CanHelper.ReadDialog");
         }
 
+        #endregion ButtonReadMonitorCommand
+
+        #region ButtonFrameWriteCommand
+
         private DelegateCommand _buttonFrameWriteCommand;
 
         public DelegateCommand ButtonFrameWriteCommand =>
@@ -61,5 +67,21 @@ namespace MstnAPP.Modules.Page.CanHelper.ViewModels
         {
             _dialogService.Show("CanHelper.FrameWriteDialog");
         }
+
+        #endregion ButtonFrameWriteCommand
+
+        #region ButtonFileWriteCommand
+
+        private DelegateCommand _buttonFileWriteCommand;
+
+        public DelegateCommand ButtonFileWriteCommand =>
+            _buttonFileWriteCommand ??= new DelegateCommand(ExecuteButtonFileWriteCommand);
+
+        private void ExecuteButtonFileWriteCommand()
+        {
+            _dialogService.Show("CanHelper.FileWriteDialog");
+        }
+
+        #endregion ButtonFileWriteCommand
     }
 }

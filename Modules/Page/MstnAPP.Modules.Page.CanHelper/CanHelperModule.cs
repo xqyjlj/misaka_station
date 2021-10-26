@@ -20,6 +20,7 @@ namespace MstnAPP.Modules.Page.CanHelper
             containerRegistry.RegisterForNavigation<CanHelperPage>("CanHelper.Page");
             containerRegistry.RegisterDialog<ReadDialog, ReadDialogViewModel>("CanHelper.ReadDialog");
             containerRegistry.RegisterDialog<FrameWriteDialog, FrameWriteDialogViewModel>("CanHelper.FrameWriteDialog");
+            containerRegistry.RegisterDialog<FileWriteDialog, FileWriteDialogViewModel>("CanHelper.FileWriteDialog");
         }
     }
 }

@@ -31,7 +31,6 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Button
                             x:Name="ButtonFrameWrite"
@@ -53,11 +52,11 @@
                             </StackPanel>
                         </Button>
                         <Button
-                            x:Name="ButtonFileSend"
+                            x:Name="ButtonFileWrite"
                             Grid.Row="1"
                             Margin="0,10,0,10"
                             HorizontalAlignment="Left"
-                            Command="{Binding ButtonFileSendCommand}"
+                            Command="{Binding ButtonFileWriteCommand}"
                             Style="{DynamicResource MaterialDesignFlatButton}">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon
@@ -89,26 +88,6 @@
                                     VerticalAlignment="Center"
                                     Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                                     Text="脚本发送" />
-                            </StackPanel>
-                        </Button>
-                        <Button
-                            x:Name="ButtonWriteMonitor"
-                            Grid.Row="3"
-                            Margin="0,10,0,10"
-                            HorizontalAlignment="Left"
-                            Command="{Binding ButtonWriteMonitorCommand}"
-                            Cursor="Hand"
-                            Style="{DynamicResource MaterialDesignFlatButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon
-                                    Width="25"
-                                    Height="25"
-                                    Kind="Monitor" />
-                                <TextBlock
-                                    Margin="8,0,0,0"
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                                    Text="发送窗口" />
                             </StackPanel>
                         </Button>
                     </Grid>

@@ -41,7 +41,7 @@
                 VerticalAlignment="Center">
                 <TextBlock
                     Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                    Text="欢迎使用Misaka-Station(御坂网络服务站)"
+                    Text="欢迎使用misaka station(御坂网络服务站)"
                     TextWrapping="Wrap" />
 
                 <Button

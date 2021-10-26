@@ -8,7 +8,7 @@ namespace MstnAPP.Services.Sys.IniFile
 {
     public class IniFile : IIniFile
     {
-        private const string FilePath = "Misaka-Station.ini";
+        private const string FilePath = "misaka station.ini";
         private readonly FileIniDataParser _parser = new();
         private IniData _iniData;
 

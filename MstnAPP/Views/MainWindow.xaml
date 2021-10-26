@@ -189,16 +189,16 @@
                                     <Button
                                         x:Name="ButtonAbout"
                                         Command="{Binding ButtonAboutCommand}"
-                                        Content="关于Misaka-Station(A)" />
+                                        Content="关于misaka station(A)" />
                                 </StackPanel>
                             </materialDesign:PopupBox>
 
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                AutomationProperties.Name="Misaka-Station(御坂网络服务站)"
+                                AutomationProperties.Name="misaka station(御坂网络服务站)"
                                 FontSize="22"
-                                Text="Misaka-Station(御坂网络服务站)" />
+                                Text="misaka station(御坂网络服务站)" />
                         </DockPanel>
                     </materialDesign:ColorZone>
 

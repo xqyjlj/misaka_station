@@ -6,7 +6,7 @@ namespace MstnAPP.Services.Sys.LogFile
     {
         public static void AppendAllText(string contents)
         {
-            File.AppendAllText("./Misaka-Station.log", contents);
+            File.AppendAllText("./misaka station.log", contents);
         }
     }
 }

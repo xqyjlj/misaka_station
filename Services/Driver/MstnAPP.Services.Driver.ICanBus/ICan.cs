@@ -9,6 +9,11 @@ namespace MstnAPP.Services.Driver.ICanBus
         Ext, // Message has an extended ID.
     }
 
+    public enum CanProtocolEnum
+    {
+        Slip = 0,
+    }
+
     /// <summary>
     /// Can接口名改变事件
     /// </summary>
@@ -54,7 +59,6 @@ namespace MstnAPP.Services.Driver.ICanBus
         /// </summary>
         /// <param name="port">端口</param>
         /// <param name="rate">波特率</param>
-        /// <param name="channel">通道</param>
         /// <returns>是否成功</returns>
         public bool Open(string port, string rate);
 

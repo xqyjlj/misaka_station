@@ -83,7 +83,7 @@ namespace MstnAPP.ViewModels
 
         #region Title
 
-        private string _title = "Misaka-Station";
+        private string _title = "misaka station";
 
         public string Title
         {

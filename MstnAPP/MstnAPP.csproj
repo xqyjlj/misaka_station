@@ -6,18 +6,18 @@
     <AssemblyName>MstnAPP</AssemblyName>
     <Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
     <ApplicationIcon>favicon24x24.ico</ApplicationIcon>
-    <PackageId>Misaka-Station</PackageId>
+    <PackageId>misaka station</PackageId>
     <Authors>xqyjlj</Authors>
     <Company>xqyjlj</Company>
-    <Product>Misaka-Station</Product>
+    <Product>misaka station</Product>
     <Description>御坂网络服务站</Description>
     <Copyright>xqyjlj&lt;xqyjlj@126.com&gt;</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/xqyjlj/Misaka-Station</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/xqyjlj/misaka station</PackageProjectUrl>
     <PackageIcon>favicon.png</PackageIcon>
     <PackageIconUrl />
-    <RepositoryUrl>https://github.com/xqyjlj/Misaka-Station</RepositoryUrl>
+    <RepositoryUrl>https://github.com/xqyjlj/misaka station</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
 	  <None Remove="Resources\favicon.png" />
