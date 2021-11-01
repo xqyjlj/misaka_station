@@ -2,7 +2,7 @@ name: Sync Github Repos To Gitee
 
 on:
 # push推送时触发
-  push:
+  #push:
   # 定时任务触发
   schedule:
     # 每天北京时间9点跑
