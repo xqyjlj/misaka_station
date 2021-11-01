@@ -6,8 +6,8 @@ on:
   # 定时任务触发
   schedule:
     # 每天北京时间9点跑
-    # Runs at 00:00 UTC (8:00 AM Beijing) every day
-    - cron:  '0 0 * * *'
+    # Runs at 01:00 UTC (9:00 AM Beijing) every day
+    - cron:  '0 1 * * *'
 
 jobs:
   build:
